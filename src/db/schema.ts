@@ -477,3 +477,26 @@ export const agentConfigVersions = pgTable(
   },
   (t) => [index("idx_config_versions_agent").on(t.agent_id, t.created_at)],
 );
+
+// ============================================================
+// GENERATED VISUALS (saved AI-generated images)
+// ============================================================
+
+export const generatedVisuals = pgTable("generated_visuals", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  url: text("url").notNull(),
+  name: text("name"),
+  preset: text("preset").notNull().default("hero"),
+  storage_path: text("storage_path"),
+  created_at: ts("created_at").notNull().defaultNow(),
+});
+
+// ============================================================
+// COACH SESSIONS (SMS life coach — one rolling managed-agent session per phone)
+// ============================================================
+
+export const coachSessions = pgTable("coach_sessions", {
+  phone: text("phone").primaryKey(),
+  session_id: text("session_id").notNull(),
+  updated_at: ts("updated_at").notNull().defaultNow(),
+});

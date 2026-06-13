@@ -40,7 +40,7 @@ export async function POST(
       imageAttachments,
       allowedTools: agent.allowed_tools || ["Read", "Glob", "Grep", "WebSearch", "WebFetch", "AskUserQuestion"],
       permissionMode: agent.permission_mode || "bypassPermissions",
-      agents: agent.agents || undefined,
+      agents: (agent.agents as Record<string, unknown>) || undefined,
       systemPrompt: agent.system_prompt || `You are ${agent.name}, an AI assistant.`,
     });
 

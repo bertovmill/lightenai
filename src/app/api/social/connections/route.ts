@@ -82,7 +82,10 @@ export async function DELETE(request: NextRequest) {
     .where(
       and(
         eq(socialConnections.user_id, userId),
-        eq(socialConnections.platform, platform),
+        eq(
+          socialConnections.platform,
+          platform as "x" | "linkedin" | "linkedin_org" | "instagram" | "medium" | "facebook",
+        ),
       ),
     );
 

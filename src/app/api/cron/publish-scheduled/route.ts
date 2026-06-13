@@ -132,27 +132,27 @@ export async function GET(request: NextRequest) {
       const platform = dbPlatform === "linkedin_org" ? "linkedin" : dbPlatform;
 
       if (platform === "medium") {
-        const mdContent = post.markdown_content || post.text;
+        const mdContent = post.markdown_content || post.text || "";
         const titleMatch = mdContent.match(/^#\s+(.+)$/m) || mdContent.match(/^(.+)$/m);
         const title = titleMatch ? titleMatch[1].replace(/[#*_`]/g, "").trim() : "Untitled";
-        const authorId = connection.platform_user_id;
+        const authorId = connection.platform_user_id ?? "";
         const result = await postToMedium(accessToken, authorId, title, mdContent);
         postId = result.id;
       } else if (platform === "facebook") {
-        const pageId = connection.platform_user_id;
+        const pageId = connection.platform_user_id ?? "";
         let fbImageUrl = post.image_url;
         if (fbImageUrl) {
           fbImageUrl = await getPublicImageUrl(fbImageUrl);
         }
-        const result = await postToFacebook(accessToken, pageId, post.text, fbImageUrl);
+        const result = await postToFacebook(accessToken, pageId, post.text ?? "", fbImageUrl || undefined);
         postId = result.id;
       } else if (platform === "instagram") {
         if (!post.image_url) {
           throw new Error("Instagram requires an image");
         }
         const publicUrl = await getPublicImageUrl(post.image_url);
-        const igUserId = connection.platform_user_id;
-        const result = await postToInstagram(accessToken, igUserId, post.text, publicUrl);
+        const igUserId = connection.platform_user_id ?? "";
+        const result = await postToInstagram(accessToken, igUserId, post.text ?? "", publicUrl);
         postId = result.id;
       } else if (platform === "x") {
         const result = await postToX(accessToken, post.text, post.image_url || undefined);
