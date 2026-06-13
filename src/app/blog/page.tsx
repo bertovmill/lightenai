@@ -55,8 +55,17 @@ export default async function BlogPage() {
                 <Link
                   key={post.id}
                   href={`/blog/${post.id}`}
-                  className="group flex flex-col rounded-2xl border border-[#E8E6E1] bg-white/60 p-6 transition-colors hover:border-[#5F9468]"
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-[#E8E6E1] bg-white/60 transition-colors hover:border-[#5F9468]"
                 >
+                  {post.image_url && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={post.image_url}
+                      alt={post.title}
+                      className="aspect-video w-full object-cover"
+                    />
+                  )}
+                  <div className="flex flex-1 flex-col p-6">
                   <h2 className="text-xl md:text-2xl font-bold leading-snug tracking-tight mb-3 group-hover:text-[#5F9468] transition-colors">
                     {post.title}
                   </h2>
@@ -69,6 +78,7 @@ export default async function BlogPage() {
                     {post.author && <span>{post.author}</span>}
                     {post.author && date && <span>·</span>}
                     {date && <time>{date}</time>}
+                  </div>
                   </div>
                 </Link>
               );

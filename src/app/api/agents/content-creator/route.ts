@@ -6,7 +6,7 @@ import { NextRequest } from "next/server";
 
 // Vercel deployment config
 export const runtime = "nodejs";
-export const maxDuration = 600; // 10 minutes (E2B sandbox timeout)
+export const maxDuration = 300; // 10 minutes (E2B sandbox timeout)
 
 export async function POST(request: NextRequest) {
   const { message, history = [], documentContent, userId, imageAttachments } = await request.json();

@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 
 // Anthropic hosts the agent loop + container, so this route only relays SSE.
 export const runtime = "nodejs";
-export const maxDuration = 800; // managed-agent turns can run for minutes
+export const maxDuration = 300; // managed-agent turns can run for minutes
 
 export async function POST(request: NextRequest) {
   const { message, sessionId, documentContent } = await request.json();

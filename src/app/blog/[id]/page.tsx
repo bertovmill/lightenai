@@ -54,6 +54,16 @@ export default async function BlogPostPage({ params }: PageProps) {
           <span className="text-[#666]">{post.title}</span>
         </nav>
 
+        {/* Cover */}
+        {post.image_url && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={post.image_url}
+            alt={post.title}
+            className="mb-8 aspect-video w-full rounded-2xl border border-[#E8E6E1] object-cover"
+          />
+        )}
+
         {/* Header */}
         <header className="pb-8 border-b border-[#E8E6E1]">
           <h1 className="text-3xl md:text-4xl xl:text-5xl font-bold tracking-tight leading-[1.15] mb-4">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 
 const AgentChat = dynamic(() => import("@/app/components/agents/AgentChat"), {
@@ -8,6 +8,31 @@ const AgentChat = dynamic(() => import("@/app/components/agents/AgentChat"), {
 });
 
 const BLOG_ICON = "✍️";
+
+/* Pull the article title from the first markdown H1, falling back to the
+ * first non-empty line. Keeps the publish title in sync with what the agent writes. */
+function deriveTitle(draft: string): string {
+  const h1 = draft.match(/^#\s+(.+)$/m);
+  if (h1) return h1[1].trim();
+  const firstLine = draft.split("\n").find((l) => l.trim().length > 0);
+  return (firstLine ?? "").replace(/^#+\s*/, "").trim().slice(0, 120);
+}
+
+/* First real paragraph, stripped of markdown, for the post excerpt. */
+function deriveExcerpt(draft: string): string {
+  const para = draft
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .find((p) => p && !p.startsWith("#") && !p.startsWith("!["));
+  if (!para) return "";
+  return para
+    .replace(/[#*`_>]/g, "")
+    .replace(/!\[.*?\]\(.*?\)/g, "")
+    .replace(/\[(.+?)\]\(.+?\)/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 200);
+}
 
 /* Two-column panel icon — left or right side filled to show which panel is active */
 function PanelIcon({ side, active }: { side: "left" | "right"; active: boolean }) {
@@ -40,9 +65,86 @@ export default function BlogWriterPage() {
   const [chatCollapsed, setChatCollapsed] = useState(false);
   const [draftCollapsed, setDraftCollapsed] = useState(false);
 
+  // Publish state
+  const [title, setTitle] = useState("");
+  const titleEdited = useRef(false);
+  const [coverUrl, setCoverUrl] = useState<string | null>(null);
+  const [generating, setGenerating] = useState(false);
+  const [saving, setSaving] = useState<"draft" | "published" | null>(null);
+  const [status, setStatus] = useState<{ msg: string; tone: "info" | "error" } | null>(null);
+  // Identity of the saved post so re-saves update instead of duplicating.
+  const [postId, setPostId] = useState<string | null>(null);
+  const [topicId, setTopicId] = useState<string | null>(null);
+  const [liveUrl, setLiveUrl] = useState<string | null>(null);
+
   const handleDocumentUpdate = useCallback((content: string) => {
     setDraft(content);
   }, []);
+
+  // Keep the title synced to the draft's H1 until the user types their own.
+  useEffect(() => {
+    if (!titleEdited.current) {
+      const derived = deriveTitle(draft);
+      if (derived) setTitle(derived);
+    }
+  }, [draft]);
+
+  async function handleGenerateCover() {
+    if (!title.trim() || generating) return;
+    setGenerating(true);
+    setStatus({ msg: "Generating cover image…", tone: "info" });
+    try {
+      const res = await fetch("/api/blog/generate-cover", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: title.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Generation failed");
+      setCoverUrl(data.url);
+      setStatus({ msg: "Cover ready.", tone: "info" });
+    } catch (err) {
+      setStatus({ msg: err instanceof Error ? err.message : "Cover generation failed", tone: "error" });
+    } finally {
+      setGenerating(false);
+    }
+  }
+
+  async function handleSave(nextStatus: "draft" | "published") {
+    if (!title.trim() || !draft.trim() || saving) return;
+    setSaving(nextStatus);
+    setStatus({ msg: nextStatus === "published" ? "Publishing…" : "Saving draft…", tone: "info" });
+    try {
+      const res = await fetch("/api/blog/publish", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          postId,
+          topicId,
+          title: title.trim(),
+          body: draft,
+          excerpt: deriveExcerpt(draft),
+          imageUrl: coverUrl,
+          status: nextStatus,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Save failed");
+      setPostId(data.postId);
+      setTopicId(data.topicId);
+      setLiveUrl(data.url);
+      setStatus({
+        msg: nextStatus === "published" ? "Published live 🎉" : "Draft saved.",
+        tone: "info",
+      });
+    } catch (err) {
+      setStatus({ msg: err instanceof Error ? err.message : "Save failed", tone: "error" });
+    } finally {
+      setSaving(null);
+    }
+  }
+
+  const busy = generating || saving !== null;
 
   return (
     <div className="flex h-[calc(100vh-4rem)] min-h-0 bg-[#FAFAF8]">
@@ -124,12 +226,90 @@ export default function BlogWriterPage() {
           </button>
         </div>
 
+        {/* Cover preview */}
+        {coverUrl && (
+          <div className="border-b border-[#E8E6E1] p-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={coverUrl}
+              alt="Article cover"
+              className="aspect-video w-full rounded-xl border border-[#E8E6E1] object-cover"
+            />
+          </div>
+        )}
+
         <textarea
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           placeholder="Your draft will appear here as the agent writes. You can edit it directly — your changes are sent back on the next message."
           className="flex-1 resize-none bg-transparent px-6 py-5 font-sans text-[15px] leading-relaxed text-[#1C1C1C] outline-none placeholder:text-[#bbb]"
         />
+
+        {/* Publish toolbar */}
+        <div className="border-t border-[#E8E6E1] bg-[#FAFAF8] px-3 py-3">
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => {
+              titleEdited.current = true;
+              setTitle(e.target.value);
+            }}
+            placeholder="Post title"
+            className="mb-2.5 w-full rounded-lg border border-[#E8E6E1] bg-white px-3 py-2 text-sm text-[#1C1C1C] outline-none focus:border-[#6B8F71]"
+          />
+
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={handleGenerateCover}
+              disabled={!title.trim() || busy}
+              className="rounded-full border border-[#1C1C1C] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-[#1C1C1C] transition-opacity disabled:opacity-30"
+            >
+              {generating ? "Generating…" : coverUrl ? "Regenerate cover" : "Generate cover"}
+            </button>
+
+            <div className="flex-1" />
+
+            <button
+              onClick={() => handleSave("draft")}
+              disabled={!title.trim() || !draft.trim() || busy}
+              className="rounded-full border border-[#1C1C1C] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-[#1C1C1C] transition-opacity disabled:opacity-30"
+            >
+              {saving === "draft" ? "Saving…" : "Save draft"}
+            </button>
+
+            <button
+              onClick={() => handleSave("published")}
+              disabled={!title.trim() || !draft.trim() || busy}
+              className="rounded-full bg-[#6B8F71] px-5 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-white transition-colors hover:bg-[#5A7D60] disabled:opacity-30"
+            >
+              {saving === "published" ? "Publishing…" : postId ? "Update & publish" : "Publish"}
+            </button>
+          </div>
+
+          {status && (
+            <p
+              className={[
+                "mt-2.5 text-xs",
+                status.tone === "error" ? "text-red-600" : "text-[#666]",
+              ].join(" ")}
+            >
+              {status.msg}
+              {liveUrl && status.tone !== "error" && (
+                <>
+                  {" "}
+                  <a
+                    href={liveUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-semibold text-[#6B8F71] underline"
+                  >
+                    View post →
+                  </a>
+                </>
+              )}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
