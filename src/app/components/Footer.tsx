@@ -26,7 +26,7 @@ export function Footer() {
             <span className="font-semibold text-[#1C1C1C] text-base">Lighten AI</span>
           </div>
           <p className="text-sm text-[#888] leading-relaxed max-w-xs">
-            AI systems built for Shopify brands. Scale content, support, and operations without adding headcount.
+            AI systems built for $10M&ndash;$100M businesses. Scale content, support, and operations without adding headcount.
           </p>
           <ReviewForm />
         </div>

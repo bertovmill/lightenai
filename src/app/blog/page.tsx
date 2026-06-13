@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   description: "Insights on AI agents, automation, and running a leaner business.",
 };
 
+// Re-render from the database at most once every 60s (ISR), so newly
+// published posts appear on the live listing without a redeploy.
+export const revalidate = 60;
+
 function formatDate(value: string | null): string | null {
   if (!value) return null;
   const d = new Date(value);
