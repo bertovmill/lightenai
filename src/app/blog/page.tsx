@@ -54,7 +54,7 @@ export default async function BlogPage() {
               return (
                 <Link
                   key={post.id}
-                  href={`/blog/${post.id}`}
+                  href={`/blog/${post.slug ?? post.id}`}
                   className="group flex flex-col overflow-hidden rounded-2xl border border-[#E8E6E1] bg-white/60 transition-colors hover:border-[#5F9468]"
                 >
                   {post.image_url && (

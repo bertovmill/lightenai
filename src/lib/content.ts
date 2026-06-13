@@ -89,6 +89,7 @@ export async function getTopicBySlug(
 
 export interface BlogPost {
   id: string;
+  slug: string | null;
   title: string;
   excerpt: string | null;
   body: string | null;
@@ -99,9 +100,13 @@ export interface BlogPost {
   topic_title: string | null;
 }
 
-function toBlogPost(p: Post, topic: { title: string; author: string | null; image_url: string | null } | undefined): BlogPost {
+function toBlogPost(
+  p: Post,
+  topic: { slug: string; title: string; author: string | null; image_url: string | null } | undefined
+): BlogPost {
   return {
     id: p.id,
+    slug: topic?.slug ?? null,
     title: p.title,
     excerpt: p.excerpt,
     body: p.body,
@@ -139,27 +144,28 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
   }
 }
 
-// A single published blog article by id.
-export async function getBlogPost(id: string): Promise<BlogPost | null> {
+// A single published blog article by its topic slug (pretty URL).
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
+    const [topic] = await db
+      .select()
+      .from(topicsTable)
+      .where(eq(topicsTable.slug, slug))
+      .limit(1);
+    if (!topic) return null;
+
     const [p] = await db
       .select()
       .from(postsTable)
       .where(
         and(
-          eq(postsTable.id, id),
+          eq(postsTable.topic_id, topic.id),
           eq(postsTable.platform, "website"),
           eq(postsTable.status, "published")
         )
       )
       .limit(1);
     if (!p) return null;
-
-    const [topic] = await db
-      .select()
-      .from(topicsTable)
-      .where(eq(topicsTable.id, p.topic_id))
-      .limit(1);
 
     return toBlogPost(p as Post, topic);
   } catch (error) {

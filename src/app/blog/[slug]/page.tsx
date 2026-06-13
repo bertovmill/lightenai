@@ -5,10 +5,10 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Navigation } from "@/app/components/Navigation";
 import { Footer } from "@/app/components/Footer";
-import { getBlogPost } from "@/lib/content";
+import { getBlogPostBySlug } from "@/lib/content";
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 function formatDate(value: string | null): string | null {
@@ -19,8 +19,8 @@ function formatDate(value: string | null): string | null {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { id } = await params;
-  const post = await getBlogPost(id);
+  const { slug } = await params;
+  const post = await getBlogPostBySlug(slug);
   if (!post) return { title: "Not Found | Lighten AI" };
   return {
     title: `${post.title} | Lighten AI`,
@@ -29,8 +29,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
-  const { id } = await params;
-  const post = await getBlogPost(id);
+  const { slug } = await params;
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) notFound();
 
