@@ -8,6 +8,13 @@
       "when": 1781376327856,
       "tag": "0000_mixed_umar",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1781387728181,
+      "tag": "0001_coach_sessions",
+      "breakpoints": true
     }
   ]
 }
