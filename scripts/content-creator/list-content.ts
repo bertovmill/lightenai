@@ -1,45 +1,41 @@
 #!/usr/bin/env npx tsx
 /**
- * List existing columns and topics from Supabase
+ * List existing columns and topics from Neon Postgres
  *
  * Usage: npx tsx scripts/content-creator/list-content.ts
  * Output: JSON array of columns with their topics
  */
 
-import { createClient } from "@supabase/supabase-js";
+import { neon } from "@neondatabase/serverless";
 
 async function main() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const connectionString = process.env.DATABASE_URL;
 
-  if (!supabaseUrl || !serviceRoleKey) {
-    console.error("Error: NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are required");
+  if (!connectionString) {
+    console.error("Error: DATABASE_URL is required");
     process.exit(1);
   }
 
-  const supabase = createClient(supabaseUrl, serviceRoleKey);
+  const sql = neon(connectionString);
 
-  const { data: columns, error: colErr } = await supabase
-    .from("columns")
-    .select("id, title, slug, description, sort_order")
-    .order("sort_order");
-
-  if (colErr) {
-    console.error("Error fetching columns:", colErr);
-    process.exit(1);
-  }
+  const columns = await sql`
+    SELECT id, title, slug, description, sort_order
+    FROM columns
+    ORDER BY sort_order
+  `;
 
   const result = [];
-  for (const col of columns || []) {
-    const { data: topics } = await supabase
-      .from("topics")
-      .select("id, title, slug, description, author, published_date, sort_order")
-      .eq("column_id", col.id)
-      .order("sort_order");
+  for (const col of columns) {
+    const topics = await sql`
+      SELECT id, title, slug, description, author, published_date, sort_order
+      FROM topics
+      WHERE column_id = ${col.id}
+      ORDER BY sort_order
+    `;
 
     result.push({
       ...col,
-      topics: topics || [],
+      topics,
     });
   }
 

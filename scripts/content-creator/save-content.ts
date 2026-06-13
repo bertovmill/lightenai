@@ -1,6 +1,6 @@
 #!/usr/bin/env npx tsx
 /**
- * Batch-save column + topic + posts to Supabase
+ * Batch-save column + topic + posts to Neon Postgres
  *
  * Usage: echo '<json>' | npx tsx scripts/content-creator/save-content.ts
  *
@@ -14,7 +14,7 @@
  * Output: JSON { success, columnId, topicId, postIds }
  */
 
-import { createClient } from "@supabase/supabase-js";
+import { neon } from "@neondatabase/serverless";
 
 interface InputColumn {
   title: string;
@@ -44,11 +44,10 @@ interface Input {
 }
 
 async function main() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const connectionString = process.env.DATABASE_URL;
 
-  if (!supabaseUrl || !serviceRoleKey) {
-    console.error("Error: NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are required");
+  if (!connectionString) {
+    console.error("Error: DATABASE_URL is required");
     process.exit(1);
   }
 
@@ -72,76 +71,63 @@ async function main() {
     process.exit(1);
   }
 
-  const supabase = createClient(supabaseUrl, serviceRoleKey);
+  const sql = neon(connectionString);
 
   // Find-or-create column by slug
   let columnId: string;
-  const { data: existingColumn } = await supabase
-    .from("columns")
-    .select("id")
-    .eq("slug", input.column.slug)
-    .single();
+  const existingColumn = (
+    await sql`SELECT id FROM columns WHERE slug = ${input.column.slug} LIMIT 1`
+  )[0];
 
   if (existingColumn) {
     columnId = existingColumn.id;
   } else {
-    const { data: newColumn, error: colErr } = await supabase
-      .from("columns")
-      .insert({
-        title: input.column.title,
-        slug: input.column.slug,
-        description: input.column.description || null,
-      })
-      .select("id")
-      .single();
-
-    if (colErr || !newColumn) {
-      console.error("Error creating column:", colErr);
+    const [newColumn] = await sql`
+      INSERT INTO columns (title, slug, description)
+      VALUES (${input.column.title}, ${input.column.slug}, ${input.column.description || null})
+      RETURNING id
+    `;
+    if (!newColumn) {
+      console.error("Error creating column");
       process.exit(1);
     }
     columnId = newColumn.id;
   }
 
   // Create topic
-  const { data: newTopic, error: topicErr } = await supabase
-    .from("topics")
-    .insert({
-      column_id: columnId,
-      title: input.topic.title,
-      slug: input.topic.slug,
-      description: input.topic.description || null,
-      image_url: input.topic.image_url || null,
-      author: input.topic.author || "Lighten AI",
-      published_date: input.topic.published_date || null,
-    })
-    .select("id")
-    .single();
+  const [newTopic] = await sql`
+    INSERT INTO topics (column_id, title, slug, description, image_url, author, published_date)
+    VALUES (
+      ${columnId},
+      ${input.topic.title},
+      ${input.topic.slug},
+      ${input.topic.description || null},
+      ${input.topic.image_url || null},
+      ${input.topic.author || "Lighten AI"},
+      ${input.topic.published_date || null}
+    )
+    RETURNING id
+  `;
 
-  if (topicErr || !newTopic) {
-    console.error("Error creating topic:", topicErr);
+  if (!newTopic) {
+    console.error("Error creating topic");
     process.exit(1);
   }
 
   // Create posts
   const postIds: string[] = [];
   for (const post of input.posts || []) {
-    const { data: newPost, error: postErr } = await supabase
-      .from("posts")
-      .insert({
-        topic_id: newTopic.id,
-        platform: post.platform,
-        title: post.title,
-        excerpt: post.excerpt || null,
-        status: "draft",
-      })
-      .select("id")
-      .single();
-
-    if (postErr) {
+    try {
+      const [newPost] = await sql`
+        INSERT INTO posts (topic_id, platform, title, excerpt, status)
+        VALUES (${newTopic.id}, ${post.platform}, ${post.title}, ${post.excerpt || null}, 'draft')
+        RETURNING id
+      `;
+      if (newPost) postIds.push(newPost.id);
+    } catch (postErr) {
       console.error(`Error creating ${post.platform} post:`, postErr);
       continue;
     }
-    if (newPost) postIds.push(newPost.id);
   }
 
   const output = {

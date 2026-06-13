@@ -108,13 +108,13 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-14 md:py-20 lg:py-24 text-center relative z-10">
           <AnimateIn animation="fade-up">
             <h1 className="font-display font-semibold text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-6">
-              Run your business with <span className="text-[#6B8F71]">AI agents.</span>
+              Go farther with <span className="text-[#6B8F71]">agents.</span>
             </h1>
           </AnimateIn>
 
           <AnimateIn animation="fade-up" delay={50}>
             <p className="text-lg md:text-xl text-[#555] leading-relaxed mb-10 max-w-2xl mx-auto">
-              We help small businesses leverage AI agents to run smoother, create more leads, and serve customers better.
+              We help businesses offload tasks to agents, so you can focus on what you do best.
             </p>
           </AnimateIn>
 

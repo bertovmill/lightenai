@@ -1,6 +1,6 @@
 #!/usr/bin/env npx tsx
 /**
- * Manage agent style preferences in Supabase
+ * Manage agent style preferences in Neon Postgres
  *
  * Usage: echo '<json>' | npx tsx scripts/content-creator/save-preferences.ts
  *
@@ -10,7 +10,7 @@
  * Output: JSON { success, rules }
  */
 
-import { createClient } from "@supabase/supabase-js";
+import { neon } from "@neondatabase/serverless";
 
 interface Input {
   action: "add" | "remove" | "list";
@@ -21,13 +21,10 @@ interface Input {
 const AGENT_ID = "content-creator";
 
 async function main() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const connectionString = process.env.DATABASE_URL;
 
-  if (!supabaseUrl || !serviceRoleKey) {
-    console.error(
-      "Error: NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are required"
-    );
+  if (!connectionString) {
+    console.error("Error: DATABASE_URL is required");
     process.exit(1);
   }
 
@@ -56,15 +53,17 @@ async function main() {
     process.exit(1);
   }
 
-  const supabase = createClient(supabaseUrl, serviceRoleKey);
+  const sql = neon(connectionString);
 
   // Fetch current preferences
-  const { data: existing } = await supabase
-    .from("agent_preferences")
-    .select("id, custom_rules")
-    .eq("user_id", input.userId)
-    .eq("agent_id", AGENT_ID)
-    .single();
+  const existing = (
+    await sql`
+      SELECT id, custom_rules
+      FROM agent_preferences
+      WHERE user_id = ${input.userId} AND agent_id = ${AGENT_ID}
+      LIMIT 1
+    `
+  )[0];
 
   const currentRules: string[] = (existing?.custom_rules as string[]) || [];
 
@@ -94,26 +93,16 @@ async function main() {
     const updatedRules = [...currentRules, input.rule];
 
     if (existing) {
-      const { error } = await supabase
-        .from("agent_preferences")
-        .update({ custom_rules: updatedRules, updated_at: new Date().toISOString() })
-        .eq("id", existing.id);
-
-      if (error) {
-        console.error("Error updating preferences:", error);
-        process.exit(1);
-      }
+      await sql`
+        UPDATE agent_preferences
+        SET custom_rules = ${JSON.stringify(updatedRules)}::jsonb, updated_at = ${new Date().toISOString()}
+        WHERE id = ${existing.id}
+      `;
     } else {
-      const { error } = await supabase.from("agent_preferences").insert({
-        user_id: input.userId,
-        agent_id: AGENT_ID,
-        custom_rules: updatedRules,
-      });
-
-      if (error) {
-        console.error("Error creating preferences:", error);
-        process.exit(1);
-      }
+      await sql`
+        INSERT INTO agent_preferences (user_id, agent_id, custom_rules)
+        VALUES (${input.userId}, ${AGENT_ID}, ${JSON.stringify(updatedRules)}::jsonb)
+      `;
     }
 
     console.log(JSON.stringify({ success: true, rules: updatedRules }));
@@ -131,15 +120,11 @@ async function main() {
     );
 
     if (existing) {
-      const { error } = await supabase
-        .from("agent_preferences")
-        .update({ custom_rules: updatedRules, updated_at: new Date().toISOString() })
-        .eq("id", existing.id);
-
-      if (error) {
-        console.error("Error updating preferences:", error);
-        process.exit(1);
-      }
+      await sql`
+        UPDATE agent_preferences
+        SET custom_rules = ${JSON.stringify(updatedRules)}::jsonb, updated_at = ${new Date().toISOString()}
+        WHERE id = ${existing.id}
+      `;
     }
 
     console.log(JSON.stringify({ success: true, rules: updatedRules }));

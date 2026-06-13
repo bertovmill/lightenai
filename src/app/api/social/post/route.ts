@@ -138,10 +138,16 @@ export async function POST(request: NextRequest) {
       const titleMatch = mdContent.match(/^#\s+(.+)$/m) || mdContent.match(/^(.+)$/m);
       const title = titleMatch ? titleMatch[1].replace(/[#*_`]/g, "").trim() : "Untitled";
       const authorId = connection.platform_user_id;
+      if (!authorId) {
+        return NextResponse.json({ error: "Medium author not found. Please reconnect Medium." }, { status: 400 });
+      }
       const result = await postToMedium(accessToken, authorId, title, mdContent);
       return NextResponse.json({ success: true, postId: result.id, url: result.url, draft: true });
     } else if (platform === "facebook") {
       const pageId = connection.platform_user_id;
+      if (!pageId) {
+        return NextResponse.json({ error: "Facebook page not found. Please reconnect Facebook." }, { status: 400 });
+      }
       const plainText = text.trim();
       let fbImageUrl = imageUrl;
       if (fbImageUrl) {
@@ -158,6 +164,9 @@ export async function POST(request: NextRequest) {
       const publicUrl = await getPublicImageUrl(imageUrl);
       console.log("Instagram: using public image URL:", publicUrl);
       const igUserId = connection.platform_user_id;
+      if (!igUserId) {
+        return NextResponse.json({ error: "Instagram account not found. Please reconnect Instagram." }, { status: 400 });
+      }
       const result = await postToInstagram(accessToken, igUserId, text.trim(), publicUrl);
       return NextResponse.json({ success: true, postId: result.id });
     } else if (platform === "x") {
