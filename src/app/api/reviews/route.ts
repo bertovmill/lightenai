@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { db } from "@/db";
+import { reviews } from "@/db/schema";
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,27 +20,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createAdminClient();
-
-    const { data, error } = await supabase
-      .from("reviews")
-      .insert([
-        {
-          name: name?.trim() || null,
-          email: email?.trim() || null,
-          rating,
-          message: message.trim(),
-        },
-      ])
-      .select();
-
-    if (error) {
-      console.error("Supabase error:", error.message, error.details, error.hint);
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
-    }
+    const data = await db
+      .insert(reviews)
+      .values({
+        name: name?.trim() || null,
+        email: email?.trim() || null,
+        rating,
+        message: message.trim(),
+      })
+      .returning();
 
     return NextResponse.json({ success: true, data });
   } catch (error) {

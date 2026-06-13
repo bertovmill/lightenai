@@ -1,36 +1,37 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { and, asc, eq, gte, ne } from "drizzle-orm";
+import { db } from "@/db";
+import { scheduledPosts } from "@/db/schema";
+import { getUserId } from "@/lib/auth";
 
 export async function GET() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const userId = await getUserId();
 
-  if (!user) {
+  if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   // Return non-cancelled posts from last 7 days
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
 
-  const { data, error } = await supabase
-    .from("scheduled_posts")
-    .select("*")
-    .neq("status", "cancelled")
-    .gte("created_at", sevenDaysAgo)
-    .order("scheduled_at", { ascending: true });
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
+  const data = await db
+    .select()
+    .from(scheduledPosts)
+    .where(
+      and(
+        ne(scheduledPosts.status, "cancelled"),
+        gte(scheduledPosts.created_at, sevenDaysAgo),
+      ),
+    )
+    .orderBy(asc(scheduledPosts.scheduled_at));
 
   return NextResponse.json({ posts: data });
 }
 
 export async function POST(request: NextRequest) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const userId = await getUserId();
 
-  if (!user) {
+  if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -60,10 +61,10 @@ export async function POST(request: NextRequest) {
 
   const dbPlatform = (platform === "linkedin" && asOrganization) ? "linkedin_org" : platform;
 
-  const { data, error } = await supabase
-    .from("scheduled_posts")
-    .insert({
-      user_id: user.id,
+  const [data] = await db
+    .insert(scheduledPosts)
+    .values({
+      user_id: userId,
       platform: dbPlatform,
       text: text.trim(),
       image_url: imageUrl || null,
@@ -72,21 +73,15 @@ export async function POST(request: NextRequest) {
       scheduled_at: scheduledDate.toISOString(),
       status: "pending",
     })
-    .select()
-    .single();
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
+    .returning();
 
   return NextResponse.json({ success: true, post: data });
 }
 
 export async function DELETE(request: NextRequest) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const userId = await getUserId();
 
-  if (!user) {
+  if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -97,16 +92,16 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: "id query param is required" }, { status: 400 });
   }
 
-  const { error } = await supabase
-    .from("scheduled_posts")
-    .update({ status: "cancelled" })
-    .eq("id", id)
-    .eq("user_id", user.id)
-    .eq("status", "pending");
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
+  await db
+    .update(scheduledPosts)
+    .set({ status: "cancelled" })
+    .where(
+      and(
+        eq(scheduledPosts.id, id),
+        eq(scheduledPosts.user_id, userId),
+        eq(scheduledPosts.status, "pending"),
+      ),
+    );
 
   return NextResponse.json({ success: true });
 }

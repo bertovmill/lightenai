@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
   const { prompt, systemPrompt } = buildPromptWithHistory(message, history);
 
   const mcpServer = createSdkMcpServer({
-    name: "supabase-data",
+    name: "database",
     tools: allTools,
   });
 
@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
           prompt,
           options: {
             systemPrompt,
-            mcpServers: { "supabase-data": mcpServer },
+            mcpServers: { database: mcpServer },
             permissionMode: "bypassPermissions",
             allowDangerouslySkipPermissions: true,
             maxTurns: 15,

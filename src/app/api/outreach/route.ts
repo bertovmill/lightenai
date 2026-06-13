@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { and, desc, eq, gte, lte } from "drizzle-orm";
+import { db } from "@/db";
+import { outreachContacts } from "@/db/schema";
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,29 +20,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createAdminClient();
-
-    const { data, error } = await supabase
-      .from("outreach_contacts")
-      .insert([
-        {
-          name: name.trim(),
-          type,
-          linkedin_url: linkedin_url || null,
-          notes: notes || null,
-          outreach_date: outreach_date || new Date().toISOString().split("T")[0],
-          source: source || null,
-        },
-      ])
-      .select();
-
-    if (error) {
-      console.error("Supabase error:", error.message, error.details, error.hint);
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
-    }
+    const data = await db
+      .insert(outreachContacts)
+      .values({
+        name: name.trim(),
+        type,
+        linkedin_url: linkedin_url || null,
+        notes: notes || null,
+        outreach_date: outreach_date || new Date().toISOString().split("T")[0],
+        source: source || null,
+      })
+      .returning();
 
     return NextResponse.json({ success: true, data });
   } catch (error) {
@@ -60,35 +50,20 @@ export async function GET(request: NextRequest) {
     const from = searchParams.get("from");
     const to = searchParams.get("to");
 
-    const supabase = createAdminClient();
+    const filters = [];
+    if (type) filters.push(eq(outreachContacts.type, type as never));
+    if (status) filters.push(eq(outreachContacts.status, status as never));
+    if (from) filters.push(gte(outreachContacts.outreach_date, from));
+    if (to) filters.push(lte(outreachContacts.outreach_date, to));
 
-    let query = supabase
-      .from("outreach_contacts")
-      .select("*")
-      .order("outreach_date", { ascending: false })
-      .order("created_at", { ascending: false });
-
-    if (type) {
-      query = query.eq("type", type);
-    }
-    if (status) {
-      query = query.eq("status", status);
-    }
-    if (from) {
-      query = query.gte("outreach_date", from);
-    }
-    if (to) {
-      query = query.lte("outreach_date", to);
-    }
-
-    const { data, error } = await query;
-
-    if (error) {
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
+    const data = await db
+      .select()
+      .from(outreachContacts)
+      .where(filters.length ? and(...filters) : undefined)
+      .orderBy(
+        desc(outreachContacts.outreach_date),
+        desc(outreachContacts.created_at)
       );
-    }
 
     return NextResponse.json({ data });
   } catch (error) {
@@ -123,20 +98,11 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    const supabase = createAdminClient();
-
-    const { data, error } = await supabase
-      .from("outreach_contacts")
-      .update(allowed)
-      .eq("id", id)
-      .select();
-
-    if (error) {
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
-    }
+    const data = await db
+      .update(outreachContacts)
+      .set(allowed)
+      .where(eq(outreachContacts.id, id))
+      .returning();
 
     return NextResponse.json({ success: true, data });
   } catch (error) {

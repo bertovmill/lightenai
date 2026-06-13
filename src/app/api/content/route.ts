@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { eq } from "drizzle-orm";
+import { db } from "@/db";
+import { columns, topics, posts } from "@/db/schema";
+
+const TABLES = { column: columns, topic: topics, post: posts } as const;
 
 /**
  * POST /api/content
@@ -18,38 +22,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createAdminClient();
-    let table: string;
+    const table = TABLES[type as keyof typeof TABLES];
 
-    switch (type) {
-      case "column":
-        table = "columns";
-        break;
-      case "topic":
-        table = "topics";
-        break;
-      case "post":
-        table = "posts";
-        break;
-      default:
-        return NextResponse.json(
-          { error: "type must be column, topic, or post" },
-          { status: 400 }
-        );
-    }
-
-    const { data: result, error } = await supabase
-      .from(table)
-      .insert([data])
-      .select();
-
-    if (error) {
-      console.error("Supabase error:", error.message, error.details, error.hint);
+    if (!table) {
       return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
+        { error: "type must be column, topic, or post" },
+        { status: 400 }
       );
     }
+
+    const result = await db.insert(table).values(data).returning();
 
     return NextResponse.json({ success: true, data: result });
   } catch (error) {
@@ -78,24 +60,13 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    const supabase = createAdminClient();
-    let table: string;
+    const table = TABLES[type as keyof typeof TABLES];
 
-    switch (type) {
-      case "column":
-        table = "columns";
-        break;
-      case "topic":
-        table = "topics";
-        break;
-      case "post":
-        table = "posts";
-        break;
-      default:
-        return NextResponse.json(
-          { error: "type must be column, topic, or post" },
-          { status: 400 }
-        );
+    if (!table) {
+      return NextResponse.json(
+        { error: "type must be column, topic, or post" },
+        { status: 400 }
+      );
     }
 
     // If publishing a post, auto-set published_at
@@ -103,19 +74,11 @@ export async function PATCH(request: NextRequest) {
       data.published_at = new Date().toISOString();
     }
 
-    const { data: result, error } = await supabase
-      .from(table)
-      .update(data)
-      .eq("id", id)
-      .select();
-
-    if (error) {
-      console.error("Supabase error:", error.message, error.details, error.hint);
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
-    }
+    const result = await db
+      .update(table)
+      .set(data)
+      .where(eq(table.id, id))
+      .returning();
 
     if (!result || result.length === 0) {
       return NextResponse.json(

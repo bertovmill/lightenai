@@ -1,22 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { and, eq } from "drizzle-orm";
+import { db } from "@/db";
+import { socialConnections } from "@/db/schema";
+import { getUserId } from "@/lib/auth";
 
 export async function GET() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const userId = await getUserId();
 
-  if (!user) {
+  if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { data, error } = await supabase
-    .from("social_connections")
-    .select("platform, platform_user_id, profile_name, profile_image, token_expires_at, org_id, org_name")
-    .eq("user_id", user.id);
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
+  const data = await db
+    .select({
+      platform: socialConnections.platform,
+      platform_user_id: socialConnections.platform_user_id,
+      profile_name: socialConnections.profile_name,
+      profile_image: socialConnections.profile_image,
+      token_expires_at: socialConnections.token_expires_at,
+      org_id: socialConnections.org_id,
+      org_name: socialConnections.org_name,
+    })
+    .from(socialConnections)
+    .where(eq(socialConnections.user_id, userId));
 
   const connections = (data || []).map((c) => ({
     platform: c.platform,
@@ -32,10 +38,9 @@ export async function GET() {
 }
 
 export async function PATCH(request: NextRequest) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const userId = await getUserId();
 
-  if (!user) {
+  if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -45,15 +50,15 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ error: "Invalid platform" }, { status: 400 });
   }
 
-  const { error } = await supabase
-    .from("social_connections")
-    .update({ org_id: orgId || null, org_name: orgName || null, updated_at: new Date().toISOString() })
-    .eq("user_id", user.id)
-    .eq("platform", platform);
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
+  await db
+    .update(socialConnections)
+    .set({ org_id: orgId || null, org_name: orgName || null, updated_at: new Date().toISOString() })
+    .where(
+      and(
+        eq(socialConnections.user_id, userId),
+        eq(socialConnections.platform, platform),
+      ),
+    );
 
   return NextResponse.json({ success: true });
 }
@@ -66,22 +71,20 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: "Invalid platform" }, { status: 400 });
   }
 
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const userId = await getUserId();
 
-  if (!user) {
+  if (!userId) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { error } = await supabase
-    .from("social_connections")
-    .delete()
-    .eq("user_id", user.id)
-    .eq("platform", platform);
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
+  await db
+    .delete(socialConnections)
+    .where(
+      and(
+        eq(socialConnections.user_id, userId),
+        eq(socialConnections.platform, platform),
+      ),
+    );
 
   return NextResponse.json({ success: true });
 }

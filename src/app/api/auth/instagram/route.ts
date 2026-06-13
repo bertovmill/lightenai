@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { getAuthUser } from "@/lib/auth";
+import { db } from "@/db";
+import { socialConnections } from "@/db/schema";
 
 const GRAPH_API_VERSION = "v21.0";
 
@@ -9,8 +11,7 @@ const GRAPH_API_VERSION = "v21.0";
  * from environment variables (Instagram Graph API via Facebook Login).
  */
 export async function POST() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getAuthUser();
 
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -42,24 +43,20 @@ export async function POST() {
     console.log("Instagram profile fetched:", profile.username, profile.id);
 
     // Upsert connection — store the page access token (which can publish)
-    const { error } = await supabase.from("social_connections").upsert(
-      {
-        user_id: user.id,
-        platform: "instagram",
-        platform_user_id: igBusinessId,
-        profile_name: profile.name || profile.username,
-        profile_image: profile.profile_picture_url || null,
-        access_token: pageAccessToken,
-        token_expires_at: new Date(Date.now() + 5184000 * 1000).toISOString(), // ~60 days
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "user_id,platform" }
-    );
-
-    if (error) {
-      console.error("Instagram connection save error:", error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
+    const values: typeof socialConnections.$inferInsert = {
+      user_id: user.id,
+      platform: "instagram" as typeof socialConnections.$inferInsert["platform"],
+      platform_user_id: igBusinessId,
+      profile_name: profile.name || profile.username,
+      profile_image: profile.profile_picture_url || null,
+      access_token: pageAccessToken,
+      token_expires_at: new Date(Date.now() + 5184000 * 1000).toISOString(), // ~60 days
+      updated_at: new Date().toISOString(),
+    };
+    await db.insert(socialConnections).values(values).onConflictDoUpdate({
+      target: [socialConnections.user_id, socialConnections.platform],
+      set: values,
+    });
 
     return NextResponse.json({
       success: true,

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { createClient } from "@/lib/supabase/client";
 import dynamic from "next/dynamic";
 import type { ScheduledPost } from "@/app/components/agents/DocumentEditor";
 
@@ -151,7 +150,6 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
   const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const agentWritingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const supabase = createClient();
   const prevIdeaId = useRef<string | null>(null);
   const headerPortalRef = useRef<HTMLDivElement | null>(null);
 
@@ -179,12 +177,15 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
   }, []);
 
   const loadIdeas = async () => {
-    const { data } = await supabase
-      .from("content_ideas")
-      .select("*")
-      .eq("completed", false)
-      .order("created_at", { ascending: false });
-    setIdeas(data || []);
+    try {
+      const res = await fetch("/api/content-ideas");
+      if (res.ok) {
+        const { data } = await res.json();
+        setIdeas(data || []);
+      }
+    } catch {
+      // Silent fail
+    }
     setIsLoadingIdeas(false);
   };
 
@@ -218,26 +219,37 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
 
   const addIdea = async () => {
     if (!newTitle.trim()) return;
-    const { data } = await supabase
-      .from("content_ideas")
-      .insert({ title: newTitle.trim(), description: newDescription.trim() || null })
-      .select()
-      .single();
-    if (data) {
-      setIdeas((prev) => [data, ...prev]);
-      setNewTitle("");
-      setNewDescription("");
-      setShowAddForm(false);
+    try {
+      const res = await fetch("/api/content-ideas", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: newTitle.trim(), description: newDescription.trim() || null }),
+      });
+      if (res.ok) {
+        const { data } = await res.json();
+        if (data) {
+          setIdeas((prev) => [data, ...prev]);
+          setNewTitle("");
+          setNewDescription("");
+          setShowAddForm(false);
+        }
+      }
+    } catch {
+      // Silent fail
     }
   };
 
   const markIdeaUsed = async (id: string) => {
-    await supabase.from("content_ideas").update({ completed: true }).eq("id", id);
+    await fetch("/api/content-ideas", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
     setIdeas((prev) => prev.filter((i) => i.id !== id));
   };
 
   const deleteIdea = async (id: string) => {
-    await supabase.from("content_ideas").delete().eq("id", id);
+    await fetch(`/api/content-ideas?id=${id}`, { method: "DELETE" });
     setIdeas((prev) => prev.filter((i) => i.id !== id));
   };
 
@@ -313,41 +325,37 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
     ];
   };
 
-  // Load document from Supabase when session changes
+  // Load document when session changes (user scoped server-side)
   const loadDocument = useCallback(async (sessionId: string) => {
     try {
-      const { data } = await supabase
-        .from("agent_documents")
-        .select("content")
-        .eq("session_id", sessionId)
-        .single();
-      if (data) {
-        setDocumentContent(data.content || "");
-        if (data.content) setShowDocument(true);
+      const res = await fetch(`/api/agent-documents?session_id=${sessionId}`);
+      if (res.ok) {
+        const { data } = await res.json();
+        if (data) {
+          setDocumentContent(data.content || "");
+          if (data.content) setShowDocument(true);
+        } else {
+          setDocumentContent("");
+        }
       } else {
         setDocumentContent("");
       }
     } catch {
       setDocumentContent("");
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Debounced save to Supabase
+  // Debounced save (Drizzle upsert, user derived server-side)
   const saveDocument = useCallback(async (sessionId: string, content: string) => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-      await supabase
-        .from("agent_documents")
-        .upsert(
-          { user_id: user.id, session_id: sessionId, agent_id: "content-creator", content, updated_at: new Date().toISOString() },
-          { onConflict: "user_id,session_id" }
-        );
+      await fetch("/api/agent-documents", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ session_id: sessionId, agent_id: "content-creator", content }),
+      });
     } catch {
       // Silent fail
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSessionChange = useCallback((sessionId: string | null) => {

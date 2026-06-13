@@ -1,5 +1,7 @@
 import { runAgentInSandbox } from "@/lib/agents/sandbox";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { db } from "@/db";
+import { agentPreferences } from "@/db/schema";
+import { and, eq } from "drizzle-orm";
 import { NextRequest } from "next/server";
 
 // Vercel deployment config
@@ -16,17 +18,20 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  // Load user's custom style rules from Supabase
+  // Load user's custom style rules
   let customRulesSection = "";
   if (userId) {
     try {
-      const supabase = createAdminClient();
-      const { data } = await supabase
-        .from("agent_preferences")
-        .select("custom_rules")
-        .eq("user_id", userId)
-        .eq("agent_id", "content-creator")
-        .single();
+      const [data] = await db
+        .select({ custom_rules: agentPreferences.custom_rules })
+        .from(agentPreferences)
+        .where(
+          and(
+            eq(agentPreferences.user_id, userId),
+            eq(agentPreferences.agent_id, "content-creator")
+          )
+        )
+        .limit(1);
 
       const rules = (data?.custom_rules as string[]) || [];
       if (rules.length > 0) {

@@ -1,5 +1,6 @@
-import { createClient } from "@/lib/supabase/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { db } from "@/db";
+import { agentConfigVersions } from "@/db/schema";
+import { and, desc, eq } from "drizzle-orm";
 import { NextRequest } from "next/server";
 
 export async function GET(
@@ -10,18 +11,20 @@ export async function GET(
   const { searchParams } = new URL(request.url);
   const versionId = searchParams.get("id");
 
-  const supabase = await createClient();
-
   // Single version with full content
   if (versionId) {
-    const { data, error } = await supabase
-      .from("agent_config_versions")
-      .select("*")
-      .eq("id", versionId)
-      .eq("agent_id", agentId)
-      .single();
+    const [data] = await db
+      .select()
+      .from(agentConfigVersions)
+      .where(
+        and(
+          eq(agentConfigVersions.id, versionId),
+          eq(agentConfigVersions.agent_id, agentId)
+        )
+      )
+      .limit(1);
 
-    if (error || !data) {
+    if (!data) {
       return Response.json({ error: "Version not found" }, { status: 404 });
     }
 
@@ -29,16 +32,19 @@ export async function GET(
   }
 
   // List versions (omit full prompt for speed)
-  const { data, error } = await supabase
-    .from("agent_config_versions")
-    .select("id, agent_id, source, note, allowed_tools, created_at")
-    .eq("agent_id", agentId)
-    .order("created_at", { ascending: false })
+  const data = await db
+    .select({
+      id: agentConfigVersions.id,
+      agent_id: agentConfigVersions.agent_id,
+      source: agentConfigVersions.source,
+      note: agentConfigVersions.note,
+      allowed_tools: agentConfigVersions.allowed_tools,
+      created_at: agentConfigVersions.created_at,
+    })
+    .from(agentConfigVersions)
+    .where(eq(agentConfigVersions.agent_id, agentId))
+    .orderBy(desc(agentConfigVersions.created_at))
     .limit(50);
-
-  if (error) {
-    return Response.json({ error: error.message }, { status: 500 });
-  }
 
   return Response.json(data ?? []);
 }
@@ -56,23 +62,16 @@ export async function POST(
     return Response.json({ error: "systemPrompt is required" }, { status: 400 });
   }
 
-  // Use admin client to bypass RLS (called from terminal script)
-  const supabase = createAdminClient();
-  const { data, error } = await supabase
-    .from("agent_config_versions")
-    .insert({
+  const [data] = await db
+    .insert(agentConfigVersions)
+    .values({
       agent_id: agentId,
       system_prompt: systemPrompt,
       allowed_tools: allowedTools ?? [],
       source: source ?? "api",
       note: note ?? null,
     })
-    .select()
-    .single();
-
-  if (error) {
-    return Response.json({ error: error.message }, { status: 500 });
-  }
+    .returning();
 
   return Response.json(data, { status: 201 });
 }

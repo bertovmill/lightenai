@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { and, desc, eq, gte, lte } from "drizzle-orm";
+import { db } from "@/db";
+import { inquiries } from "@/db/schema";
 import { Resend } from "resend";
 
 const getResend = () => process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
@@ -22,28 +24,15 @@ export async function GET(request: NextRequest) {
     const from = searchParams.get("from");
     const to = searchParams.get("to");
 
-    const supabase = createAdminClient();
+    const filters = [];
+    if (from) filters.push(gte(inquiries.created_at, from));
+    if (to) filters.push(lte(inquiries.created_at, to));
 
-    let query = supabase
-      .from("inquiries")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (from) {
-      query = query.gte("created_at", from);
-    }
-    if (to) {
-      query = query.lte("created_at", to);
-    }
-
-    const { data, error } = await query;
-
-    if (error) {
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
-    }
+    const data = await db
+      .select()
+      .from(inquiries)
+      .where(filters.length ? and(...filters) : undefined)
+      .orderBy(desc(inquiries.created_at));
 
     return NextResponse.json({ data });
   } catch (error) {
@@ -69,20 +58,11 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    const supabase = createAdminClient();
-
-    const { data, error } = await supabase
-      .from("inquiries")
-      .update({ status })
-      .eq("id", id)
-      .select();
-
-    if (error) {
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
-    }
+    const data = await db
+      .update(inquiries)
+      .set({ status })
+      .where(eq(inquiries.id, id))
+      .returning();
 
     return NextResponse.json({ success: true, data });
   } catch (error) {
@@ -117,34 +97,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createAdminClient();
-
-    const { data, error } = await supabase
-      .from("inquiries")
-      .insert([
-        {
-          email,
-          first_name,
-          last_name,
-          company,
-          role,
-          website,
-          company_size,
-          annual_revenue,
-          project_budget,
-          services,
-          message,
-        },
-      ])
-      .select();
-
-    if (error) {
-      console.error("Supabase error:", error.message, error.details, error.hint);
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
-    }
+    const data = await db
+      .insert(inquiries)
+      .values({
+        email,
+        first_name,
+        last_name,
+        company,
+        role,
+        website,
+        company_size,
+        annual_revenue,
+        project_budget,
+        services,
+        message,
+      })
+      .returning();
 
     // Send email notification (non-blocking — don't let email failure break the form)
     const notificationEmail = process.env.NOTIFICATION_EMAIL;

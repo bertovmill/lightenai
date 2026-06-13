@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { createClient } from "@/lib/supabase/client";
-import { ADMIN_EMAIL } from "@/lib/constants";
+import { useUser } from "@clerk/nextjs";
+import { isAdminEmail } from "@/lib/admin";
 import {
   generateImage,
   generateVideo,
@@ -42,22 +42,14 @@ export default function GenerateAssetsPage() {
   const [error, setError] = useState<string | null>(null);
   const [startTime, setStartTime] = useState<number | null>(null);
 
-  const supabase = createClient();
+  const { user, isLoaded } = useUser();
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user || user.email !== ADMIN_EMAIL) return;
-      } catch (error) {
-        console.error("Auth error:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    checkAuth();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!isLoaded) return;
+    // Gate visibility by admin email; real enforcement lives in middleware/layout.
+    isAdminEmail(user?.primaryEmailAddress?.emailAddress);
+    setIsLoading(false);
+  }, [isLoaded, user]);
 
   const handleLogMessage = useCallback((log: LogMessage) => {
     setLogs((prev) => [...prev, log.message]);

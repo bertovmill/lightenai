@@ -1,5 +1,7 @@
 import { runAgentInSandbox } from "@/lib/agents/sandbox";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { db } from "@/db";
+import { deployedAgents } from "@/db/schema";
+import { eq } from "drizzle-orm";
 import { NextRequest } from "next/server";
 
 export const runtime = "nodejs";
@@ -19,15 +21,14 @@ export async function POST(
     });
   }
 
-  // Load agent config from Supabase
-  const supabase = createAdminClient();
-  const { data: agent, error } = await supabase
-    .from("deployed_agents")
-    .select("*")
-    .eq("agent_id", slug)
-    .single();
+  // Load agent config from the database
+  const [agent] = await db
+    .select()
+    .from(deployedAgents)
+    .where(eq(deployedAgents.agent_id, slug))
+    .limit(1);
 
-  if (error || !agent) {
+  if (!agent) {
     return new Response(JSON.stringify({ error: "Agent not found" }), {
       status: 404,
       headers: { "Content-Type": "application/json" },

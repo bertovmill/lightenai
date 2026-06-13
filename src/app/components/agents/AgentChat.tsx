@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { StatefulButton } from "@/components/ui/stateful-button";
-import { createClient } from "@/lib/supabase/client";
+import { useUser } from "@clerk/nextjs";
 
 interface QuestionOption {
   label: string;
@@ -161,7 +161,8 @@ export default function AgentChat({
   const [selectionQuery, setSelectionQuery] = useState("");
   const [postingState, setPostingState] = useState<Record<string, "idle" | "posting" | "posted" | "error">>({});
   const [sessionIdCopied, setSessionIdCopied] = useState(false);
-  const [userId, setUserId] = useState<string | null>(null);
+  const { user: clerkUser } = useUser();
+  const userId = clerkUser?.id ?? null;
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatAreaRef = useRef<HTMLDivElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -173,14 +174,6 @@ export default function AgentChat({
 
   const isFull = variant === "full";
   const accent = "#6B8F71";
-
-  // Fetch authenticated user ID on mount
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (user) setUserId(user.id);
-    });
-  }, []);
 
   useEffect(() => {
     const saved = localStorage.getItem(storageKey);

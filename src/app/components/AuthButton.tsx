@@ -3,40 +3,21 @@
 import { useEffect, useState, useRef } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/client";
-import type { User } from "@supabase/supabase-js";
-
-const ADMIN_EMAIL = "bertmill19@gmail.com";
+import { useUser, useClerk } from "@clerk/nextjs";
+import { isAdminEmail } from "@/lib/admin";
 
 export function AuthButton() {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { isLoaded, isSignedIn, user } = useUser();
+  const { signOut } = useClerk();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const supabase = createClient();
 
-  const isAdminUser = user?.email === ADMIN_EMAIL;
+  const email = user?.primaryEmailAddress?.emailAddress ?? null;
+  const isAdminUser = isAdminEmail(email);
   const isAdminView = pathname === "/content" && searchParams.get("view") === "admin";
-
-  useEffect(() => {
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-      setLoading(false);
-    };
-    getUser();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setUser(session?.user ?? null);
-      }
-    );
-
-    return () => subscription.unsubscribe();
-  }, [supabase.auth]);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -51,17 +32,16 @@ export function AuthButton() {
   }, [dropdownOpen]);
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
+    await signOut();
     router.refresh();
   };
 
-  if (loading) {
+  if (!isLoaded) {
     return <div className="w-16" />;
   }
 
-  if (user) {
-    const initial = (user.email?.[0] ?? "U").toUpperCase();
+  if (isSignedIn) {
+    const initial = (email?.[0] ?? "U").toUpperCase();
     return (
       <div className="relative" ref={dropdownRef}>
         <button
@@ -73,7 +53,7 @@ export function AuthButton() {
         {dropdownOpen && (
           <div className="absolute right-0 top-full mt-2 w-52 bg-white border border-[#E8E6E1] rounded-xl shadow-lg py-1 z-50">
             <div className="px-4 py-2 border-b border-[#E8E6E1]">
-              <p className="text-xs text-[#999] truncate">{user.email}</p>
+              <p className="text-xs text-[#999] truncate">{email}</p>
             </div>
             {isAdminUser && (
               <>
@@ -110,7 +90,10 @@ export function AuthButton() {
             )}
             <div className="border-t border-[#E8E6E1] mt-1">
               <button
-                onClick={() => { setDropdownOpen(false); handleSignOut(); }}
+                onClick={() => {
+                  setDropdownOpen(false);
+                  handleSignOut();
+                }}
                 className="block w-full text-left px-4 py-2 text-sm text-[#666] hover:text-red-500 hover:bg-[#F5F4F1] transition-colors"
               >
                 Sign Out

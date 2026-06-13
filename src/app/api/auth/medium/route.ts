@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { getAuthUser } from "@/lib/auth";
+import { db } from "@/db";
+import { socialConnections } from "@/db/schema";
 import { getMediumProfile } from "@/lib/social/oauth";
 
 /**
@@ -7,8 +9,7 @@ import { getMediumProfile } from "@/lib/social/oauth";
  * Connects Medium using an integration token from env vars.
  */
 export async function POST() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getAuthUser();
 
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -24,24 +25,20 @@ export async function POST() {
     const profile = await getMediumProfile(integrationToken);
     console.log("Medium profile fetched:", profile.username, profile.id);
 
-    const { error } = await supabase.from("social_connections").upsert(
-      {
-        user_id: user.id,
-        platform: "medium",
-        platform_user_id: profile.id,
-        profile_name: profile.name || profile.username,
-        profile_image: profile.imageUrl || null,
-        access_token: integrationToken,
-        token_expires_at: null, // Integration tokens don't expire
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: "user_id,platform" }
-    );
-
-    if (error) {
-      console.error("Medium connection save error:", error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
+    const values: typeof socialConnections.$inferInsert = {
+      user_id: user.id,
+      platform: "medium" as typeof socialConnections.$inferInsert["platform"],
+      platform_user_id: profile.id,
+      profile_name: profile.name || profile.username,
+      profile_image: profile.imageUrl || null,
+      access_token: integrationToken,
+      token_expires_at: null, // Integration tokens don't expire
+      updated_at: new Date().toISOString(),
+    };
+    await db.insert(socialConnections).values(values).onConflictDoUpdate({
+      target: [socialConnections.user_id, socialConnections.platform],
+      set: values,
+    });
 
     return NextResponse.json({
       success: true,

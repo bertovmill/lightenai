@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { useDailyProgress, getTodayString } from "./hooks/useDailyProgress";
 import MorningProgress from "./components/MorningProgress";
 import StepCard from "./components/StepCard";
@@ -43,7 +42,6 @@ export default function AdminDashboard() {
   const [feedbackCount, setFeedbackCount] = useState(0);
   const [newsForContent, setNewsForContent] = useState<string | undefined>();
   const [selectedDate, setSelectedDate] = useState(getTodayString);
-  const supabase = createClient();
 
   const {
     progress,
@@ -94,14 +92,14 @@ export default function AdminDashboard() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-          // Fetch unaddressed feedback count
-          const { count: fbCount } = await supabase
-            .from("feedback")
-            .select("id", { count: "exact", head: true })
-            .eq("addressed", false);
-          setFeedbackCount(fbCount ?? 0);
+        // Fetch unaddressed feedback count
+        const res = await fetch("/api/feedback");
+        if (res.ok) {
+          const { data } = await res.json();
+          const fbCount = (data || []).filter(
+            (f: { addressed: boolean | null }) => f.addressed === false
+          ).length;
+          setFeedbackCount(fbCount);
         }
       } catch (error) {
         console.error("Data fetch error:", error);

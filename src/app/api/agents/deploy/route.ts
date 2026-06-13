@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { db } from "@/db";
+import { deployedAgents } from "@/db/schema";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -115,41 +116,34 @@ export async function POST(request: NextRequest) {
     const extracted = JSON.parse(jsonMatch[0]);
 
     // Upsert into deployed_agents
-    const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from("deployed_agents")
-      .upsert(
-        {
-          agent_id: extracted.agent_id,
-          name: extracted.name,
-          tagline: extracted.tagline || "",
-          description: extracted.description || "",
-          icon_path: extracted.icon_path || undefined,
-          status: extracted.status || "active",
-          capabilities: extracted.capabilities || [],
-          faq: extracted.faq || [],
-          architecture: extracted.architecture || null,
-          placeholder: extracted.placeholder || "Send a message...",
-          empty_state_title: extracted.empty_state_title || "Start a conversation",
-          empty_state_description: extracted.empty_state_description || "",
-          loading_text: extracted.loading_text || "Thinking...",
-          starter_prompts: extracted.starter_prompts || [],
-          system_prompt: extracted.system_prompt || "",
-          allowed_tools: extracted.allowed_tools || ["Read", "Glob", "Grep", "WebSearch", "WebFetch", "AskUserQuestion"],
-          agents: extracted.agents || null,
-          permission_mode: extracted.permission_mode || "bypassPermissions",
-          created_by: userId,
-          updated_at: new Date().toISOString(),
-        },
-        { onConflict: "agent_id" }
-      )
-      .select()
-      .single();
+    const values = {
+      agent_id: extracted.agent_id,
+      name: extracted.name,
+      tagline: extracted.tagline || "",
+      description: extracted.description || "",
+      icon_path: extracted.icon_path || undefined,
+      status: extracted.status || "active",
+      capabilities: extracted.capabilities || [],
+      faq: extracted.faq || [],
+      architecture: extracted.architecture || null,
+      placeholder: extracted.placeholder || "Send a message...",
+      empty_state_title: extracted.empty_state_title || "Start a conversation",
+      empty_state_description: extracted.empty_state_description || "",
+      loading_text: extracted.loading_text || "Thinking...",
+      starter_prompts: extracted.starter_prompts || [],
+      system_prompt: extracted.system_prompt || "",
+      allowed_tools: extracted.allowed_tools || ["Read", "Glob", "Grep", "WebSearch", "WebFetch", "AskUserQuestion"],
+      agents: extracted.agents || null,
+      permission_mode: extracted.permission_mode || "bypassPermissions",
+      created_by: userId,
+      updated_at: new Date().toISOString(),
+    };
 
-    if (error) {
-      console.error("Deploy upsert error:", error);
-      return Response.json({ error: "Failed to deploy agent", details: error.message }, { status: 500 });
-    }
+    const [data] = await db
+      .insert(deployedAgents)
+      .values(values)
+      .onConflictDoUpdate({ target: deployedAgents.agent_id, set: values })
+      .returning();
 
     return Response.json({
       success: true,

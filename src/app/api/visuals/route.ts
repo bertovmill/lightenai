@@ -1,20 +1,21 @@
 import { NextResponse } from "next/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { desc } from "drizzle-orm";
+import { db } from "@/db";
+import { generatedVisuals } from "@/db/schema";
 
 export async function GET() {
   try {
-    const supabase = createAdminClient();
-
-    const { data, error } = await supabase
-      .from("generated_visuals")
-      .select("id, url, name, preset, created_at")
-      .order("created_at", { ascending: false })
+    const data = await db
+      .select({
+        id: generatedVisuals.id,
+        url: generatedVisuals.url,
+        name: generatedVisuals.name,
+        preset: generatedVisuals.preset,
+        created_at: generatedVisuals.created_at,
+      })
+      .from(generatedVisuals)
+      .orderBy(desc(generatedVisuals.created_at))
       .limit(20);
-
-    if (error) {
-      console.error("Visuals fetch error:", error);
-      return NextResponse.json({ error: "Failed to fetch visuals" }, { status: 500 });
-    }
 
     return NextResponse.json({ data });
   } catch (err) {

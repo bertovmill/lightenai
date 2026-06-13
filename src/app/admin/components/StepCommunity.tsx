@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { createClient } from "@/lib/supabase/client";
 
 interface CommunityTask {
   id: string;
@@ -21,7 +20,6 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
   const [tasks, setTasks] = useState<CommunityTask[]>([]);
   const [newTask, setNewTask] = useState("");
   const [isAdding, setIsAdding] = useState(false);
-  const supabase = createClient();
 
   // Load fixed checks from localStorage (daily reset)
   useEffect(() => {
@@ -55,14 +53,18 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
     saveChecks(lumaChecked, next);
   };
 
-  // Load tasks from Supabase
+  // Load tasks from the API (Drizzle, scoped to current user server-side)
   const loadTasks = useCallback(async () => {
-    const { data } = await supabase
-      .from("community_tasks")
-      .select("*")
-      .order("created_at", { ascending: true });
-    if (data) setTasks(data);
-  }, [supabase]);
+    try {
+      const res = await fetch("/api/community-tasks");
+      if (res.ok) {
+        const { data } = await res.json();
+        if (data) setTasks(data);
+      }
+    } catch {
+      // Silent fail
+    }
+  }, []);
 
   useEffect(() => {
     loadTasks();
@@ -72,18 +74,21 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
     const title = newTask.trim();
     if (!title) return;
     setIsAdding(true);
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { setIsAdding(false); return; }
-
-    const { data, error } = await supabase
-      .from("community_tasks")
-      .insert({ title, user_id: user.id })
-      .select()
-      .single();
-
-    if (!error && data) {
-      setTasks((prev) => [...prev, data]);
-      setNewTask("");
+    try {
+      const res = await fetch("/api/community-tasks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title }),
+      });
+      if (res.ok) {
+        const { data } = await res.json();
+        if (data) {
+          setTasks((prev) => [...prev, data]);
+          setNewTask("");
+        }
+      }
+    } catch {
+      // Silent fail
     }
     setIsAdding(false);
   };
@@ -91,15 +96,16 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
   const toggleTask = async (task: CommunityTask) => {
     const next = !task.is_completed;
     setTasks((prev) => prev.map((t) => t.id === task.id ? { ...t, is_completed: next } : t));
-    await supabase
-      .from("community_tasks")
-      .update({ is_completed: next })
-      .eq("id", task.id);
+    await fetch("/api/community-tasks", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: task.id, is_completed: next }),
+    });
   };
 
   const deleteTask = async (id: string) => {
     setTasks((prev) => prev.filter((t) => t.id !== id));
-    await supabase.from("community_tasks").delete().eq("id", id);
+    await fetch(`/api/community-tasks?id=${id}`, { method: "DELETE" });
   };
 
   const completedTasks = tasks.filter((t) => t.is_completed).length;

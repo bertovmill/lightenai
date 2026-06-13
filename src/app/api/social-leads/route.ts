@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { and, desc, eq, gte, lte } from "drizzle-orm";
+import { db } from "@/db";
+import { socialLeads } from "@/db/schema";
 
 const VALID_PLATFORMS = ["linkedin", "x", "medium", "youtube", "instagram", "tiktok"];
 
@@ -19,27 +21,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createAdminClient();
-
-    const { data, error } = await supabase
-      .from("social_leads")
-      .insert([
-        {
-          platform,
-          contact_name: contact_name.trim(),
-          profile_url: profile_url || null,
-          message_summary: message_summary || null,
-        },
-      ])
-      .select();
-
-    if (error) {
-      console.error("Supabase error:", error.message, error.details, error.hint);
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
-    }
+    const data = await db
+      .insert(socialLeads)
+      .values({
+        platform,
+        contact_name: contact_name.trim(),
+        profile_url: profile_url || null,
+        message_summary: message_summary || null,
+      })
+      .returning();
 
     return NextResponse.json({ success: true, data });
   } catch (error) {
@@ -58,32 +48,18 @@ export async function GET(request: NextRequest) {
     const from = searchParams.get("from");
     const to = searchParams.get("to");
 
-    const supabase = createAdminClient();
-
-    let query = supabase
-      .from("social_leads")
-      .select("*")
-      .order("lead_date", { ascending: false })
-      .order("created_at", { ascending: false });
-
+    const filters = [];
     if (platform && VALID_PLATFORMS.includes(platform)) {
-      query = query.eq("platform", platform);
+      filters.push(eq(socialLeads.platform, platform as never));
     }
-    if (from) {
-      query = query.gte("lead_date", from);
-    }
-    if (to) {
-      query = query.lte("lead_date", to);
-    }
+    if (from) filters.push(gte(socialLeads.lead_date, from));
+    if (to) filters.push(lte(socialLeads.lead_date, to));
 
-    const { data, error } = await query;
-
-    if (error) {
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
-    }
+    const data = await db
+      .select()
+      .from(socialLeads)
+      .where(filters.length ? and(...filters) : undefined)
+      .orderBy(desc(socialLeads.lead_date), desc(socialLeads.created_at));
 
     return NextResponse.json({ data });
   } catch (error) {
@@ -111,20 +87,11 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    const supabase = createAdminClient();
-
-    const { data, error } = await supabase
-      .from("social_leads")
-      .update({ status })
-      .eq("id", id)
-      .select();
-
-    if (error) {
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
-    }
+    const data = await db
+      .update(socialLeads)
+      .set({ status })
+      .where(eq(socialLeads.id, id))
+      .returning();
 
     return NextResponse.json({ success: true, data });
   } catch (error) {
@@ -144,19 +111,7 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "id is required" }, { status: 400 });
     }
 
-    const supabase = createAdminClient();
-
-    const { error } = await supabase
-      .from("social_leads")
-      .delete()
-      .eq("id", id);
-
-    if (error) {
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
-    }
+    await db.delete(socialLeads).where(eq(socialLeads.id, id));
 
     return NextResponse.json({ success: true });
   } catch (error) {

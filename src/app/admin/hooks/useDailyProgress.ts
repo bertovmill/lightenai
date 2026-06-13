@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { createClient } from "@/lib/supabase/client";
 
 interface DailyProgressState {
   date: string;
@@ -74,7 +73,6 @@ function saveToLocalStorage(state: DailyProgressState) {
 export function useDailyProgress(selectedDate: string = getTodayString()) {
   const [progress, setProgress] = useState<DailyProgressState>(() => getDefaultState(selectedDate));
   const [isLoadingProgress, setIsLoadingProgress] = useState(true);
-  const supabase = createClient();
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isToday = selectedDate === getTodayString();
 
@@ -93,20 +91,15 @@ export function useDailyProgress(selectedDate: string = getTodayString()) {
         }
       }
 
-      // Then load from Supabase (authoritative)
+      // Then load from the API (authoritative — user derived server-side)
       try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user || cancelled) {
+        const res = await fetch(`/api/daily-progress?date=${selectedDate}`);
+        if (cancelled) return;
+        if (!res.ok) {
           setIsLoadingProgress(false);
           return;
         }
-
-        const { data } = await supabase
-          .from("daily_progress")
-          .select("progress")
-          .eq("user_id", user.id)
-          .eq("date", selectedDate)
-          .single();
+        const { data } = await res.json();
 
         if (cancelled) return;
 
@@ -120,11 +113,11 @@ export function useDailyProgress(selectedDate: string = getTodayString()) {
           setProgress(loaded);
           if (isToday) saveToLocalStorage(loaded);
         } else {
-          // No Supabase data for this date
+          // No saved data for this date
           setProgress(getDefaultState(selectedDate));
         }
       } catch {
-        // Supabase fetch failed, keep what we have
+        // Fetch failed, keep what we have
         if (cancelled) return;
         if (!isToday) {
           setProgress(getDefaultState(selectedDate));
@@ -139,32 +132,23 @@ export function useDailyProgress(selectedDate: string = getTodayString()) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDate, isToday]);
 
-  // Debounced save to Supabase
-  const saveToSupabase = useCallback(
+  // Debounced save to the API (Drizzle upsert, user derived server-side)
+  const saveToServer = useCallback(
     (state: DailyProgressState) => {
       if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
       saveTimeoutRef.current = setTimeout(async () => {
         try {
-          const { data: { user } } = await supabase.auth.getUser();
-          if (!user) return;
-
-          await supabase
-            .from("daily_progress")
-            .upsert(
-              {
-                user_id: user.id,
-                date: state.date,
-                progress: state,
-                updated_at: new Date().toISOString(),
-              },
-              { onConflict: "user_id,date" }
-            );
+          await fetch("/api/daily-progress", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ date: state.date, progress: state }),
+          });
         } catch (err) {
           console.error("Failed to save daily progress:", err);
         }
       }, 500);
     },
-    [supabase]
+    []
   );
 
   const update = useCallback(
@@ -172,11 +156,11 @@ export function useDailyProgress(selectedDate: string = getTodayString()) {
       setProgress((prev) => {
         const next = updater(prev);
         saveToLocalStorage(next);
-        saveToSupabase(next);
+        saveToServer(next);
         return next;
       });
     },
-    [saveToSupabase]
+    [saveToServer]
   );
 
   const markInquiriesReviewed = useCallback(() => {

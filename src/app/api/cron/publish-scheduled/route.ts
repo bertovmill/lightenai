@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { and, asc, eq, lte } from "drizzle-orm";
+import { db } from "@/db";
+import { scheduledPosts, socialConnections } from "@/db/schema";
 import {
   postToX,
   postToLinkedIn,
@@ -9,22 +11,18 @@ import {
   refreshXToken,
   refreshInstagramToken,
 } from "@/lib/social/oauth";
+import { uploadBlob } from "@/lib/blob";
 
 import sharp from "sharp";
 
 async function getPublicImageUrl(imageUrl: string): Promise<string> {
-  const supabase = createAdminClient();
   const imgRes = await fetch(imageUrl);
   if (!imgRes.ok) throw new Error("Failed to download image for re-upload");
   const buffer = Buffer.from(await imgRes.arrayBuffer());
   const jpegBuffer = await sharp(buffer).jpeg({ quality: 90 }).toBuffer();
-  const fileName = `social/${Date.now()}.jpg`;
-  const { error } = await supabase.storage
-    .from("visuals")
-    .upload(fileName, jpegBuffer, { contentType: "image/jpeg", upsert: false });
-  if (error) throw new Error(`Storage upload failed: ${error.message}`);
-  const { data } = supabase.storage.from("visuals").getPublicUrl(fileName);
-  return data.publicUrl;
+  const fileName = `${Date.now()}.jpg`;
+  const blob = await uploadBlob("visuals/social", fileName, jpegBuffer, "image/jpeg");
+  return blob.url;
 }
 
 export async function GET(request: NextRequest) {
@@ -36,18 +34,22 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const admin = createAdminClient();
-
   // Find all pending posts that are due
-  const { data: duePosts, error: fetchError } = await admin
-    .from("scheduled_posts")
-    .select("*")
-    .eq("status", "pending")
-    .lte("scheduled_at", new Date().toISOString())
-    .order("scheduled_at", { ascending: true });
-
-  if (fetchError) {
-    return NextResponse.json({ error: fetchError.message }, { status: 500 });
+  let duePosts;
+  try {
+    duePosts = await db
+      .select()
+      .from(scheduledPosts)
+      .where(
+        and(
+          eq(scheduledPosts.status, "pending"),
+          lte(scheduledPosts.scheduled_at, new Date().toISOString()),
+        ),
+      )
+      .orderBy(asc(scheduledPosts.scheduled_at));
+  } catch (fetchError) {
+    const message = fetchError instanceof Error ? fetchError.message : "Unknown error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 
   if (!duePosts || duePosts.length === 0) {
@@ -61,16 +63,24 @@ export async function GET(request: NextRequest) {
     try {
       // Determine the platform to look up in social_connections
       const dbPlatform = post.platform;
+      // social_connections.platform is a narrower enum than scheduled_posts.platform;
+      // the column actually stores the same raw platform strings, so cast for the query.
+      const connectionPlatform =
+        dbPlatform as (typeof socialConnections.$inferSelect)["platform"];
 
       // Fetch the user's connection for this platform
-      const { data: connection, error: connError } = await admin
-        .from("social_connections")
-        .select("*")
-        .eq("user_id", post.user_id)
-        .eq("platform", dbPlatform)
-        .single();
+      const [connection] = await db
+        .select()
+        .from(socialConnections)
+        .where(
+          and(
+            eq(socialConnections.user_id, post.user_id),
+            eq(socialConnections.platform, connectionPlatform),
+          ),
+        )
+        .limit(1);
 
-      if (connError || !connection) {
+      if (!connection) {
         throw new Error(`No ${dbPlatform} connection found for user`);
       }
 
@@ -82,28 +92,36 @@ export async function GET(request: NextRequest) {
         if (basePlatform === "x" && connection.refresh_token) {
           const refreshed = await refreshXToken(connection.refresh_token);
           accessToken = refreshed.access_token;
-          await admin
-            .from("social_connections")
-            .update({
+          await db
+            .update(socialConnections)
+            .set({
               access_token: refreshed.access_token,
               refresh_token: refreshed.refresh_token,
               token_expires_at: new Date(Date.now() + refreshed.expires_in * 1000).toISOString(),
               updated_at: new Date().toISOString(),
             })
-            .eq("user_id", post.user_id)
-            .eq("platform", dbPlatform);
+            .where(
+              and(
+                eq(socialConnections.user_id, post.user_id),
+                eq(socialConnections.platform, connectionPlatform),
+              ),
+            );
         } else if (basePlatform === "instagram") {
           const refreshed = await refreshInstagramToken(accessToken);
           accessToken = refreshed.access_token;
-          await admin
-            .from("social_connections")
-            .update({
+          await db
+            .update(socialConnections)
+            .set({
               access_token: refreshed.access_token,
               token_expires_at: new Date(Date.now() + refreshed.expires_in * 1000).toISOString(),
               updated_at: new Date().toISOString(),
             })
-            .eq("user_id", post.user_id)
-            .eq("platform", dbPlatform);
+            .where(
+              and(
+                eq(socialConnections.user_id, post.user_id),
+                eq(socialConnections.platform, connectionPlatform),
+              ),
+            );
         } else {
           throw new Error("TOKEN_EXPIRED");
         }
@@ -155,27 +173,27 @@ export async function GET(request: NextRequest) {
       }
 
       // Mark as published
-      await admin
-        .from("scheduled_posts")
-        .update({
+      await db
+        .update(scheduledPosts)
+        .set({
           status: "published",
           post_id: postId || null,
           published_at: new Date().toISOString(),
         })
-        .eq("id", post.id);
+        .where(eq(scheduledPosts.id, post.id));
 
       published++;
     } catch (err) {
       const errMessage = err instanceof Error ? err.message : "Unknown error";
       console.error(`Failed to publish scheduled post ${post.id}:`, errMessage);
 
-      await admin
-        .from("scheduled_posts")
-        .update({
+      await db
+        .update(scheduledPosts)
+        .set({
           status: "failed",
           error_message: errMessage,
         })
-        .eq("id", post.id);
+        .where(eq(scheduledPosts.id, post.id));
 
       failed++;
     }

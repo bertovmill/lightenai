@@ -1,5 +1,7 @@
 import { NextRequest } from "next/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { db } from "@/db";
+import { deployedAgents } from "@/db/schema";
+import { desc, eq } from "drizzle-orm";
 import { getAllAgents } from "@/lib/agents/data";
 import { AgentConfig } from "@/lib/agents/types";
 
@@ -42,12 +44,11 @@ export async function GET(request: NextRequest) {
     }
 
     try {
-      const supabase = createAdminClient();
-      const { data } = await supabase
-        .from("deployed_agents")
-        .select("*")
-        .eq("agent_id", slug)
-        .single();
+      const [data] = await db
+        .select()
+        .from(deployedAgents)
+        .where(eq(deployedAgents.agent_id, slug))
+        .limit(1);
 
       if (data) {
         return Response.json(dbRowToAgentConfig(data));
@@ -62,11 +63,10 @@ export async function GET(request: NextRequest) {
   // Return merged list: static agents + dynamic agents from DB
   let dynamicAgents: AgentConfig[] = [];
   try {
-    const supabase = createAdminClient();
-    const { data } = await supabase
-      .from("deployed_agents")
-      .select("*")
-      .order("created_at", { ascending: false });
+    const data = await db
+      .select()
+      .from(deployedAgents)
+      .orderBy(desc(deployedAgents.created_at));
 
     if (data) {
       const staticIds = new Set(staticAgents.map((a) => a.id));

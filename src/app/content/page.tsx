@@ -3,11 +3,9 @@ import Link from "next/link";
 import { Navigation } from "../components/Navigation";
 import { Footer } from "../components/Footer";
 import { getPublishedContent, getAllContent } from "@/lib/content";
-import { createClient } from "@/lib/supabase/server";
+import { getAuthUser, isAdminEmail } from "@/lib/auth";
 import { PLATFORMS, PLATFORM_ORDER } from "./platforms";
 import { ContentPageClient } from "./ContentPageClient";
-
-const ADMIN_EMAIL = "bertmill19@gmail.com";
 
 export const metadata: Metadata = {
   title: "Content | Lighten AI",
@@ -16,12 +14,8 @@ export const metadata: Metadata = {
 };
 
 export default async function ContentPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const isAdminUser = user?.email === ADMIN_EMAIL;
+  const user = await getAuthUser();
+  const isAdminUser = isAdminEmail(user?.email);
 
   const publishedColumns = await getPublishedContent();
   const allColumns = isAdminUser ? await getAllContent() : null;

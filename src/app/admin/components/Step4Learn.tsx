@@ -2,7 +2,6 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { createClient } from "@/lib/supabase/client";
 
 const AgentChat = dynamic(() => import("@/app/components/agents/AgentChat"), {
   ssr: false,
@@ -133,21 +132,18 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
     }
   }, []);
 
-  // Load quiz scores from Supabase
+  // Load quiz scores (scoped to current user server-side)
   useEffect(() => {
     async function loadScores() {
-      const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
-
-      const { data } = await supabase
-        .from("quiz_scores")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("created_at", { ascending: false })
-        .limit(50);
-
-      if (data) setScores(data);
+      try {
+        const res = await fetch("/api/quiz-scores");
+        if (res.ok) {
+          const { data } = await res.json();
+          if (data) setScores(data);
+        }
+      } catch {
+        // Silent fail
+      }
     }
     loadScores();
   }, []);
@@ -275,26 +271,21 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
   const handleQuizScore = useCallback(async (score: number, total: number) => {
     if (activeSessionId && scoreSavedForSession === activeSessionId) return;
 
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
-
-    const today = new Date().toISOString().split("T")[0];
-    const { data, error } = await supabase
-      .from("quiz_scores")
-      .insert({
-        user_id: user.id,
-        date: today,
-        score,
-        total,
-        session_id: activeSessionId,
-      })
-      .select()
-      .single();
-
-    if (!error && data) {
-      setScores((prev) => [data, ...prev]);
-      if (activeSessionId) setScoreSavedForSession(activeSessionId);
+    try {
+      const res = await fetch("/api/quiz-scores", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ score, total, session_id: activeSessionId }),
+      });
+      if (res.ok) {
+        const { data } = await res.json();
+        if (data) {
+          setScores((prev) => [data, ...prev]);
+          if (activeSessionId) setScoreSavedForSession(activeSessionId);
+        }
+      }
+    } catch {
+      // Silent fail
     }
   }, [activeSessionId, scoreSavedForSession]);
 

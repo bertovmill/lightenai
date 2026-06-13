@@ -1,16 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { and, eq } from "drizzle-orm";
+import { db } from "@/db";
+import { socialConnections, SOCIAL_CONNECTION_PLATFORMS } from "@/db/schema";
+import { getAuthUser } from "@/lib/auth";
+import { uploadBlob } from "@/lib/blob";
 import { postToX, postToLinkedIn, postToInstagram, postToMedium, postToFacebook, refreshXToken, refreshInstagramToken } from "@/lib/social/oauth";
 
 import sharp from "sharp";
 
+type ConnectionPlatform = (typeof SOCIAL_CONNECTION_PLATFORMS)[number];
+
 /**
- * Re-upload an image to Supabase Storage as JPEG so Instagram can access it.
+ * Re-upload an image to Vercel Blob as JPEG so Instagram can access it.
  * Instagram Graph API only supports JPEG. fal.ai CDN URLs are also blocked.
  */
 async function getPublicImageUrl(imageUrl: string): Promise<string> {
-  const supabase = createAdminClient();
   const imgRes = await fetch(imageUrl);
   if (!imgRes.ok) throw new Error("Failed to download image for re-upload");
 
@@ -20,20 +24,12 @@ async function getPublicImageUrl(imageUrl: string): Promise<string> {
   const jpegBuffer = await sharp(buffer).jpeg({ quality: 90 }).toBuffer();
 
   const fileName = `social/${Date.now()}.jpg`;
-
-  const { error } = await supabase.storage
-    .from("visuals")
-    .upload(fileName, jpegBuffer, { contentType: "image/jpeg", upsert: false });
-
-  if (error) throw new Error(`Storage upload failed: ${error.message}`);
-
-  const { data } = supabase.storage.from("visuals").getPublicUrl(fileName);
-  return data.publicUrl;
+  const { url } = await uploadBlob("visuals", fileName, jpegBuffer, "image/jpeg");
+  return url;
 }
 
 export async function POST(request: NextRequest) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getAuthUser();
 
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -50,17 +46,22 @@ export async function POST(request: NextRequest) {
   }
 
   // For org posting, use the separate linkedin_org connection
-  const dbPlatform = (platform === "linkedin" && asOrganization) ? "linkedin_org" : platform;
+  const dbPlatform: ConnectionPlatform =
+    platform === "linkedin" && asOrganization ? "linkedin_org" : platform;
 
   // Fetch stored connection
-  const { data: connection, error: fetchError } = await supabase
-    .from("social_connections")
-    .select("*")
-    .eq("user_id", user.id)
-    .eq("platform", dbPlatform)
-    .single();
+  const [connection] = await db
+    .select()
+    .from(socialConnections)
+    .where(
+      and(
+        eq(socialConnections.user_id, user.id),
+        eq(socialConnections.platform, dbPlatform)
+      )
+    )
+    .limit(1);
 
-  if (fetchError || !connection) {
+  if (!connection) {
     if (asOrganization) {
       return NextResponse.json({ error: "Company page not connected. Click 'Connect Company Page' first." }, { status: 404 });
     }
@@ -76,16 +77,20 @@ export async function POST(request: NextRequest) {
         const refreshed = await refreshXToken(connection.refresh_token);
         accessToken = refreshed.access_token;
 
-        await supabase
-          .from("social_connections")
-          .update({
+        await db
+          .update(socialConnections)
+          .set({
             access_token: refreshed.access_token,
             refresh_token: refreshed.refresh_token,
             token_expires_at: new Date(Date.now() + refreshed.expires_in * 1000).toISOString(),
             updated_at: new Date().toISOString(),
           })
-          .eq("user_id", user.id)
-          .eq("platform", "x");
+          .where(
+            and(
+              eq(socialConnections.user_id, user.id),
+              eq(socialConnections.platform, "x")
+            )
+          );
       } catch {
         return NextResponse.json(
           { error: "TOKEN_EXPIRED", message: "Please reconnect your X account" },
@@ -97,15 +102,19 @@ export async function POST(request: NextRequest) {
         const refreshed = await refreshInstagramToken(accessToken);
         accessToken = refreshed.access_token;
 
-        await supabase
-          .from("social_connections")
-          .update({
+        await db
+          .update(socialConnections)
+          .set({
             access_token: refreshed.access_token,
             token_expires_at: new Date(Date.now() + refreshed.expires_in * 1000).toISOString(),
             updated_at: new Date().toISOString(),
           })
-          .eq("user_id", user.id)
-          .eq("platform", "instagram");
+          .where(
+            and(
+              eq(socialConnections.user_id, user.id),
+              eq(socialConnections.platform, "instagram")
+            )
+          );
       } catch {
         return NextResponse.json(
           { error: "TOKEN_EXPIRED", message: "Please reconnect your Instagram account" },

@@ -1,4 +1,6 @@
-import { createClient } from "@/lib/supabase/server";
+import { db } from "@/db";
+import { agentConfigOverrides, agentConfigVersions } from "@/db/schema";
+import { eq } from "drizzle-orm";
 import { NextRequest } from "next/server";
 
 // Hardcoded defaults for each agent
@@ -78,12 +80,11 @@ export async function GET(
   }
 
   try {
-    const supabase = await createClient();
-    const { data } = await supabase
-      .from("agent_config_overrides")
-      .select("*")
-      .eq("agent_id", agentId)
-      .single();
+    const [data] = await db
+      .select()
+      .from(agentConfigOverrides)
+      .where(eq(agentConfigOverrides.agent_id, agentId))
+      .limit(1);
 
     if (data) {
       return Response.json({
@@ -119,29 +120,27 @@ export async function PATCH(
   const systemPrompt = body.systemPrompt ?? defaults.systemPrompt;
   const allowedTools = body.allowedTools ?? defaults.allowedTools;
 
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("agent_config_overrides")
-    .upsert(
-      {
-        agent_id: agentId,
+  const [data] = await db
+    .insert(agentConfigOverrides)
+    .values({
+      agent_id: agentId,
+      system_prompt: systemPrompt,
+      allowed_tools: allowedTools,
+      updated_at: new Date().toISOString(),
+    })
+    .onConflictDoUpdate({
+      target: agentConfigOverrides.agent_id,
+      set: {
         system_prompt: systemPrompt,
         allowed_tools: allowedTools,
         updated_at: new Date().toISOString(),
       },
-      { onConflict: "agent_id" }
-    )
-    .select()
-    .single();
-
-  if (error) {
-    return Response.json({ error: error.message }, { status: 500 });
-  }
+    })
+    .returning();
 
   // Fire-and-forget: save version snapshot
-  supabase
-    .from("agent_config_versions")
-    .insert({
+  db.insert(agentConfigVersions)
+    .values({
       agent_id: agentId,
       system_prompt: data.system_prompt,
       allowed_tools: data.allowed_tools,
@@ -168,11 +167,9 @@ export async function DELETE(
     return Response.json({ error: "Unknown agent" }, { status: 404 });
   }
 
-  const supabase = await createClient();
-  await supabase
-    .from("agent_config_overrides")
-    .delete()
-    .eq("agent_id", agentId);
+  await db
+    .delete(agentConfigOverrides)
+    .where(eq(agentConfigOverrides.agent_id, agentId));
 
   return Response.json({
     systemPrompt: defaults.systemPrompt,

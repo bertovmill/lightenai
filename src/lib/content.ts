@@ -1,66 +1,82 @@
-import { createClient } from "@/lib/supabase/server";
-import type { ColumnWithTopics, TopicWithPosts, Column } from "@/lib/types/content";
+import { asc, eq } from "drizzle-orm";
+import { db } from "@/db";
+import { columns as columnsTable, topics as topicsTable, posts as postsTable } from "@/db/schema";
+import type { ColumnWithTopics, TopicWithPosts, Column, Post } from "@/lib/types/content";
 
-export async function getPublishedContent(): Promise<ColumnWithTopics[]> {
-  const supabase = await createClient();
+// Assemble the columns → topics → posts tree. When `publishedOnly` is true,
+// only published posts are included (public site); otherwise all posts (admin).
+async function getContentTree(publishedOnly: boolean): Promise<ColumnWithTopics[]> {
+  const [cols, tops, allPosts] = await Promise.all([
+    db.select().from(columnsTable).orderBy(asc(columnsTable.sort_order)),
+    db.select().from(topicsTable).orderBy(asc(topicsTable.sort_order)),
+    db.select().from(postsTable).orderBy(asc(postsTable.created_at)),
+  ]);
 
-  const { data, error } = await supabase.rpc("get_published_content");
-
-  if (error) {
-    console.error("Error fetching content:", error.message, error.code, error.details);
-    return [];
+  const postsByTopic = new Map<string, Post[]>();
+  for (const p of allPosts) {
+    if (publishedOnly && p.status !== "published") continue;
+    const list = postsByTopic.get(p.topic_id) ?? [];
+    list.push(p as Post);
+    postsByTopic.set(p.topic_id, list);
   }
 
-  return (data as ColumnWithTopics[]) ?? [];
+  const topicsByColumn = new Map<string, TopicWithPosts[]>();
+  for (const t of tops) {
+    const list = topicsByColumn.get(t.column_id) ?? [];
+    list.push({ ...(t as TopicWithPosts), posts: postsByTopic.get(t.id) ?? [] });
+    topicsByColumn.set(t.column_id, list);
+  }
+
+  return cols.map((c) => ({
+    ...(c as ColumnWithTopics),
+    topics: topicsByColumn.get(c.id) ?? [],
+  }));
+}
+
+export async function getPublishedContent(): Promise<ColumnWithTopics[]> {
+  try {
+    return await getContentTree(true);
+  } catch (error) {
+    console.error("Error fetching content:", error);
+    return [];
+  }
 }
 
 export async function getAllContent(): Promise<ColumnWithTopics[]> {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase.rpc("get_all_content");
-
-  if (error) {
-    console.error("Error fetching all content:", error.message, error.code, error.details);
+  try {
+    return await getContentTree(false);
+  } catch (error) {
+    console.error("Error fetching all content:", error);
     return [];
   }
-
-  return (data as ColumnWithTopics[]) ?? [];
 }
 
 export async function getTopicBySlug(
   columnSlug: string,
   topicSlug: string
 ): Promise<{ column: Column; topic: TopicWithPosts } | null> {
-  const supabase = await createClient();
+  const [column] = await db
+    .select()
+    .from(columnsTable)
+    .where(eq(columnsTable.slug, columnSlug))
+    .limit(1);
+  if (!column) return null;
 
-  // Fetch column by slug
-  const { data: column, error: columnError } = await supabase
-    .from("columns")
-    .select("*")
-    .eq("slug", columnSlug)
-    .single();
+  const [topic] = await db
+    .select()
+    .from(topicsTable)
+    .where(eq(topicsTable.slug, topicSlug))
+    .limit(1);
+  if (!topic || topic.column_id !== column.id) return null;
 
-  if (columnError || !column) return null;
-
-  // Fetch topic by slug and column_id
-  const { data: topic, error: topicError } = await supabase
-    .from("topics")
-    .select("*")
-    .eq("slug", topicSlug)
-    .eq("column_id", column.id)
-    .single();
-
-  if (topicError || !topic) return null;
-
-  // Fetch posts for this topic
-  const { data: posts } = await supabase
-    .from("posts")
-    .select("*")
-    .eq("topic_id", topic.id)
-    .order("created_at", { ascending: true });
+  const posts = await db
+    .select()
+    .from(postsTable)
+    .where(eq(postsTable.topic_id, topic.id))
+    .orderBy(asc(postsTable.created_at));
 
   return {
-    column,
-    topic: { ...topic, posts: posts ?? [] },
+    column: column as Column,
+    topic: { ...(topic as TopicWithPosts), posts: posts as Post[] },
   };
 }

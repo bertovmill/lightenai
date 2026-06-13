@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { createClient } from "@/lib/supabase/server";
+import { getAuthUser } from "@/lib/auth";
 import {
   generateCodeVerifier,
   generateCodeChallenge,
@@ -9,8 +9,7 @@ import {
 } from "@/lib/social/oauth";
 
 export async function GET() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getAuthUser();
 
   if (!user) {
     return NextResponse.redirect(new URL("/login", process.env.NEXT_PUBLIC_APP_URL));

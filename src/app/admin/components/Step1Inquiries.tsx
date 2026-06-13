@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 
 interface Inquiry {
   id: string;
@@ -22,7 +21,6 @@ interface Step1InquiriesProps {
 export default function Step1Inquiries({ onComplete, isComplete, onNewCount }: Step1InquiriesProps) {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [loading, setLoading] = useState(true);
-  const supabase = createClient();
 
   useEffect(() => {
     fetchInquiries();
@@ -30,27 +28,27 @@ export default function Step1Inquiries({ onComplete, isComplete, onNewCount }: S
   }, []);
 
   const fetchInquiries = async () => {
-    const { data, error } = await supabase
-      .from("inquiries")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(10);
+    try {
+      const res = await fetch("/api/inquiries");
+      if (!res.ok) {
+        console.error("Fetch error:", res.status);
+        setLoading(false);
+        return;
+      }
+      const { data } = await res.json();
 
-    if (error) {
+      const all: Inquiry[] = (data || []).slice(0, 10);
+      setInquiries(all);
+
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      const newCount = all.filter((i) => new Date(i.created_at) > yesterday).length;
+      onNewCount?.(newCount);
+    } catch (error) {
       console.error("Fetch error:", error);
+    } finally {
       setLoading(false);
-      return;
     }
-
-    const all = data || [];
-    setInquiries(all);
-
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const newCount = all.filter((i) => new Date(i.created_at) > yesterday).length;
-    onNewCount?.(newCount);
-
-    setLoading(false);
   };
 
   const formatDate = (dateString: string) => {

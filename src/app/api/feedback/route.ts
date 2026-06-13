@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { asc, desc, eq } from "drizzle-orm";
+import { db } from "@/db";
+import { feedback } from "@/db/schema";
+import { uploadBlob } from "@/lib/blob";
 import { Resend } from "resend";
 
 const getResend = () => process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
@@ -37,8 +40,6 @@ export async function POST(request: NextRequest) {
     const validCategories = ["bug", "improvement", "feature", "other"];
     const safeCategory = validCategories.includes(category || "") ? category : "other";
 
-    const supabase = createAdminClient();
-
     // Upload screenshot if provided
     let screenshot_url: string | null = null;
     if (screenshot && screenshot.size > 0) {
@@ -59,49 +60,33 @@ export async function POST(request: NextRequest) {
       const filename = `${Date.now()}-${crypto.randomUUID()}.${ext}`;
       const buffer = Buffer.from(await screenshot.arrayBuffer());
 
-      const { error: uploadError } = await supabase.storage
-        .from("feedback-screenshots")
-        .upload(filename, buffer, { contentType: screenshot.type });
-
-      if (uploadError) {
-        console.error("Screenshot upload error:", uploadError.message);
+      try {
+        const blob = await uploadBlob(
+          "feedback-screenshots",
+          filename,
+          buffer,
+          screenshot.type
+        );
+        screenshot_url = blob.url;
+      } catch (uploadError) {
+        console.error("Screenshot upload error:", uploadError);
         return NextResponse.json(
-          { error: `Screenshot upload failed: ${uploadError.message}` },
+          { error: "Screenshot upload failed" },
           { status: 500 }
         );
       }
-
-      const { data: urlData } = supabase.storage
-        .from("feedback-screenshots")
-        .getPublicUrl(filename);
-      screenshot_url = urlData.publicUrl;
     }
 
-    const { data, error } = await supabase
-      .from("feedback")
-      .insert([
-        {
-          email: email || null,
-          page_url: page_url || null,
-          category: safeCategory,
-          message: message.trim(),
-          screenshot_url,
-        },
-      ])
-      .select();
-
-    if (error) {
-      console.error("Supabase error:", error.message, error.details, error.hint, error.code);
-      return NextResponse.json(
-        {
-          error: `Database error: ${error.message}`,
-          details: error.details,
-          hint: error.hint,
-          code: error.code,
-        },
-        { status: 500 }
-      );
-    }
+    const data = await db
+      .insert(feedback)
+      .values({
+        email: email || null,
+        page_url: page_url || null,
+        category: safeCategory,
+        message: message.trim(),
+        screenshot_url,
+      })
+      .returning();
 
     // Send email notification (non-blocking)
     const notificationEmail = process.env.NOTIFICATION_EMAIL;
@@ -142,20 +127,10 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
-    const supabase = createAdminClient();
-
-    const { data, error } = await supabase
-      .from("feedback")
-      .select("*")
-      .order("addressed", { ascending: true })
-      .order("created_at", { ascending: false });
-
-    if (error) {
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
-    }
+    const data = await db
+      .select()
+      .from(feedback)
+      .orderBy(asc(feedback.addressed), desc(feedback.created_at));
 
     return NextResponse.json({ data });
   } catch (error) {
@@ -175,20 +150,11 @@ export async function PATCH(request: NextRequest) {
       return NextResponse.json({ error: "id is required" }, { status: 400 });
     }
 
-    const supabase = createAdminClient();
-
-    const { data, error } = await supabase
-      .from("feedback")
-      .update({ addressed: addressed ?? true })
-      .eq("id", id)
-      .select();
-
-    if (error) {
-      return NextResponse.json(
-        { error: `Database error: ${error.message}` },
-        { status: 500 }
-      );
-    }
+    const data = await db
+      .update(feedback)
+      .set({ addressed: addressed ?? true })
+      .where(eq(feedback.id, id))
+      .returning();
 
     return NextResponse.json({ success: true, data });
   } catch (error) {

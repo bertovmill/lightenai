@@ -1,39 +1,30 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
-
-const ALLOWED_EMAIL = "bertmill19@gmail.com";
+import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
+import { isAdminEmail } from "@/lib/admin";
 
 export function DropContentIdeas() {
-  const [visible, setVisible] = useState(false);
+  const { user } = useUser();
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  const supabase = createClient();
-
-  useEffect(() => {
-    const check = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user?.email === ALLOWED_EMAIL) {
-        setVisible(true);
-      }
-    };
-    check();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  const visible = isAdminEmail(user?.primaryEmailAddress?.emailAddress);
   if (!visible) return null;
 
   const handleSave = async () => {
     if (!title.trim()) return;
     setSaving(true);
-    await supabase.from("content_ideas").insert({
-      title: title.trim(),
-      description: description.trim() || null,
+    await fetch("/api/content-ideas", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: title.trim(),
+        description: description.trim() || null,
+      }),
     });
     setSaving(false);
     setSaved(true);

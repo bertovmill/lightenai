@@ -1,5 +1,7 @@
 import { runAgentInSandbox } from "@/lib/agents/sandbox";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { db } from "@/db";
+import { agentConfigOverrides } from "@/db/schema";
+import { eq } from "drizzle-orm";
 import { NextRequest } from "next/server";
 
 // Vercel deployment config
@@ -60,12 +62,14 @@ When the user answers a quiz question:
 
 async function getAgentConfig() {
   try {
-    const supabase = createAdminClient();
-    const { data } = await supabase
-      .from("agent_config_overrides")
-      .select("system_prompt, allowed_tools")
-      .eq("agent_id", "sdk-tutor")
-      .single();
+    const [data] = await db
+      .select({
+        system_prompt: agentConfigOverrides.system_prompt,
+        allowed_tools: agentConfigOverrides.allowed_tools,
+      })
+      .from(agentConfigOverrides)
+      .where(eq(agentConfigOverrides.agent_id, "sdk-tutor"))
+      .limit(1);
 
     if (data) {
       return {
