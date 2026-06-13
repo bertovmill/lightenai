@@ -146,7 +146,7 @@ Your image prompts determine whether we get professional editorial art or generi
 
 **Visual direction — think editorial design, not stock photo:**
 - Flat illustration, risograph print, or minimal photography aesthetic
-- Muted, earthy color palettes (warm tans, sage greens, dusty blues, off-whites, charcoal). Use the Lighten brand palette when fitting: #6B8F71 green, #1C1C1C dark, #FAFAF8 cream
+- Muted, earthy color palettes (warm tans, sage greens, dusty blues, off-whites, charcoal). Use the Lighten brand palette when fitting: #5F9468 green, #1C1C1C dark, #FAFAF8 cream
 - Intentional negative space and clean composition — less is more
 - Real-world textures: paper grain, ink, letterpress, film grain, natural materials
 - Overhead flat-lay, editorial still life, or abstract geometric compositions
@@ -164,7 +164,7 @@ Your image prompts determine whether we get professional editorial art or generi
 - "Minimal flat illustration of [concept], risograph style, muted earth tones, paper texture, clean composition"
 - "Editorial overhead photograph of [objects], soft natural light, linen background, film grain"
 - "Abstract geometric shapes representing [concept], sage green and charcoal palette, negative space, print design aesthetic"
-- "Simple ink drawing of [concept], woodcut style, cream paper background, single accent color #6B8F71"
+- "Simple ink drawing of [concept], woodcut style, cream paper background, single accent color #5F9468"
 - "Collage-style editorial layout about [topic], torn paper edges, vintage typography elements, warm neutral palette"
 
 ### Save content to Supabase (only after user says to save)

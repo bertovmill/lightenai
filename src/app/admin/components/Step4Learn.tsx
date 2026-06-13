@@ -362,7 +362,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
           setShowChat(true);
           window.history.pushState(null, "", "#sdk-tutor");
         }}
-        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#6B8F71]/30 bg-[#6B8F71]/5 text-[#6B8F71] text-sm font-medium hover:bg-[#6B8F71]/10 hover:border-[#6B8F71]/50 transition-colors duration-200"
+        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#5F9468]/30 bg-[#5F9468]/5 text-[#5F9468] text-sm font-medium hover:bg-[#5F9468]/10 hover:border-[#5F9468]/50 transition-colors duration-200"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d={LEARN_ICON} />
@@ -374,15 +374,15 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
       {scores.length > 0 && (
         <div className="mt-4 border border-[#E8E6E1] rounded-2xl overflow-hidden">
           <div className="px-4 py-3 border-b border-[#E8E6E1] bg-[#FAFAF8]">
-            <span className="text-[10px] font-semibold text-[#6B8F71] uppercase tracking-[0.15em]">
+            <span className="text-[10px] font-semibold text-[#5F9468] uppercase tracking-[0.15em]">
               Quiz History
             </span>
           </div>
 
           {latestScore && (
-            <div className="px-4 py-4 bg-[#6B8F71]/5 border-b border-[#E8E6E1]">
+            <div className="px-4 py-4 bg-[#5F9468]/5 border-b border-[#E8E6E1]">
               <div className="flex items-center gap-3">
-                <span className="font-serif text-3xl text-[#6B8F71] leading-none">
+                <span className="font-serif text-3xl text-[#5F9468] leading-none">
                   {latestScore.score}/{latestScore.total}
                 </span>
                 <div>
@@ -409,7 +409,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
                     <div
                       key={i}
                       className={`w-4 h-2 rounded-sm ${
-                        i < s.score ? "bg-[#6B8F71]" : "bg-[#E8E6E1]"
+                        i < s.score ? "bg-[#5F9468]" : "bg-[#E8E6E1]"
                       }`}
                     />
                   ))}
@@ -441,7 +441,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
               Back
             </button>
             <div className="flex items-center gap-2">
-              <svg className="w-3.5 h-3.5 text-[#6B8F71] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <svg className="w-3.5 h-3.5 text-[#5F9468] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d={LEARN_ICON} />
               </svg>
               <span className="text-sm font-medium text-[#1C1C1C] truncate">
@@ -455,7 +455,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
               onClick={() => setShowAbout(!showAbout)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                 showAbout
-                  ? "bg-[#6B8F71] text-white"
+                  ? "bg-[#5F9468] text-white"
                   : "bg-[#F5F4F0] text-[#666] hover:bg-[#ECEAE5] hover:text-[#1C1C1C]"
               }`}
             >
@@ -512,13 +512,13 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
                   className="absolute left-0 top-0 bottom-0 w-1 cursor-col-resize z-10 group"
                 >
                   <div className="absolute inset-y-0 -left-1 w-3" />
-                  <div className="h-full w-px bg-[#E8E6E1] group-hover:bg-[#6B8F71] group-active:bg-[#6B8F71] transition-colors" />
+                  <div className="h-full w-px bg-[#E8E6E1] group-hover:bg-[#5F9468] group-active:bg-[#5F9468] transition-colors" />
                 </div>
               <div className="flex-1 flex flex-col overflow-hidden pl-3">
                 {/* Shelf header */}
                 <div className="flex items-center gap-3 p-5 pb-4 border-b border-[#E8E6E1] shrink-0">
-                  <div className="w-10 h-10 rounded-xl bg-[#6B8F71]/10 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-[#6B8F71]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <div className="w-10 h-10 rounded-xl bg-[#5F9468]/10 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-[#5F9468]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d={CONFIG_ICON} />
                       <path strokeLinecap="round" strokeLinejoin="round" d={CONFIG_ICON_INNER} />
                     </svg>
@@ -539,7 +539,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
                       onClick={() => setActiveTab(tab)}
                       className={`flex-1 py-2.5 text-[11px] font-semibold uppercase tracking-[0.1em] transition-colors ${
                         activeTab === tab
-                          ? "text-[#6B8F71] border-b-2 border-[#6B8F71]"
+                          ? "text-[#5F9468] border-b-2 border-[#5F9468]"
                           : "text-[#999] hover:text-[#666]"
                       }`}
                     >
@@ -552,7 +552,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
                 <div className="flex-1 overflow-y-auto">
                   {configLoading ? (
                     <div className="flex items-center justify-center py-12">
-                      <div className="w-5 h-5 border-2 border-[#6B8F71]/30 border-t-[#6B8F71] rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-[#5F9468]/30 border-t-[#5F9468] rounded-full animate-spin" />
                     </div>
                   ) : configError && !config ? (
                     <div className="p-5 text-sm text-red-600">{configError}</div>
@@ -582,7 +582,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
                                 type="checkbox"
                                 checked={editedTools.includes(tool.name)}
                                 onChange={() => handleToolToggle(tool.name)}
-                                className="mt-0.5 w-4 h-4 rounded border-[#E8E6E1] text-[#6B8F71] focus:ring-[#6B8F71]/30"
+                                className="mt-0.5 w-4 h-4 rounded border-[#E8E6E1] text-[#5F9468] focus:ring-[#5F9468]/30"
                               />
                               <div>
                                 <span className="text-xs font-semibold text-[#1C1C1C]">{tool.name}</span>
@@ -601,7 +601,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
                           )}
                           {!versionsLoaded && (
                             <div className="flex items-center justify-center py-8">
-                              <div className="w-5 h-5 border-2 border-[#6B8F71]/30 border-t-[#6B8F71] rounded-full animate-spin" />
+                              <div className="w-5 h-5 border-2 border-[#5F9468]/30 border-t-[#5F9468] rounded-full animate-spin" />
                             </div>
                           )}
                           {versions.map((v) => (
@@ -614,7 +614,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
                                   <div className="flex items-center gap-2">
                                     <span className={`inline-block px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${
                                       v.source === "ui"
-                                        ? "bg-[#6B8F71]/10 text-[#6B8F71]"
+                                        ? "bg-[#5F9468]/10 text-[#5F9468]"
                                         : v.source === "code"
                                           ? "bg-blue-50 text-blue-600"
                                           : "bg-gray-100 text-gray-500"
@@ -640,7 +640,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
                                 <div className="border-t border-[#E8E6E1]">
                                   {expandedVersionPrompt === null ? (
                                     <div className="flex items-center justify-center py-6">
-                                      <div className="w-4 h-4 border-2 border-[#6B8F71]/30 border-t-[#6B8F71] rounded-full animate-spin" />
+                                      <div className="w-4 h-4 border-2 border-[#5F9468]/30 border-t-[#5F9468] rounded-full animate-spin" />
                                     </div>
                                   ) : (
                                     <>
@@ -648,7 +648,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
                                       <div className="p-2 border-t border-[#E8E6E1] bg-white">
                                         <button
                                           onClick={() => handleRestoreVersion(expandedVersionPrompt)}
-                                          className="w-full py-1.5 rounded-md text-[11px] font-semibold uppercase tracking-[0.1em] bg-[#6B8F71]/10 text-[#6B8F71] hover:bg-[#6B8F71]/20 transition-colors"
+                                          className="w-full py-1.5 rounded-md text-[11px] font-semibold uppercase tracking-[0.1em] bg-[#5F9468]/10 text-[#5F9468] hover:bg-[#5F9468]/20 transition-colors"
                                         >
                                           Restore this version
                                         </button>
@@ -667,13 +667,13 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
                         <div className="p-5 space-y-5">
                           {INFO_SECTIONS.map((section) => (
                             <div key={section.title}>
-                              <h4 className="text-[10px] font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-2">
+                              <h4 className="text-[10px] font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-2">
                                 {section.title}
                               </h4>
                               <ul className="space-y-1.5">
                                 {section.items.map((item, i) => (
                                   <li key={i} className="flex gap-2 text-[13px] text-[#555] leading-relaxed">
-                                    <span className="text-[#6B8F71] shrink-0 mt-1.5">
+                                    <span className="text-[#5F9468] shrink-0 mt-1.5">
                                       <svg className="w-2 h-2" fill="currentColor" viewBox="0 0 8 8">
                                         <circle cx="4" cy="4" r="3" />
                                       </svg>
@@ -698,9 +698,9 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
                       disabled={configSaving || !hasUnsavedChanges}
                       className={`flex-1 py-2 rounded-lg text-xs font-semibold uppercase tracking-[0.1em] transition-colors ${
                         configSaved
-                          ? "bg-[#6B8F71]/10 text-[#6B8F71]"
+                          ? "bg-[#5F9468]/10 text-[#5F9468]"
                           : hasUnsavedChanges
-                            ? "bg-[#6B8F71] text-white hover:bg-[#5A7D60]"
+                            ? "bg-[#5F9468] text-white hover:bg-[#4F8357]"
                             : "bg-[#F5F4F0] text-[#999] cursor-not-allowed"
                       }`}
                     >
@@ -731,7 +731,7 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
       {!isComplete && (
         <button
           onClick={onComplete}
-          className="mt-3 w-full px-4 py-2.5 rounded-lg bg-[#6B8F71] text-white text-sm font-medium hover:bg-[#5A7D60] transition-colors duration-200"
+          className="mt-3 w-full px-4 py-2.5 rounded-lg bg-[#5F9468] text-white text-sm font-medium hover:bg-[#4F8357] transition-colors duration-200"
         >
           Mark Learning Complete
         </button>
@@ -740,9 +740,9 @@ export default function Step4Learn({ onComplete, isComplete }: Step4LearnProps) 
       {isComplete && (
         <button
           onClick={onComplete}
-          className="mt-3 w-full py-2.5 text-center rounded-lg bg-[#6B8F71]/5 hover:bg-[#6B8F71]/10 transition-colors"
+          className="mt-3 w-full py-2.5 text-center rounded-lg bg-[#5F9468]/5 hover:bg-[#5F9468]/10 transition-colors"
         >
-          <p className="text-sm text-[#6B8F71] font-medium">Learning complete! (click to undo)</p>
+          <p className="text-sm text-[#5F9468] font-medium">Learning complete! (click to undo)</p>
         </button>
       )}
     </div>

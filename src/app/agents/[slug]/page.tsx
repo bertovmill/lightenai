@@ -44,7 +44,7 @@ export default function AgentShowcase() {
         <div className="text-center">
           <h1 className="text-2xl font-bold text-[#1C1C1C] mb-2">Agent not found</h1>
           <p className="text-[#666] mb-4">The agent &ldquo;{slug}&rdquo; doesn&apos;t exist.</p>
-          <Link href="/agents" className="text-[#6B8F71] hover:underline text-sm">Back to agents</Link>
+          <Link href="/agents" className="text-[#5F9468] hover:underline text-sm">Back to agents</Link>
         </div>
       </div>
     );
@@ -56,8 +56,8 @@ export default function AgentShowcase() {
       <AnimateIn animation="fade-up">
         <div className="mb-16">
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-16 h-16 rounded-3xl bg-[#6B8F71]/10 flex items-center justify-center">
-              <svg className="w-8 h-8 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-16 h-16 rounded-3xl bg-[#5F9468]/10 flex items-center justify-center">
+              <svg className="w-8 h-8 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={agent.iconPath} />
               </svg>
             </div>
@@ -80,13 +80,13 @@ export default function AgentShowcase() {
           <div className="mt-6 flex items-center gap-4">
             <Link
               href={`/agents/${agent.id}/chat`}
-              className="px-5 py-2.5 bg-[#6B8F71] text-white font-semibold rounded-xl hover:bg-[#5A7D60] transition-colors text-sm"
+              className="px-5 py-2.5 bg-[#5F9468] text-white font-semibold rounded-xl hover:bg-[#4F8357] transition-colors text-sm"
             >
               Open Full Chat
             </Link>
             <a
               href="#try-it"
-              className="px-5 py-2.5 text-sm text-[#666] hover:text-[#6B8F71] transition-colors border border-[#E8E6E1] rounded-xl hover:border-[#6B8F71]/50"
+              className="px-5 py-2.5 text-sm text-[#666] hover:text-[#5F9468] transition-colors border border-[#E8E6E1] rounded-xl hover:border-[#5F9468]/50"
             >
               Try it below
             </a>
@@ -104,8 +104,8 @@ export default function AgentShowcase() {
                 key={i}
                 className="bg-white border border-[#E8E6E1] rounded-2xl p-5"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#6B8F71]/10 flex items-center justify-center mb-3">
-                  <svg className="w-5 h-5 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-xl bg-[#5F9468]/10 flex items-center justify-center mb-3">
+                  <svg className="w-5 h-5 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={cap.icon} />
                   </svg>
                 </div>
@@ -147,10 +147,10 @@ export default function AgentShowcase() {
                               }
                               className={`rounded-xl px-4 py-2 text-sm font-medium transition-all cursor-pointer ${
                                 node.type === "orchestrator"
-                                  ? `bg-[#6B8F71]/10 border border-[#6B8F71]/30 text-[#6B8F71] ${isActive ? "ring-2 ring-[#6B8F71]/40" : "hover:bg-[#6B8F71]/15"}`
+                                  ? `bg-[#5F9468]/10 border border-[#5F9468]/30 text-[#5F9468] ${isActive ? "ring-2 ring-[#5F9468]/40" : "hover:bg-[#5F9468]/15"}`
                                   : node.type === "result"
                                   ? `bg-emerald-50 border border-emerald-200 text-emerald-700 ${isActive ? "ring-2 ring-emerald-300" : "hover:bg-emerald-100"}`
-                                  : `bg-[#F5F4F0] border border-[#E8E6E1] text-[#555] text-xs ${isActive ? "ring-2 ring-[#6B8F71]/30" : "hover:bg-[#EDECE8]"}`
+                                  : `bg-[#F5F4F0] border border-[#E8E6E1] text-[#555] text-xs ${isActive ? "ring-2 ring-[#5F9468]/30" : "hover:bg-[#EDECE8]"}`
                               }`}
                             >
                               {node.label}

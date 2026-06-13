@@ -30,11 +30,11 @@ function AgentCard({ agent }: { agent: Agent }) {
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="flex flex-col gap-2 px-4 py-3.5 bg-white border border-[#E8E6E1] rounded-3xl hover:border-[#6B8F71]/40 hover:shadow-md hover:shadow-[#6B8F71]/8 transition-all duration-300"
+        className="flex flex-col gap-2 px-4 py-3.5 bg-white border border-[#E8E6E1] rounded-3xl hover:border-[#5F9468]/40 hover:shadow-md hover:shadow-[#5F9468]/8 transition-all duration-300"
       >
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full bg-[#6B8F71]/10 flex items-center justify-center shrink-0">
-            <svg className="w-4 h-4 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-8 h-8 rounded-full bg-[#5F9468]/10 flex items-center justify-center shrink-0">
+            <svg className="w-4 h-4 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={agent.icon} />
             </svg>
           </div>

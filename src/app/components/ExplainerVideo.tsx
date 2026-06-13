@@ -41,7 +41,7 @@ export function ExplainerVideo() {
               }
             }}
           >
-            <span className="bg-[#6B8F71] hover:bg-[#5A7D60] text-white text-sm font-semibold tracking-[0.1em] uppercase px-10 py-4 rounded-full transition-colors">
+            <span className="bg-[#5F9468] hover:bg-[#4F8357] text-white text-sm font-semibold tracking-[0.1em] uppercase px-10 py-4 rounded-full transition-colors">
               Book a Free Assessment
             </span>
           </a>

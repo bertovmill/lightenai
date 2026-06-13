@@ -17,7 +17,7 @@ export function ExpandableCard({
 
   return (
     <div className="border border-white/10 rounded-2xl p-8 hover:bg-white/5 transition-all duration-300 h-full">
-      <span className="text-[#6B8F71] text-sm font-semibold tracking-[0.1em]">{step}</span>
+      <span className="text-[#5F9468] text-sm font-semibold tracking-[0.1em]">{step}</span>
       <h3 className="text-xl font-semibold mt-3 mb-3">{title}</h3>
       <p className="text-white/60 leading-relaxed text-sm">{description}</p>
 
@@ -34,7 +34,7 @@ export function ExpandableCard({
           </div>
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.1em] hover:text-[#89B08F] transition-colors duration-200 cursor-pointer"
+            className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[#5F9468] uppercase tracking-[0.1em] hover:text-[#89B08F] transition-colors duration-200 cursor-pointer"
           >
             {isOpen ? "Read less" : "Read more"}
             <svg

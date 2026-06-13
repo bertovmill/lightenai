@@ -87,7 +87,7 @@ export default function Step5Improve({ onComplete, isComplete }: Step5ImprovePro
         {!isComplete && (
           <button
             onClick={onComplete}
-            className="mt-4 px-4 py-2 rounded-lg bg-[#6B8F71] text-white text-sm font-medium hover:bg-[#5A7D60] transition-colors duration-200"
+            className="mt-4 px-4 py-2 rounded-lg bg-[#5F9468] text-white text-sm font-medium hover:bg-[#4F8357] transition-colors duration-200"
           >
             Mark Improve as Done
           </button>
@@ -101,7 +101,7 @@ export default function Step5Improve({ onComplete, isComplete }: Step5ImprovePro
       {/* Unaddressed feedback */}
       {unaddressed.length > 0 && (
         <div className="mb-4">
-          <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-3">
+          <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-3">
             Open Feedback ({unaddressed.length})
           </p>
           <div className="space-y-2">
@@ -141,7 +141,7 @@ export default function Step5Improve({ onComplete, isComplete }: Step5ImprovePro
         <button
           onClick={onComplete}
           disabled={!addressedToday && unaddressed.length > 0}
-          className="mt-4 w-full px-4 py-2.5 rounded-lg bg-[#6B8F71] text-white text-sm font-medium hover:bg-[#5A7D60] disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-200"
+          className="mt-4 w-full px-4 py-2.5 rounded-lg bg-[#5F9468] text-white text-sm font-medium hover:bg-[#4F8357] disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-200"
         >
           {unaddressed.length === 0
             ? "Mark Improve as Done"
@@ -188,13 +188,13 @@ function FeedbackCard({
           <button
             onClick={() => onAddress(item.id)}
             disabled={isAddressing}
-            className="shrink-0 px-2.5 py-1 rounded-md border border-[#6B8F71] text-xs font-medium text-[#6B8F71] hover:bg-[#6B8F71] hover:text-white disabled:opacity-50 transition-colors duration-200"
+            className="shrink-0 px-2.5 py-1 rounded-md border border-[#5F9468] text-xs font-medium text-[#5F9468] hover:bg-[#5F9468] hover:text-white disabled:opacity-50 transition-colors duration-200"
           >
             {isAddressing ? "..." : "Address"}
           </button>
         )}
         {item.addressed && (
-          <span className="shrink-0 text-[10px] text-[#6B8F71] font-medium">Done</span>
+          <span className="shrink-0 text-[10px] text-[#5F9468] font-medium">Done</span>
         )}
       </div>
     </div>

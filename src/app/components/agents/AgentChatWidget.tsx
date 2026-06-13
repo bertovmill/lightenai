@@ -27,7 +27,7 @@ export default function AgentChatWidget({ agent }: AgentChatWidgetProps) {
       <div className="mt-3 text-center">
         <Link
           href={`/agents/${agent.id}/chat`}
-          className="inline-flex items-center gap-2 text-sm text-[#6B8F71] hover:underline"
+          className="inline-flex items-center gap-2 text-sm text-[#5F9468] hover:underline"
         >
           Open full chat
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

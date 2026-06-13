@@ -27,7 +27,7 @@ function LoginForm() {
         forceRedirectUrl={redirectTo}
         appearance={{
           variables: {
-            colorPrimary: "#6B8F71",
+            colorPrimary: "#5F9468",
             colorBackground: "#FFFFFF",
             borderRadius: "1rem",
             fontFamily: "var(--font-plus-jakarta)",

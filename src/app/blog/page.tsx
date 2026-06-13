@@ -22,7 +22,7 @@ export default async function BlogPage() {
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#1C1C1C] relative overflow-x-hidden">
       {/* Soft background gradients */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#6B8F71] opacity-[0.06] blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#5F9468] opacity-[0.06] blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#D4E5D7] opacity-[0.15] blur-[120px] rounded-full pointer-events-none" />
 
       <Navigation />
@@ -30,7 +30,7 @@ export default async function BlogPage() {
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-8 min-h-screen flex flex-col">
         {/* Header */}
         <header className="py-12 md:py-16">
-          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#6B8F71] mb-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.15em] text-[#5F9468] mb-4">
             The Blog
           </p>
           <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mb-4">
@@ -55,9 +55,9 @@ export default async function BlogPage() {
                 <Link
                   key={post.id}
                   href={`/blog/${post.id}`}
-                  className="group flex flex-col rounded-2xl border border-[#E8E6E1] bg-white/60 p-6 transition-colors hover:border-[#6B8F71]"
+                  className="group flex flex-col rounded-2xl border border-[#E8E6E1] bg-white/60 p-6 transition-colors hover:border-[#5F9468]"
                 >
-                  <h2 className="text-xl md:text-2xl font-bold leading-snug tracking-tight mb-3 group-hover:text-[#6B8F71] transition-colors">
+                  <h2 className="text-xl md:text-2xl font-bold leading-snug tracking-tight mb-3 group-hover:text-[#5F9468] transition-colors">
                     {post.title}
                   </h2>
                   {post.excerpt && (

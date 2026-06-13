@@ -118,7 +118,7 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
       <div className="flex items-center gap-2 mb-4">
         <div className="flex-1 h-1.5 bg-[#E8E6E1] rounded-full overflow-hidden">
           <div
-            className="h-full bg-[#6B8F71] rounded-full transition-all duration-300"
+            className="h-full bg-[#5F9468] rounded-full transition-all duration-300"
             style={{ width: totalChecks > 0 ? `${(doneChecks / totalChecks) * 100}%` : "0%" }}
           />
         </div>
@@ -135,8 +135,8 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
             onClick={toggleLuma}
             className={`w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-colors duration-200 ${
               lumaChecked
-                ? "bg-[#6B8F71] border-[#6B8F71]"
-                : "border-[#D1CFC9] hover:border-[#6B8F71]"
+                ? "bg-[#5F9468] border-[#5F9468]"
+                : "border-[#D1CFC9] hover:border-[#5F9468]"
             }`}
           >
             {lumaChecked && (
@@ -146,7 +146,7 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
             )}
           </button>
           <div className="flex-1 min-w-0">
-            <span className={`text-sm ${lumaChecked ? "text-[#6B8F71] line-through" : "text-[#1C1C1C]"}`}>
+            <span className={`text-sm ${lumaChecked ? "text-[#5F9468] line-through" : "text-[#1C1C1C]"}`}>
               Check Luma for messages
             </span>
             <p className="text-xs text-[#999] mt-0.5">Reply to any community messages, RSVPs, or event questions</p>
@@ -155,7 +155,7 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
             href="https://lu.ma/home"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs text-[#6B8F71] hover:text-[#5A7D60] font-medium transition-colors shrink-0"
+            className="text-xs text-[#5F9468] hover:text-[#4F8357] font-medium transition-colors shrink-0"
           >
             Open Luma
           </a>
@@ -167,8 +167,8 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
             onClick={toggleSlack}
             className={`w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-colors duration-200 ${
               slackChecked
-                ? "bg-[#6B8F71] border-[#6B8F71]"
-                : "border-[#D1CFC9] hover:border-[#6B8F71]"
+                ? "bg-[#5F9468] border-[#5F9468]"
+                : "border-[#D1CFC9] hover:border-[#5F9468]"
             }`}
           >
             {slackChecked && (
@@ -178,7 +178,7 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
             )}
           </button>
           <div className="flex-1 min-w-0">
-            <span className={`text-sm ${slackChecked ? "text-[#6B8F71] line-through" : "text-[#1C1C1C]"}`}>
+            <span className={`text-sm ${slackChecked ? "text-[#5F9468] line-through" : "text-[#1C1C1C]"}`}>
               Check MakersLounge Slack
             </span>
             <p className="text-xs text-[#999] mt-0.5">Read and respond to any messages or threads</p>
@@ -195,8 +195,8 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
               onClick={() => toggleTask(task)}
               className={`w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-colors duration-200 ${
                 task.is_completed
-                  ? "bg-[#6B8F71] border-[#6B8F71]"
-                  : "border-[#D1CFC9] hover:border-[#6B8F71]"
+                  ? "bg-[#5F9468] border-[#5F9468]"
+                  : "border-[#D1CFC9] hover:border-[#5F9468]"
               }`}
             >
               {task.is_completed && (
@@ -205,7 +205,7 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
                 </svg>
               )}
             </button>
-            <span className={`flex-1 text-sm ${task.is_completed ? "text-[#6B8F71] line-through" : "text-[#1C1C1C]"}`}>
+            <span className={`flex-1 text-sm ${task.is_completed ? "text-[#5F9468] line-through" : "text-[#1C1C1C]"}`}>
               {task.title}
             </span>
             <button
@@ -221,7 +221,7 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
         ))}
 
         {/* Inline add task — looks like another checklist row */}
-        <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl border border-dashed border-[#E8E6E1] bg-white hover:border-[#6B8F71]/40 transition-colors duration-200">
+        <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl border border-dashed border-[#E8E6E1] bg-white hover:border-[#5F9468]/40 transition-colors duration-200">
           <div className="w-5 h-5 rounded border-2 border-[#E8E6E1] flex items-center justify-center shrink-0">
             <svg className="w-3 h-3 text-[#999]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -239,7 +239,7 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
             <button
               onClick={addTask}
               disabled={isAdding}
-              className="text-xs text-[#6B8F71] hover:text-[#5A7D60] font-medium transition-colors shrink-0 disabled:opacity-40"
+              className="text-xs text-[#5F9468] hover:text-[#4F8357] font-medium transition-colors shrink-0 disabled:opacity-40"
             >
               {isAdding ? "Adding..." : "Add"}
             </button>
@@ -253,9 +253,9 @@ export default function StepCommunity({ onComplete, isComplete }: StepCommunityP
           onClick={onComplete}
           className={`w-full py-3 rounded-xl text-sm font-semibold transition-all duration-200 ${
             isComplete
-              ? "bg-[#6B8F71]/10 text-[#6B8F71] border border-[#6B8F71]/20"
+              ? "bg-[#5F9468]/10 text-[#5F9468] border border-[#5F9468]/20"
               : lumaChecked && slackChecked
-                ? "bg-[#6B8F71] text-white hover:bg-[#5A7D60]"
+                ? "bg-[#5F9468] text-white hover:bg-[#4F8357]"
                 : "bg-[#F5F4F1] text-[#999] cursor-not-allowed"
           }`}
           disabled={!isComplete && !(lumaChecked && slackChecked)}

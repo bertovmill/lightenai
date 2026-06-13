@@ -97,7 +97,7 @@ export const FollowPointer = ({
         fill="currentColor"
         strokeWidth="1"
         viewBox="0 0 16 16"
-        className="h-6 w-6 -translate-x-[12px] -translate-y-[10px] -rotate-[70deg] transform stroke-[#5A7D60] text-[#6B8F71]"
+        className="h-6 w-6 -translate-x-[12px] -translate-y-[10px] -rotate-[70deg] transform stroke-[#4F8357] text-[#5F9468]"
         height="1em"
         width="1em"
         xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ export const FollowPointer = ({
           scale: 0.5,
           opacity: 0,
         }}
-        className="min-w-max rounded-full bg-[#6B8F71] px-3 py-1.5 text-xs whitespace-nowrap text-white shadow-lg"
+        className="min-w-max rounded-full bg-[#5F9468] px-3 py-1.5 text-xs whitespace-nowrap text-white shadow-lg"
       >
         {title || "Lighten AI"}
       </motion.div>

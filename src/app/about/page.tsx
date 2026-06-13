@@ -45,7 +45,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#1C1C1C] relative overflow-x-hidden">
       {/* Soft background gradients */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#6B8F71] opacity-[0.06] blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#5F9468] opacity-[0.06] blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#D4E5D7] opacity-[0.15] blur-[120px] rounded-full pointer-events-none" />
 
       <Navigation />
@@ -55,10 +55,10 @@ export default function AboutPage() {
         <section className="py-16 lg:py-24">
           <AnimateIn animation="fade-up">
             <div className="max-w-3xl">
-              <span className="inline-block text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">About Us</span>
+              <span className="inline-block text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">About Us</span>
               <h1 className="text-4xl md:text-5xl xl:text-[3.5rem] font-bold tracking-tight leading-[1.1] mb-6 text-[#1C1C1C]">
                 So you can focus on what you do{" "}
-                <span className="text-[#6B8F71]">best.</span>
+                <span className="text-[#5F9468]">best.</span>
               </h1>
               <p className="text-lg md:text-xl text-[#555] leading-relaxed">
                 Our mission is simple: take as much work off your plate as possible, so you can focus on what you do best — and making your business better.
@@ -108,14 +108,14 @@ export default function AboutPage() {
           <AnimateIn animation="fade-up">
             <div className="relative rounded-[2rem] p-10 lg:p-14 overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(107,143,113,0.08) 0%, rgba(107,143,113,0.04) 100%)" }}>
               {/* Decorative quote mark */}
-              <span className="absolute top-6 left-8 text-[#6B8F71]/15 text-[8rem] font-serif leading-none select-none pointer-events-none">&ldquo;</span>
+              <span className="absolute top-6 left-8 text-[#5F9468]/15 text-[8rem] font-serif leading-none select-none pointer-events-none">&ldquo;</span>
               <div className="max-w-3xl mx-auto text-center relative z-10">
-                <span className="inline-block text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">Our Mission</span>
+                <span className="inline-block text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">Our Mission</span>
                 <h2 className="text-2xl md:text-3xl font-bold mb-6 text-[#1C1C1C] leading-relaxed">
                   &ldquo;Take as much work off your plate as possible, so you can focus on what you do best — and making your business better.&rdquo;
                 </h2>
                 {/* Green accent line */}
-                <div className="w-16 h-1 bg-[#6B8F71] rounded-full mx-auto" />
+                <div className="w-16 h-1 bg-[#5F9468] rounded-full mx-auto" />
               </div>
             </div>
           </AnimateIn>
@@ -125,7 +125,7 @@ export default function AboutPage() {
         <section className="py-16 border-t border-[#E8E6E1]">
           <AnimateIn animation="fade-up">
             <div className="mb-12">
-              <span className="inline-block text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">Our Values</span>
+              <span className="inline-block text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">Our Values</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1C1C1C]">
                 What we stand for
               </h2>
@@ -136,10 +136,10 @@ export default function AboutPage() {
             {VALUES.map((value, i) => (
               <AnimateIn key={value.title} animation="fade-up" delay={i * 100}>
                 <div
-                  className="bg-white border border-[#E8E6E1] rounded-3xl p-8 hover:border-[#6B8F71]/40 transition-all duration-300"
+                  className="bg-white border border-[#E8E6E1] rounded-3xl p-8 hover:border-[#5F9468]/40 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-[#6B8F71]/10 flex items-center justify-center mb-5">
-                    <svg className="w-6 h-6 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-12 h-12 rounded-2xl bg-[#5F9468]/10 flex items-center justify-center mb-5">
+                    <svg className="w-6 h-6 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={value.icon} />
                     </svg>
                   </div>
@@ -155,7 +155,7 @@ export default function AboutPage() {
         <section className="py-16 border-t border-[#E8E6E1]">
           <AnimateIn animation="fade-up">
             <div className="mb-12">
-              <span className="inline-block text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">Our Team</span>
+              <span className="inline-block text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">Our Team</span>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1C1C1C]">
                 The people behind Lighten AI
               </h2>
@@ -167,13 +167,13 @@ export default function AboutPage() {
                   key={member.name}
                   className="bg-white border border-[#E8E6E1] rounded-3xl p-8"
                 >
-                  <div className="w-16 h-16 rounded-full bg-[#6B8F71]/10 flex items-center justify-center mb-5">
-                    <svg className="w-8 h-8 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-16 h-16 rounded-full bg-[#5F9468]/10 flex items-center justify-center mb-5">
+                    <svg className="w-8 h-8 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                     </svg>
                   </div>
                   <h3 className="text-xl font-semibold text-[#1C1C1C]">{member.name}</h3>
-                  <p className="text-[#6B8F71] text-sm font-medium mb-3">{member.role}</p>
+                  <p className="text-[#5F9468] text-sm font-medium mb-3">{member.role}</p>
                   <p className="text-[#666] leading-relaxed text-sm">{member.bio}</p>
                 </div>
               ))}
@@ -184,14 +184,14 @@ export default function AboutPage() {
         {/* CTA */}
         <section className="py-16 border-t border-[#E8E6E1]">
           <AnimateIn animation="fade-up">
-            <div className="bg-[#6B8F71] rounded-[2rem] p-10 lg:p-14 text-center text-white">
+            <div className="bg-[#5F9468] rounded-[2rem] p-10 lg:p-14 text-center text-white">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to lighten your load?</h2>
               <p className="text-lg text-white/80 mb-8 max-w-xl mx-auto">
                 Let&apos;s talk about how we can help you get back to doing what you do best.
               </p>
               <Link
                 href="/"
-                className="inline-block px-8 py-4 bg-white text-[#6B8F71] font-semibold rounded-2xl hover:bg-white/90 transition-all duration-200 cursor-pointer active:scale-[0.98]"
+                className="inline-block px-8 py-4 bg-white text-[#5F9468] font-semibold rounded-2xl hover:bg-white/90 transition-all duration-200 cursor-pointer active:scale-[0.98]"
               >
                 Get in touch
               </Link>

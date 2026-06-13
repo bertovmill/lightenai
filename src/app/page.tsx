@@ -108,7 +108,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-14 md:py-20 lg:py-24 text-center relative z-10">
           <AnimateIn animation="fade-up">
             <h1 className="font-display font-semibold text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-6">
-              Go farther with <span className="text-[#6B8F71]">agents.</span>
+              Go farther with <span className="text-[#5F9468]">agents.</span>
             </h1>
           </AnimateIn>
 
@@ -140,7 +140,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6">
           <AnimateIn animation="fade-up">
             <div className="text-center mb-16">
-              <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">OUR VALUES</p>
+              <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">OUR VALUES</p>
               <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight">
                 What we stand for.
               </h2>
@@ -150,8 +150,8 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             <AnimateIn animation="fade-up" delay={0}>
               <div className="text-center px-4">
-                <div className="w-14 h-14 mx-auto mb-6 rounded-2xl bg-[#6B8F71]/10 flex items-center justify-center">
-                  <svg className="w-7 h-7 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                <div className="w-14 h-14 mx-auto mb-6 rounded-2xl bg-[#5F9468]/10 flex items-center justify-center">
+                  <svg className="w-7 h-7 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                   </svg>
                 </div>
@@ -164,8 +164,8 @@ export default function Home() {
 
             <AnimateIn animation="fade-up" delay={100}>
               <div className="text-center px-4">
-                <div className="w-14 h-14 mx-auto mb-6 rounded-2xl bg-[#6B8F71]/10 flex items-center justify-center">
-                  <svg className="w-7 h-7 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                <div className="w-14 h-14 mx-auto mb-6 rounded-2xl bg-[#5F9468]/10 flex items-center justify-center">
+                  <svg className="w-7 h-7 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.58-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
                   </svg>
                 </div>
@@ -178,8 +178,8 @@ export default function Home() {
 
             <AnimateIn animation="fade-up" delay={200}>
               <div className="text-center px-4">
-                <div className="w-14 h-14 mx-auto mb-6 rounded-2xl bg-[#6B8F71]/10 flex items-center justify-center">
-                  <svg className="w-7 h-7 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                <div className="w-14 h-14 mx-auto mb-6 rounded-2xl bg-[#5F9468]/10 flex items-center justify-center">
+                  <svg className="w-7 h-7 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
                   </svg>
                 </div>
@@ -198,7 +198,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 pt-20 md:pt-28 pb-10 md:pb-16">
           <AnimateIn animation="fade-up">
             <div className="text-center mb-12">
-              <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">REVIEWS</p>
+              <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">REVIEWS</p>
               <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight">
                 What our clients say.
               </h2>
@@ -217,7 +217,7 @@ export default function Home() {
       <section className="max-w-6xl mx-auto px-6 py-20 md:py-28">
         <AnimateIn animation="fade-up">
           <div className="text-center mb-14">
-            <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">SOUND FAMILIAR?</p>
+            <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">SOUND FAMILIAR?</p>
             <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight">Problems we solve.</h2>
           </div>
         </AnimateIn>
@@ -249,7 +249,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
           <AnimateIn animation="fade-up">
             <div className="text-center mb-14">
-              <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">WHAT WE DO</p>
+              <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">WHAT WE DO</p>
               <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight">
                 We expose the gaps. Then we close them.
               </h2>
@@ -281,7 +281,7 @@ export default function Home() {
       </section>
 
       {/* ─── DARK METRICS BAR ─── */}
-      <section className="grain-green bg-[#6B8F71]">
+      <section className="grain-green bg-[#5F9468]">
         <GrainTexture density={0.2} />
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -309,12 +309,12 @@ export default function Home() {
               <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                 <AnimateIn animation={isReversed ? "slide-left" : "slide-right"} className={isReversed ? "lg:order-2" : ""}>
                   <div>
-                    <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">{feature.label}</p>
+                    <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">{feature.label}</p>
                     <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight mb-6">{feature.title}</h2>
                     <p className="text-[#555] text-lg leading-relaxed mb-8">{feature.description}</p>
                     <Link
                       href="/offer"
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#1C1C1C] uppercase tracking-[0.1em] hover:text-[#6B8F71] transition-colors duration-200"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#1C1C1C] uppercase tracking-[0.1em] hover:text-[#5F9468] transition-colors duration-200"
                     >
                       LEARN MORE
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -325,8 +325,8 @@ export default function Home() {
                 </AnimateIn>
                 <AnimateIn animation={isReversed ? "slide-right" : "slide-left"} delay={100} className={isReversed ? "lg:order-1" : ""}>
                   <div className="flex items-center justify-center">
-                    <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-[#6B8F71]/10 flex items-center justify-center">
-                      <svg className="w-24 h-24 md:w-28 md:h-28 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={0.75}>
+                    <div className="w-48 h-48 md:w-56 md:h-56 rounded-full bg-[#5F9468]/10 flex items-center justify-center">
+                      <svg className="w-24 h-24 md:w-28 md:h-28 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={0.75}>
                         <path strokeLinecap="round" strokeLinejoin="round" d={iconPath} />
                       </svg>
                     </div>
@@ -339,7 +339,7 @@ export default function Home() {
       })}
 
       {/* ─── DARK SECTION: WHAT WE BUILD ─── */}
-      <section className="grain-green bg-[#6B8F71] text-white">
+      <section className="grain-green bg-[#5F9468] text-white">
         <GrainTexture density={0.45} />
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28">
           <AnimateIn animation="fade-up">
@@ -373,7 +373,7 @@ export default function Home() {
       <section className="max-w-6xl mx-auto px-6 py-20 md:py-28">
         <AnimateIn animation="fade-up">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">PROCESS</p>
+            <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">PROCESS</p>
             <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight">Three steps to lighter content.</h2>
           </div>
         </AnimateIn>
@@ -385,7 +385,7 @@ export default function Home() {
           {HOW_IT_WORKS.map((item, i) => (
             <AnimateIn key={item.step} animation="fade-up" delay={i * 150}>
               <div className="text-center relative">
-                <div className="w-12 h-12 rounded-full bg-[#6B8F71] text-white flex items-center justify-center mx-auto mb-6 text-lg font-display font-semibold relative z-10">
+                <div className="w-12 h-12 rounded-full bg-[#5F9468] text-white flex items-center justify-center mx-auto mb-6 text-lg font-display font-semibold relative z-10">
                   {item.step}
                 </div>
                 <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
@@ -401,7 +401,7 @@ export default function Home() {
         <div className="max-w-3xl mx-auto px-6 py-20 md:py-28">
           <AnimateIn animation="fade-up">
             <div className="mb-12">
-              <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">FAQ</p>
+              <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">FAQ</p>
               <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight">
                 Frequently asked questions.
               </h2>
@@ -416,7 +416,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-14 md:py-20">
           <AnimateIn animation="fade-up">
             <div className="text-center mb-6">
-              <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-3">GET IN TOUCH</p>
+              <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-3">GET IN TOUCH</p>
               <h2 className="font-display font-semibold text-3xl md:text-4xl leading-[1.1] tracking-tight mb-3">
                 Let&apos;s start with an AI growth<br className="hidden md:block" /> and profit assessment.
               </h2>
@@ -437,7 +437,7 @@ export default function Home() {
       </section>
 
       {/* ─── FINAL CTA ─── */}
-      <section className="grain-green bg-[#6B8F71] text-white">
+      <section className="grain-green bg-[#5F9468] text-white">
         <GrainTexture density={0.3} />
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28 text-center">
           <AnimateIn animation="fade-up">
@@ -450,7 +450,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="#contact"
-                className="bg-white text-[#6B8F71] text-sm font-semibold tracking-[0.1em] uppercase px-8 py-4 rounded-full hover:bg-white/90 transition-colors duration-200"
+                className="bg-white text-[#5F9468] text-sm font-semibold tracking-[0.1em] uppercase px-8 py-4 rounded-full hover:bg-white/90 transition-colors duration-200"
               >
                 START A CONVERSATION
               </a>

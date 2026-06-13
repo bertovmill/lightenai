@@ -205,9 +205,9 @@ export default function AdminDashboard() {
     return (
       <div className="flex items-center justify-center py-20">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-          <span className="w-2 h-2 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-          <span className="w-2 h-2 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+          <span className="w-2 h-2 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+          <span className="w-2 h-2 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+          <span className="w-2 h-2 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
         </div>
       </div>
     );
@@ -224,7 +224,7 @@ export default function AdminDashboard() {
         <div className="flex items-center gap-3 mt-1">
           <button
             onClick={goToPreviousDay}
-            className="p-1 text-[#999] hover:text-[#6B8F71] transition-colors rounded-lg hover:bg-[#6B8F71]/5"
+            className="p-1 text-[#999] hover:text-[#5F9468] transition-colors rounded-lg hover:bg-[#5F9468]/5"
             title="Previous day"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -235,7 +235,7 @@ export default function AdminDashboard() {
           <button
             onClick={goToToday}
             className={`text-sm transition-colors ${
-              isToday ? "text-[#999]" : "text-[#6B8F71] hover:text-[#5A7D60] underline underline-offset-2"
+              isToday ? "text-[#999]" : "text-[#5F9468] hover:text-[#4F8357] underline underline-offset-2"
             }`}
             disabled={isToday}
           >
@@ -248,7 +248,7 @@ export default function AdminDashboard() {
             className={`p-1 rounded-lg transition-colors ${
               isToday
                 ? "text-[#E8E6E1] cursor-not-allowed"
-                : "text-[#999] hover:text-[#6B8F71] hover:bg-[#6B8F71]/5"
+                : "text-[#999] hover:text-[#5F9468] hover:bg-[#5F9468]/5"
             }`}
             title="Next day"
           >
@@ -279,8 +279,8 @@ export default function AdminDashboard() {
 
       {/* All done celebration */}
       {completedCount === totalSteps && (
-        <div className="mb-8 p-6 rounded-xl bg-[#6B8F71]/5 border border-[#6B8F71]/20 text-center">
-          <div className="w-12 h-12 rounded-full bg-[#6B8F71] flex items-center justify-center mx-auto mb-3">
+        <div className="mb-8 p-6 rounded-xl bg-[#5F9468]/5 border border-[#5F9468]/20 text-center">
+          <div className="w-12 h-12 rounded-full bg-[#5F9468] flex items-center justify-center mx-auto mb-3">
             <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
@@ -373,7 +373,7 @@ export default function AdminDashboard() {
           onToggle={() => toggleStep(4)}
           badge={
             newInquiryCount > 0 && !stepsComplete[4] && isToday ? (
-              <span className="px-2 py-0.5 rounded-full bg-[#6B8F71] text-white text-xs font-medium">
+              <span className="px-2 py-0.5 rounded-full bg-[#5F9468] text-white text-xs font-medium">
                 {newInquiryCount} new
               </span>
             ) : undefined
@@ -397,7 +397,7 @@ export default function AdminDashboard() {
           onToggle={() => toggleStep(5)}
           badge={
             feedbackCount > 0 && !stepsComplete[5] && isToday ? (
-              <span className="px-2 py-0.5 rounded-full bg-[#6B8F71] text-white text-xs font-medium">
+              <span className="px-2 py-0.5 rounded-full bg-[#5F9468] text-white text-xs font-medium">
                 {feedbackCount} open
               </span>
             ) : undefined

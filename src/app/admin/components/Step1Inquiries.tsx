@@ -67,9 +67,9 @@ export default function Step1Inquiries({ onComplete, isComplete, onNewCount }: S
     return (
       <div className="py-8 flex justify-center">
         <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-          <span className="w-1.5 h-1.5 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-          <span className="w-1.5 h-1.5 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+          <span className="w-1.5 h-1.5 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+          <span className="w-1.5 h-1.5 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+          <span className="w-1.5 h-1.5 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
         </div>
       </div>
     );
@@ -78,8 +78,8 @@ export default function Step1Inquiries({ onComplete, isComplete, onNewCount }: S
   if (recentInquiries.length === 0) {
     return (
       <div className="py-6 text-center">
-        <div className="w-10 h-10 rounded-full bg-[#6B8F71]/10 flex items-center justify-center mx-auto mb-3">
-          <svg className="w-5 h-5 text-[#6B8F71]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <div className="w-10 h-10 rounded-full bg-[#5F9468]/10 flex items-center justify-center mx-auto mb-3">
+          <svg className="w-5 h-5 text-[#5F9468]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
@@ -88,7 +88,7 @@ export default function Step1Inquiries({ onComplete, isComplete, onNewCount }: S
         {!isComplete && (
           <button
             onClick={onComplete}
-            className="mt-4 px-4 py-2 rounded-lg bg-[#6B8F71] text-white text-sm font-medium hover:bg-[#5A7D60] transition-colors duration-200"
+            className="mt-4 px-4 py-2 rounded-lg bg-[#5F9468] text-white text-sm font-medium hover:bg-[#4F8357] transition-colors duration-200"
           >
             Mark Reviewed
           </button>
@@ -106,7 +106,7 @@ export default function Step1Inquiries({ onComplete, isComplete, onNewCount }: S
               <div className="flex items-center gap-2 min-w-0">
                 <a
                   href={`mailto:${inquiry.email}`}
-                  className="text-sm text-[#6B8F71] hover:underline font-medium truncate"
+                  className="text-sm text-[#5F9468] hover:underline font-medium truncate"
                 >
                   {inquiry.first_name && inquiry.last_name
                     ? `${inquiry.first_name} ${inquiry.last_name}`
@@ -136,7 +136,7 @@ export default function Step1Inquiries({ onComplete, isComplete, onNewCount }: S
       {!isComplete && (
         <button
           onClick={onComplete}
-          className="mt-4 w-full px-4 py-2.5 rounded-lg bg-[#6B8F71] text-white text-sm font-medium hover:bg-[#5A7D60] transition-colors duration-200"
+          className="mt-4 w-full px-4 py-2.5 rounded-lg bg-[#5F9468] text-white text-sm font-medium hover:bg-[#4F8357] transition-colors duration-200"
         >
           Mark Reviewed
         </button>

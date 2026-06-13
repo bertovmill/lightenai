@@ -116,7 +116,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                   onClick={() => setSidebarOpen(false)}
                   className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors duration-150 ${
                     active
-                      ? "bg-[#6B8F71]/10 text-[#6B8F71] font-medium"
+                      ? "bg-[#5F9468]/10 text-[#5F9468] font-medium"
                       : "text-[#666] hover:text-[#1C1C1C] hover:bg-[#F5F4F1]"
                   }`}
                 >

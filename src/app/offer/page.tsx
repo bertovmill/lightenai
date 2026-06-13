@@ -83,7 +83,7 @@ export default function OfferPage() {
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-28 lg:py-32 text-center relative z-10">
           <AnimateIn animation="fade-up">
             <h1 className="font-display font-semibold text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-6">
-              Agentic AI <span className="text-[#6B8F71]">Engineers.</span>
+              Agentic AI <span className="text-[#5F9468]">Engineers.</span>
             </h1>
           </AnimateIn>
 
@@ -96,7 +96,7 @@ export default function OfferPage() {
       </section>
 
       {/* ─── THE PROFIT GAP (green grain section) ─── */}
-      <section className="grain-green bg-[#6B8F71] text-white">
+      <section className="grain-green bg-[#5F9468] text-white">
         <GrainTexture density={0.45} />
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28">
           <AnimateIn animation="fade-up">
@@ -148,7 +148,7 @@ export default function OfferPage() {
       <section className="max-w-6xl mx-auto px-6 py-20 md:py-28">
         <AnimateIn animation="fade-up">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">OUR PROCESS</p>
+            <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">OUR PROCESS</p>
             <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight mb-6">
               Three steps to a lighter workload.
             </h2>
@@ -161,11 +161,11 @@ export default function OfferPage() {
         <div className="space-y-8">
           {PROCESS_STEPS.map((step, i) => (
             <AnimateIn key={step.step} animation={i % 2 === 0 ? "slide-right" : "slide-left"} delay={i * 100}>
-              <div className="bg-white border border-[#E8E6E1] rounded-2xl p-8 lg:p-10 hover:border-[#6B8F71]/40 transition-all duration-300">
+              <div className="bg-white border border-[#E8E6E1] rounded-2xl p-8 lg:p-10 hover:border-[#5F9468]/40 transition-all duration-300">
                 <div className="grid lg:grid-cols-[1fr,1.2fr] gap-8 items-start">
                   <div>
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 rounded-full bg-[#6B8F71] text-white flex items-center justify-center font-display font-semibold text-lg">
+                      <div className="w-12 h-12 rounded-full bg-[#5F9468] text-white flex items-center justify-center font-display font-semibold text-lg">
                         {step.step}
                       </div>
                     </div>
@@ -177,7 +177,7 @@ export default function OfferPage() {
                     <ul className="space-y-3">
                       {step.details.map((detail) => (
                         <li key={detail} className="flex items-start gap-3">
-                          <svg className="w-5 h-5 text-[#6B8F71] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-5 h-5 text-[#5F9468] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 12.75l6 6 9-13.5" />
                           </svg>
                           <span className="text-[#555] text-sm leading-relaxed">{detail}</span>
@@ -193,7 +193,7 @@ export default function OfferPage() {
       </section>
 
       {/* ─── ROI FRAMING (green grain section) ─── */}
-      <section className="grain-green bg-[#6B8F71] text-white">
+      <section className="grain-green bg-[#5F9468] text-white">
         <GrainTexture density={0.3} />
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28">
           <AnimateIn animation="fade-up">
@@ -216,7 +216,7 @@ export default function OfferPage() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           <AnimateIn animation="fade-up">
             <div>
-              <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">IS THIS FOR YOU?</p>
+              <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">IS THIS FOR YOU?</p>
               <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight mb-6">
                 For businesses ready to work smarter.
               </h2>
@@ -236,7 +236,7 @@ export default function OfferPage() {
                 "You're ready for a system that scales with your business",
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3 bg-white border border-[#E8E6E1] rounded-xl p-4">
-                  <svg className="w-5 h-5 text-[#6B8F71] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-[#5F9468] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 12.75l6 6 9-13.5" />
                   </svg>
                   <span className="text-[#555] leading-relaxed">{item}</span>
@@ -252,7 +252,7 @@ export default function OfferPage() {
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
           <AnimateIn animation="fade-up">
             <div className="text-center mb-12">
-              <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">NEXT STEP</p>
+              <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">NEXT STEP</p>
               <h2 className="font-display font-semibold text-3xl md:text-5xl leading-[1.1] tracking-tight mb-4">Start with a process audit.</h2>
               <p className="text-lg text-[#555] max-w-xl mx-auto mb-6">
                 Book a call and we&apos;ll show you exactly where AI agents can save time, cut costs, and lighten your workload.
@@ -260,7 +260,7 @@ export default function OfferPage() {
               <a
                 href="/lighten-ai-one-pager.pdf"
                 download
-                className="inline-flex items-center gap-2 text-sm text-[#6B8F71] hover:text-[#5A7D60] font-medium transition-colors duration-200"
+                className="inline-flex items-center gap-2 text-sm text-[#5F9468] hover:text-[#4F8357] font-medium transition-colors duration-200"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -288,7 +288,7 @@ export default function OfferPage() {
       </section>
 
       {/* ─── FINAL CTA ─── */}
-      <section className="grain-green bg-[#6B8F71] text-white">
+      <section className="grain-green bg-[#5F9468] text-white">
         <GrainTexture density={0.3} />
         <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28 text-center">
           <AnimateIn animation="fade-up">
@@ -301,7 +301,7 @@ export default function OfferPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="#contact"
-                className="bg-white text-[#6B8F71] text-sm font-semibold tracking-[0.1em] uppercase px-8 py-4 rounded-full hover:bg-white/90 transition-colors duration-200"
+                className="bg-white text-[#5F9468] text-sm font-semibold tracking-[0.1em] uppercase px-8 py-4 rounded-full hover:bg-white/90 transition-colors duration-200"
               >
                 START A CONVERSATION
               </a>

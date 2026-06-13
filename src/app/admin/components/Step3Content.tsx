@@ -481,7 +481,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
       {/* Daily Content Pipeline */}
       <div className="mb-4">
         <div className="flex items-center justify-between mb-2">
-          <h4 className="text-xs font-semibold text-[#6B8F71] uppercase tracking-wider">
+          <h4 className="text-xs font-semibold text-[#5F9468] uppercase tracking-wider">
             Today&apos;s Pipeline
           </h4>
           <span className="text-[11px] text-[#999]">
@@ -498,15 +498,15 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
                 onClick={() => togglePipelineStep(step.key)}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg border transition-all text-left ${
                   checked
-                    ? "bg-[#6B8F71]/5 border-[#6B8F71]/30"
+                    ? "bg-[#5F9468]/5 border-[#5F9468]/30"
                     : prevDone
-                    ? "bg-white border-[#E8E6E1] hover:border-[#6B8F71]/50"
+                    ? "bg-white border-[#E8E6E1] hover:border-[#5F9468]/50"
                     : "bg-[#FAFAF8] border-[#E8E6E1]/60 opacity-50"
                 }`}
               >
                 {/* Checkbox */}
                 <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-colors ${
-                  checked ? "bg-[#6B8F71] border-[#6B8F71]" : "border-[#ccc]"
+                  checked ? "bg-[#5F9468] border-[#5F9468]" : "border-[#ccc]"
                 }`}>
                   {checked && (
                     <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
@@ -515,18 +515,18 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
                   )}
                 </div>
                 {/* Platform icon */}
-                <svg className={`w-4 h-4 shrink-0 ${checked ? "text-[#6B8F71]" : "text-[#999]"}`} viewBox="0 0 24 24" fill="currentColor">
+                <svg className={`w-4 h-4 shrink-0 ${checked ? "text-[#5F9468]" : "text-[#999]"}`} viewBox="0 0 24 24" fill="currentColor">
                   <path d={step.icon} />
                 </svg>
                 {/* Label & hint */}
                 <div className="flex-1 min-w-0">
-                  <span className={`text-sm font-medium ${checked ? "text-[#6B8F71] line-through" : "text-[#1C1C1C]"}`}>
+                  <span className={`text-sm font-medium ${checked ? "text-[#5F9468] line-through" : "text-[#1C1C1C]"}`}>
                     {step.label}
                   </span>
                   <span className="text-[11px] text-[#999] ml-2">{step.hint}</span>
                 </div>
                 {/* Step number */}
-                <span className={`text-[10px] font-semibold shrink-0 ${checked ? "text-[#6B8F71]" : "text-[#ccc]"}`}>
+                <span className={`text-[10px] font-semibold shrink-0 ${checked ? "text-[#5F9468]" : "text-[#ccc]"}`}>
                   {i + 1}
                 </span>
               </button>
@@ -534,15 +534,15 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
           })}
         </div>
         {pipelineDone === PIPELINE_STEPS.length && (
-          <div className="mt-2 text-center py-2 rounded-lg bg-[#6B8F71]/10 border border-[#6B8F71]/20">
-            <p className="text-sm font-medium text-[#6B8F71]">All content done for today!</p>
+          <div className="mt-2 text-center py-2 rounded-lg bg-[#5F9468]/10 border border-[#5F9468]/20">
+            <p className="text-sm font-medium text-[#5F9468]">All content done for today!</p>
           </div>
         )}
       </div>
 
       {/* Connected Accounts */}
       <div className="mb-3">
-        <h4 className="text-xs font-semibold text-[#6B8F71] uppercase tracking-wider mb-2">
+        <h4 className="text-xs font-semibold text-[#5F9468] uppercase tracking-wider mb-2">
           Connected Accounts
         </h4>
         {isLoadingConnections ? (
@@ -574,7 +574,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
               ) : (
                 <a
                   href="/api/auth/x"
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg border border-dashed border-[#E8E6E1] text-[#666] hover:border-[#6B8F71]/50 hover:text-[#1C1C1C] hover:bg-[#6B8F71]/5 transition-all text-xs font-medium"
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg border border-dashed border-[#E8E6E1] text-[#666] hover:border-[#5F9468]/50 hover:text-[#1C1C1C] hover:bg-[#5F9468]/5 transition-all text-xs font-medium"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -609,7 +609,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
               ) : (
                 <a
                   href="/api/auth/linkedin"
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg border border-dashed border-[#E8E6E1] text-[#666] hover:border-[#6B8F71]/50 hover:text-[#1C1C1C] hover:bg-[#6B8F71]/5 transition-all text-xs font-medium"
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg border border-dashed border-[#E8E6E1] text-[#666] hover:border-[#5F9468]/50 hover:text-[#1C1C1C] hover:bg-[#5F9468]/5 transition-all text-xs font-medium"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
@@ -796,12 +796,12 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
       {/* Ideas section */}
       <div className="mb-3">
         <div className="flex items-center justify-between mb-2">
-          <h4 className="text-xs font-semibold text-[#6B8F71] uppercase tracking-wider">
+          <h4 className="text-xs font-semibold text-[#5F9468] uppercase tracking-wider">
             Your Ideas ({ideas.length})
           </h4>
           <button
             onClick={() => setShowAddForm(!showAddForm)}
-            className="text-xs text-[#6B8F71] hover:text-[#5A7D60] transition-colors flex items-center gap-1"
+            className="text-xs text-[#5F9468] hover:text-[#4F8357] transition-colors flex items-center gap-1"
           >
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d={showAddForm ? "M6 18L18 6M6 6l12 12" : "M12 4.5v15m7.5-7.5h-15"} />
@@ -818,7 +818,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
               placeholder="What's the idea?"
-              className="w-full bg-white border border-[#E8E6E1] rounded-lg px-3 py-2 text-sm text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] mb-2"
+              className="w-full bg-white border border-[#E8E6E1] rounded-lg px-3 py-2 text-sm text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] mb-2"
               onKeyDown={(e) => { if (e.key === "Enter") addIdea(); }}
             />
             <textarea
@@ -830,12 +830,12 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
               }}
               placeholder="Any extra context? (optional)"
               rows={2}
-              className="w-full bg-white border border-[#E8E6E1] rounded-lg px-3 py-2 text-sm text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] resize-none mb-2 overflow-hidden"
+              className="w-full bg-white border border-[#E8E6E1] rounded-lg px-3 py-2 text-sm text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] resize-none mb-2 overflow-hidden"
             />
             <button
               onClick={addIdea}
               disabled={!newTitle.trim()}
-              className="px-4 py-1.5 rounded-lg bg-[#6B8F71] text-white text-xs font-medium hover:bg-[#5A7D60] transition-colors disabled:opacity-50"
+              className="px-4 py-1.5 rounded-lg bg-[#5F9468] text-white text-xs font-medium hover:bg-[#4F8357] transition-colors disabled:opacity-50"
             >
               Save idea
             </button>
@@ -854,13 +854,13 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
                 key={idea.id}
                 className={`group relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm cursor-pointer transition-all ${
                   selectedIdea?.id === idea.id
-                    ? "bg-[#6B8F71]/10 border-[#6B8F71] text-[#1C1C1C]"
-                    : "bg-white border-[#E8E6E1] text-[#555] hover:border-[#6B8F71]/50 hover:text-[#1C1C1C]"
+                    ? "bg-[#5F9468]/10 border-[#5F9468] text-[#1C1C1C]"
+                    : "bg-white border-[#E8E6E1] text-[#555] hover:border-[#5F9468]/50 hover:text-[#1C1C1C]"
                 }`}
                 onClick={() => handleSelectIdea(idea)}
                 title={idea.description || idea.title}
               >
-                <svg className="w-3.5 h-3.5 text-[#6B8F71] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <svg className="w-3.5 h-3.5 text-[#5F9468] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                 </svg>
                 <span className="text-xs leading-snug line-clamp-3 max-w-[200px]">{idea.title}</span>
@@ -869,7 +869,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
                 <span className="hidden group-hover:flex items-center gap-0.5 ml-1">
                   <button
                     onClick={(e) => { e.stopPropagation(); markIdeaUsed(idea.id); }}
-                    className="p-0.5 text-[#6B8F71] hover:text-[#5A7D60]"
+                    className="p-0.5 text-[#5F9468] hover:text-[#4F8357]"
                     title="Mark as used"
                   >
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -893,10 +893,10 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
 
         {/* Selected idea detail */}
         {selectedIdea && (
-          <div className="mt-2 p-3 rounded-lg bg-[#6B8F71]/5 border border-[#6B8F71]/20">
+          <div className="mt-2 p-3 rounded-lg bg-[#5F9468]/5 border border-[#5F9468]/20">
             <div className="flex items-start justify-between gap-2 mb-3">
               <div className="flex items-start gap-2 min-w-0">
-                <svg className="w-4 h-4 text-[#6B8F71] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <svg className="w-4 h-4 text-[#5F9468] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                 </svg>
                 <div className="min-w-0">
@@ -918,7 +918,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
 
             {/* Target audience */}
             <div className="mb-3">
-              <p className="text-[10px] font-semibold text-[#6B8F71] uppercase tracking-wider mb-1.5">Target audience</p>
+              <p className="text-[10px] font-semibold text-[#5F9468] uppercase tracking-wider mb-1.5">Target audience</p>
               <div className="flex flex-wrap gap-1.5 mb-1.5">
                 {AUDIENCE_PRESETS.map((preset) => (
                   <button
@@ -926,8 +926,8 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
                     onClick={() => setTargetAudience(targetAudience === preset ? "" : preset)}
                     className={`px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
                       targetAudience === preset
-                        ? "bg-[#6B8F71] text-white"
-                        : "bg-white border border-[#E8E6E1] text-[#555] hover:border-[#6B8F71]/50 hover:text-[#1C1C1C]"
+                        ? "bg-[#5F9468] text-white"
+                        : "bg-white border border-[#E8E6E1] text-[#555] hover:border-[#5F9468]/50 hover:text-[#1C1C1C]"
                     }`}
                   >
                     {preset}
@@ -940,7 +940,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
                   value={targetAudience}
                   onChange={(e) => setTargetAudience(e.target.value)}
                   placeholder="Or type a custom audience..."
-                  className="w-full bg-white border border-[#E8E6E1] rounded-lg px-2.5 py-1.5 text-xs text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71]"
+                  className="w-full bg-white border border-[#E8E6E1] rounded-lg px-2.5 py-1.5 text-xs text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468]"
                 />
               )}
             </div>
@@ -948,7 +948,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
             {/* Open Content Creator */}
             <button
               onClick={openContentCreator}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#6B8F71] text-white text-sm font-medium hover:bg-[#5A7D60] transition-colors"
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#5F9468] text-white text-sm font-medium hover:bg-[#4F8357] transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d={CONTENT_ICON} />
@@ -963,7 +963,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
       {!selectedIdea && (
         <button
           onClick={openContentCreator}
-          className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#6B8F71]/30 bg-[#6B8F71]/5 text-[#6B8F71] text-sm font-medium hover:bg-[#6B8F71]/10 hover:border-[#6B8F71]/50 transition-colors duration-200"
+          className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#5F9468]/30 bg-[#5F9468]/5 text-[#5F9468] text-sm font-medium hover:bg-[#5F9468]/10 hover:border-[#5F9468]/50 transition-colors duration-200"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d={CONTENT_ICON} />
@@ -987,7 +987,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
               Back
             </button>
             <div className="flex items-center gap-2">
-              <svg className="w-3.5 h-3.5 text-[#6B8F71] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <svg className="w-3.5 h-3.5 text-[#5F9468] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d={CONTENT_ICON} />
               </svg>
               <span className="text-sm font-medium text-[#1C1C1C] truncate">
@@ -1001,7 +1001,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
               onClick={() => setShowIdeasSidebar(!showIdeasSidebar)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                 showIdeasSidebar
-                  ? "bg-[#6B8F71] text-white"
+                  ? "bg-[#5F9468] text-white"
                   : "bg-[#F5F4F0] text-[#666] hover:bg-[#ECEAE5] hover:text-[#1C1C1C]"
               }`}
             >
@@ -1011,7 +1011,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
               Ideas
               {ideas.length > 0 && (
                 <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${
-                  showIdeasSidebar ? "bg-white/20 text-white" : "bg-[#6B8F71]/10 text-[#6B8F71]"
+                  showIdeasSidebar ? "bg-white/20 text-white" : "bg-[#5F9468]/10 text-[#5F9468]"
                 }`}>
                   {ideas.length}
                 </span>
@@ -1022,7 +1022,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
               onClick={() => setShowDocument(!showDocument)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                 showDocument
-                  ? "bg-[#6B8F71] text-white"
+                  ? "bg-[#5F9468] text-white"
                   : "bg-[#F5F4F0] text-[#666] hover:bg-[#ECEAE5] hover:text-[#1C1C1C]"
               }`}
             >
@@ -1039,7 +1039,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
               onClick={() => setShowAbout(!showAbout)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                 showAbout
-                  ? "bg-[#6B8F71] text-white"
+                  ? "bg-[#5F9468] text-white"
                   : "bg-[#F5F4F0] text-[#666] hover:bg-[#ECEAE5] hover:text-[#1C1C1C]"
               }`}
             >
@@ -1062,12 +1062,12 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
                 <div className="w-[300px] p-4">
                 {/* Sidebar header */}
                 <div className="flex items-center justify-between mb-3">
-                  <h4 className="text-[10px] font-semibold text-[#6B8F71] uppercase tracking-[0.15em]">
+                  <h4 className="text-[10px] font-semibold text-[#5F9468] uppercase tracking-[0.15em]">
                     Your Ideas ({ideas.length})
                   </h4>
                   <button
                     onClick={() => setShowAddForm(!showAddForm)}
-                    className="text-xs text-[#6B8F71] hover:text-[#5A7D60] transition-colors flex items-center gap-1"
+                    className="text-xs text-[#5F9468] hover:text-[#4F8357] transition-colors flex items-center gap-1"
                   >
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d={showAddForm ? "M6 18L18 6M6 6l12 12" : "M12 4.5v15m7.5-7.5h-15"} />
@@ -1084,7 +1084,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
                       value={newTitle}
                       onChange={(e) => setNewTitle(e.target.value)}
                       placeholder="What's the idea?"
-                      className="w-full bg-white border border-[#E8E6E1] rounded-lg px-3 py-2 text-sm text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] mb-2"
+                      className="w-full bg-white border border-[#E8E6E1] rounded-lg px-3 py-2 text-sm text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] mb-2"
                       onKeyDown={(e) => { if (e.key === "Enter") addIdea(); }}
                     />
                     <textarea
@@ -1096,12 +1096,12 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
                       }}
                       placeholder="Extra context? (optional)"
                       rows={2}
-                      className="w-full bg-white border border-[#E8E6E1] rounded-lg px-3 py-2 text-sm text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] resize-none mb-2 overflow-hidden"
+                      className="w-full bg-white border border-[#E8E6E1] rounded-lg px-3 py-2 text-sm text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] resize-none mb-2 overflow-hidden"
                     />
                     <button
                       onClick={addIdea}
                       disabled={!newTitle.trim()}
-                      className="px-4 py-1.5 rounded-lg bg-[#6B8F71] text-white text-xs font-medium hover:bg-[#5A7D60] transition-colors disabled:opacity-50"
+                      className="px-4 py-1.5 rounded-lg bg-[#5F9468] text-white text-xs font-medium hover:bg-[#4F8357] transition-colors disabled:opacity-50"
                     >
                       Save idea
                     </button>
@@ -1125,11 +1125,11 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
                           setChatInsertText(prompt);
                           setChatInsertKey((k) => k + 1);
                         }}
-                        className="group w-full text-left p-2.5 rounded-lg border border-[#E8E6E1] hover:border-[#6B8F71]/50 hover:bg-[#6B8F71]/5 transition-all"
+                        className="group w-full text-left p-2.5 rounded-lg border border-[#E8E6E1] hover:border-[#5F9468]/50 hover:bg-[#5F9468]/5 transition-all"
                         title={idea.description || idea.title}
                       >
                         <div className="flex items-start gap-2">
-                          <svg className="w-3.5 h-3.5 text-[#6B8F71] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                          <svg className="w-3.5 h-3.5 text-[#5F9468] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
                           </svg>
                           <div className="flex-1 min-w-0">
@@ -1141,7 +1141,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
                           <span className="hidden group-hover:flex items-center gap-0.5 shrink-0">
                             <span
                               onClick={(e) => { e.stopPropagation(); markIdeaUsed(idea.id); }}
-                              className="p-0.5 text-[#6B8F71] hover:text-[#5A7D60] cursor-pointer"
+                              className="p-0.5 text-[#5F9468] hover:text-[#4F8357] cursor-pointer"
                               title="Mark as used"
                             >
                               <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -1263,8 +1263,8 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
               <div className="w-[380px] p-5">
                 {/* Shelf header */}
                 <div className="flex items-center gap-3 mb-5 pb-4 border-b border-[#E8E6E1]">
-                  <div className="w-10 h-10 rounded-xl bg-[#6B8F71]/10 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-[#6B8F71]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <div className="w-10 h-10 rounded-xl bg-[#5F9468]/10 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-[#5F9468]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d={CONTENT_ICON} />
                     </svg>
                   </div>
@@ -1278,7 +1278,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
                 <div className="space-y-5">
                   {ABOUT_SECTIONS.map((section) => (
                     <div key={section.title}>
-                      <h4 className="text-[10px] font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-2">
+                      <h4 className="text-[10px] font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-2">
                         {section.title}
                       </h4>
 
@@ -1294,7 +1294,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
                         <ul className="space-y-1.5">
                           {section.items.map((item, i) => (
                             <li key={i} className="flex gap-2 text-[13px] text-[#555] leading-relaxed">
-                              <span className="text-[#6B8F71] shrink-0 mt-1.5">
+                              <span className="text-[#5F9468] shrink-0 mt-1.5">
                                 <svg className="w-2 h-2" fill="currentColor" viewBox="0 0 8 8">
                                   <circle cx="4" cy="4" r="3" />
                                 </svg>
@@ -1331,7 +1331,7 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
             if (selectedIdea) markIdeaUsed(selectedIdea.id);
             onComplete();
           }}
-          className="mt-3 w-full px-4 py-2.5 rounded-lg bg-[#6B8F71] text-white text-sm font-medium hover:bg-[#5A7D60] transition-colors duration-200"
+          className="mt-3 w-full px-4 py-2.5 rounded-lg bg-[#5F9468] text-white text-sm font-medium hover:bg-[#4F8357] transition-colors duration-200"
         >
           Mark Content as Done
         </button>
@@ -1340,9 +1340,9 @@ export default function Step3Content({ onComplete, isComplete, externalPrompt }:
       {isComplete && (
         <button
           onClick={onComplete}
-          className="mt-3 w-full py-2.5 text-center rounded-lg bg-[#6B8F71]/5 hover:bg-[#6B8F71]/10 transition-colors"
+          className="mt-3 w-full py-2.5 text-center rounded-lg bg-[#5F9468]/5 hover:bg-[#5F9468]/10 transition-colors"
         >
-          <p className="text-sm text-[#6B8F71] font-medium">Content created! (click to undo)</p>
+          <p className="text-sm text-[#5F9468] font-medium">Content created! (click to undo)</p>
         </button>
       )}
     </div>

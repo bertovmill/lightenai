@@ -25,7 +25,7 @@ function PlatformIcon({ platformKey }: { platformKey: string }) {
 function StatusBadge({ status }: { status: string }) {
   if (status === "published") {
     return (
-      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#6B8F71]/15 text-[#6B8F71]">
+      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#5F9468]/15 text-[#5F9468]">
         Published
       </span>
     );
@@ -70,7 +70,7 @@ function TopicCard({
   const hasAnyPublished = publishedByPlatform.size > 0;
 
   return (
-    <div className="bg-white border border-[#E8E6E1] rounded-3xl overflow-hidden hover:border-[#6B8F71]/40 transition-all duration-300">
+    <div className="bg-white border border-[#E8E6E1] rounded-3xl overflow-hidden hover:border-[#5F9468]/40 transition-all duration-300">
       {topic.image_url && (
         <Link href={`/content/${columnSlug}/${topic.slug}`} className="block">
           <div className="relative w-full h-48 md:h-56">
@@ -130,7 +130,7 @@ function TopicCard({
                   {isWebsite ? (
                     <Link
                       href={href}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#6B8F71]/10 text-[#6B8F71] text-sm font-medium hover:bg-[#6B8F71]/20 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#5F9468]/10 text-[#5F9468] text-sm font-medium hover:bg-[#5F9468]/20 transition-colors"
                     >
                       <PlatformIcon platformKey={key} />
                       Read Article
@@ -143,7 +143,7 @@ function TopicCard({
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#6B8F71]/10 text-[#6B8F71] text-sm font-medium hover:bg-[#6B8F71]/20 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#5F9468]/10 text-[#5F9468] text-sm font-medium hover:bg-[#5F9468]/20 transition-colors"
                     >
                       <PlatformIcon platformKey={key} />
                       {PLATFORMS[key].name}
@@ -198,7 +198,7 @@ function TopicCard({
                   <button
                     onClick={() => onToggleStatus(post)}
                     disabled={updatingPostId === post.id}
-                    className="inline-flex items-center gap-1 ml-1 px-2 py-0.5 rounded text-xs font-medium bg-[#6B8F71] text-white hover:bg-[#5A7D60] transition-colors disabled:opacity-50"
+                    className="inline-flex items-center gap-1 ml-1 px-2 py-0.5 rounded text-xs font-medium bg-[#5F9468] text-white hover:bg-[#4F8357] transition-colors disabled:opacity-50"
                   >
                     {updatingPostId === post.id ? (
                       <Spinner />
@@ -238,7 +238,7 @@ function TopicCard({
                   }
                 }}
                 disabled={updatingPostId !== null}
-                className="text-xs font-medium text-[#6B8F71] hover:text-[#5A7D60] transition-colors disabled:opacity-50"
+                className="text-xs font-medium text-[#5F9468] hover:text-[#4F8357] transition-colors disabled:opacity-50"
               >
                 Publish All
               </button>
@@ -421,7 +421,7 @@ export function ContentPageClient({
           {/* Floating action button */}
           <button
             onClick={() => setShowCreator(true)}
-            className="fixed bottom-8 right-8 z-40 w-14 h-14 rounded-full bg-[#6B8F71] text-white shadow-lg hover:bg-[#5A7D60] hover:shadow-xl transition-all flex items-center justify-center"
+            className="fixed bottom-8 right-8 z-40 w-14 h-14 rounded-full bg-[#5F9468] text-white shadow-lg hover:bg-[#4F8357] hover:shadow-xl transition-all flex items-center justify-center"
             title="Create with AI"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -452,12 +452,12 @@ export function ContentPageClient({
                   }}
                   className="absolute left-0 top-0 bottom-0 w-2 cursor-col-resize z-10 group"
                 >
-                  <div className="absolute left-0 top-0 bottom-0 w-1 group-hover:bg-[#6B8F71]/30 transition-colors" />
+                  <div className="absolute left-0 top-0 bottom-0 w-1 group-hover:bg-[#5F9468]/30 transition-colors" />
                 </div>
                 <div className="flex items-center justify-between px-6 py-4 border-b border-[#E8E6E1]">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-[#6B8F71]/10 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-8 h-8 rounded-xl bg-[#5F9468]/10 flex items-center justify-center">
+                      <svg className="w-4 h-4 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                       </svg>
                     </div>

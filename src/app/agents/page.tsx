@@ -24,7 +24,7 @@ export default function Agents() {
     <main className="flex-1 py-12">
       <AnimateIn animation="fade-up">
         <div className="mb-10">
-          <span className="inline-block text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-3">AI Agents</span>
+          <span className="inline-block text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-3">AI Agents</span>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3 text-[#1C1C1C]">
             Agents
           </h1>
@@ -41,11 +41,11 @@ export default function Agents() {
             <Link
               key={agent.id}
               href={`/agents/${agent.id}`}
-              className="group bg-white border border-[#E8E6E1] rounded-2xl p-6 hover:border-[#6B8F71]/50 transition-all hover:shadow-lg hover:shadow-[#6B8F71]/5"
+              className="group bg-white border border-[#E8E6E1] rounded-2xl p-6 hover:border-[#5F9468]/50 transition-all hover:shadow-lg hover:shadow-[#5F9468]/5"
             >
               <div className="flex items-start justify-between mb-4">
-                <div className="w-10 h-10 rounded-xl bg-[#6B8F71]/10 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-xl bg-[#5F9468]/10 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={agent.iconPath} />
                   </svg>
                 </div>
@@ -56,7 +56,7 @@ export default function Agents() {
                   </span>
                 )}
               </div>
-              <h3 className="text-lg font-semibold mb-2 text-[#1C1C1C] group-hover:text-[#6B8F71] transition-colors">
+              <h3 className="text-lg font-semibold mb-2 text-[#1C1C1C] group-hover:text-[#5F9468] transition-colors">
                 {agent.name}
               </h3>
               <p className="text-sm text-[#666]">
@@ -81,7 +81,7 @@ export default function Agents() {
       <AnimateIn animation="fade-up" delay={200}>
         <div className="mt-20 pt-16 border-t border-[#E8E6E1]">
           <div className="mb-8">
-            <span className="inline-block text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-3">Case Study</span>
+            <span className="inline-block text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-3">Case Study</span>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-3 text-[#1C1C1C]">
               See Scout in Action
             </h2>
@@ -129,7 +129,7 @@ export default function Agents() {
             <div className="border-t border-[#E8E6E1] p-6">
               <p className="text-xs font-medium text-[#999] mb-4">Architecture</p>
               <div className="flex flex-col items-center gap-3">
-                <div className="bg-[#6B8F71]/10 border border-[#6B8F71]/30 rounded-xl px-4 py-2 text-sm font-medium text-[#6B8F71]">
+                <div className="bg-[#5F9468]/10 border border-[#5F9468]/30 rounded-xl px-4 py-2 text-sm font-medium text-[#5F9468]">
                   Scout Orchestrator
                 </div>
                 <div className="flex flex-col items-center">
@@ -179,11 +179,11 @@ export default function Agents() {
             <div className="border-t border-[#E8E6E1] p-6 flex items-center justify-between">
               <div>
                 <p className="text-xs text-[#999] mb-1">Research time reduction</p>
-                <p className="text-2xl font-bold text-[#6B8F71]">4-5 hours → minutes</p>
+                <p className="text-2xl font-bold text-[#5F9468]">4-5 hours → minutes</p>
               </div>
               <Link
                 href="/agents/scout"
-                className="px-4 py-2 bg-[#6B8F71] text-white font-semibold rounded-xl hover:bg-[#5A7D60] transition-colors text-sm"
+                className="px-4 py-2 bg-[#5F9468] text-white font-semibold rounded-xl hover:bg-[#4F8357] transition-colors text-sm"
               >
                 Try Scout →
               </Link>

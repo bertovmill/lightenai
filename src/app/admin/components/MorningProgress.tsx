@@ -23,7 +23,7 @@ export default function MorningProgress({ stepsComplete, completedCount }: Morni
             <div
               className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-500 ${
                 complete
-                  ? "bg-[#6B8F71] text-white shadow-sm shadow-[#6B8F71]/25"
+                  ? "bg-[#5F9468] text-white shadow-sm shadow-[#5F9468]/25"
                   : "border-2 border-[#E8E6E1] text-[#999] bg-white"
               }`}
             >
@@ -38,7 +38,7 @@ export default function MorningProgress({ stepsComplete, completedCount }: Morni
             {i < STEP_LABELS.length - 1 && (
               <div
                 className={`w-8 h-0.5 transition-colors duration-500 ${
-                  complete ? "bg-[#6B8F71]" : "bg-[#E8E6E1]"
+                  complete ? "bg-[#5F9468]" : "bg-[#E8E6E1]"
                 }`}
               />
             )}
@@ -53,7 +53,7 @@ export default function MorningProgress({ stepsComplete, completedCount }: Morni
             <div key={i} className="flex items-center">
               <span
                 className={`text-[11px] font-medium w-9 text-center ${
-                  stepsComplete[i] ? "text-[#6B8F71]" : "text-[#999]"
+                  stepsComplete[i] ? "text-[#5F9468]" : "text-[#999]"
                 }`}
               >
                 {label}
@@ -67,7 +67,7 @@ export default function MorningProgress({ stepsComplete, completedCount }: Morni
       {/* Status text */}
       <p className="text-center text-sm text-[#666]">
         {completedCount === STEP_LABELS.length ? (
-          <span className="text-[#6B8F71] font-medium">All done for today!</span>
+          <span className="text-[#5F9468] font-medium">All done for today!</span>
         ) : (
           <>
             <span className="font-medium text-[#1C1C1C]">{completedCount} of {STEP_LABELS.length}</span>

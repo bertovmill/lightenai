@@ -18,8 +18,8 @@ export interface UnifiedLead {
 
 const STATUS_CONFIG: Record<LeadStatus, { label: string; className: string }> = {
   lead: { label: "Lead", className: "bg-[#F5F4F0] text-[#666]" },
-  targeted: { label: "Targeted", className: "bg-[#6B8F71]/10 text-[#6B8F71]" },
-  contacted: { label: "Contacted", className: "bg-[#6B8F71] text-white" },
+  targeted: { label: "Targeted", className: "bg-[#5F9468]/10 text-[#5F9468]" },
+  contacted: { label: "Contacted", className: "bg-[#5F9468] text-white" },
 };
 
 const STATUS_ORDER: LeadStatus[] = ["lead", "targeted", "contacted"];
@@ -72,14 +72,14 @@ export default function LeadRow({ lead, onStatusChange }: LeadRowProps) {
                 href={lead.profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-[#6B8F71] hover:underline font-medium truncate"
+                className="text-sm text-[#5F9468] hover:underline font-medium truncate"
               >
                 {lead.name}
               </a>
             ) : lead.email ? (
               <a
                 href={`mailto:${lead.email}`}
-                className="text-sm text-[#6B8F71] hover:underline font-medium truncate"
+                className="text-sm text-[#5F9468] hover:underline font-medium truncate"
               >
                 {lead.name}
               </a>
@@ -130,7 +130,7 @@ export default function LeadRow({ lead, onStatusChange }: LeadRowProps) {
                         lead.status === s ? "font-semibold" : ""
                       }`}
                     >
-                      <span className={`w-2 h-2 rounded-full ${s === "lead" ? "bg-[#ccc]" : s === "targeted" ? "bg-[#6B8F71]/50" : "bg-[#6B8F71]"}`} />
+                      <span className={`w-2 h-2 rounded-full ${s === "lead" ? "bg-[#ccc]" : s === "targeted" ? "bg-[#5F9468]/50" : "bg-[#5F9468]"}`} />
                       {sc.label}
                     </button>
                   );

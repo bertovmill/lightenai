@@ -19,8 +19,8 @@ type ChannelKey = (typeof CHANNELS)[number]["key"];
 const STATUS_FILTERS = [
   { key: "all", label: "All" },
   { key: "lead", label: "Lead", dot: "bg-[#ccc]" },
-  { key: "targeted", label: "Targeted", dot: "bg-[#6B8F71]/50" },
-  { key: "contacted", label: "Contacted", dot: "bg-[#6B8F71]" },
+  { key: "targeted", label: "Targeted", dot: "bg-[#5F9468]/50" },
+  { key: "contacted", label: "Contacted", dot: "bg-[#5F9468]" },
 ] as const;
 
 type StatusFilterKey = (typeof STATUS_FILTERS)[number]["key"];
@@ -192,7 +192,7 @@ export default function Step1Leads({ onComplete, isComplete, onNewCount }: Step1
               onClick={() => setActiveChannel(ch.key)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors shrink-0 ${
                 isActive
-                  ? "bg-[#6B8F71] text-white"
+                  ? "bg-[#5F9468] text-white"
                   : "bg-[#F5F4F0] text-[#666] hover:bg-[#ECEAE5] hover:text-[#1C1C1C]"
               }`}
             >
@@ -202,7 +202,7 @@ export default function Step1Leads({ onComplete, isComplete, onNewCount }: Step1
                   className={`px-1.5 py-0.5 rounded-full text-[10px] font-semibold leading-none ${
                     isActive
                       ? "bg-white/20 text-white"
-                      : "bg-[#6B8F71]/10 text-[#6B8F71]"
+                      : "bg-[#5F9468]/10 text-[#5F9468]"
                   }`}
                 >
                   {count}
@@ -246,15 +246,15 @@ export default function Step1Leads({ onComplete, isComplete, onNewCount }: Step1
       {loading ? (
         <div className="py-8 flex justify-center">
           <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-            <span className="w-1.5 h-1.5 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-            <span className="w-1.5 h-1.5 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+            <span className="w-1.5 h-1.5 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+            <span className="w-1.5 h-1.5 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+            <span className="w-1.5 h-1.5 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
           </div>
         </div>
       ) : filtered.length === 0 ? (
         <div className="py-6 text-center">
-          <div className="w-10 h-10 rounded-full bg-[#6B8F71]/10 flex items-center justify-center mx-auto mb-3">
-            <svg className="w-5 h-5 text-[#6B8F71]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <div className="w-10 h-10 rounded-full bg-[#5F9468]/10 flex items-center justify-center mx-auto mb-3">
+            <svg className="w-5 h-5 text-[#5F9468]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
@@ -280,7 +280,7 @@ export default function Step1Leads({ onComplete, isComplete, onNewCount }: Step1
       {/* Quick-log form for social channels */}
       {showQuickLog && (
         <form onSubmit={handleQuickLog} className="mt-4 pt-4 border-t border-[#F0EFEC] space-y-2">
-          <p className="text-[11px] font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-2">
+          <p className="text-[11px] font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-2">
             Quick Log — {CHANNELS.find((c) => c.key === activeChannel)?.label}
           </p>
           <input
@@ -289,7 +289,7 @@ export default function Step1Leads({ onComplete, isComplete, onNewCount }: Step1
             value={logName}
             onChange={(e) => setLogName(e.target.value)}
             required
-            className="w-full px-3 py-2 text-sm rounded-lg border border-[#E8E6E1] bg-white text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] transition-colors"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-[#E8E6E1] bg-white text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] transition-colors"
           />
           <div className="flex gap-2">
             <input
@@ -297,20 +297,20 @@ export default function Step1Leads({ onComplete, isComplete, onNewCount }: Step1
               placeholder="Profile URL"
               value={logUrl}
               onChange={(e) => setLogUrl(e.target.value)}
-              className="flex-1 px-3 py-2 text-sm rounded-lg border border-[#E8E6E1] bg-white text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] transition-colors"
+              className="flex-1 px-3 py-2 text-sm rounded-lg border border-[#E8E6E1] bg-white text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] transition-colors"
             />
             <input
               type="text"
               placeholder="Note"
               value={logNote}
               onChange={(e) => setLogNote(e.target.value)}
-              className="flex-1 px-3 py-2 text-sm rounded-lg border border-[#E8E6E1] bg-white text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] transition-colors"
+              className="flex-1 px-3 py-2 text-sm rounded-lg border border-[#E8E6E1] bg-white text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] transition-colors"
             />
           </div>
           <button
             type="submit"
             disabled={submitting || !logName.trim()}
-            className="px-4 py-2 rounded-lg bg-[#6B8F71] text-white text-sm font-medium hover:bg-[#5A7D60] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 rounded-lg bg-[#5F9468] text-white text-sm font-medium hover:bg-[#4F8357] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {submitting ? "Logging..." : "Log Lead"}
           </button>
@@ -321,7 +321,7 @@ export default function Step1Leads({ onComplete, isComplete, onNewCount }: Step1
       {!isComplete && (
         <button
           onClick={onComplete}
-          className="mt-4 w-full px-4 py-2.5 rounded-lg bg-[#6B8F71] text-white text-sm font-medium hover:bg-[#5A7D60] transition-colors duration-200"
+          className="mt-4 w-full px-4 py-2.5 rounded-lg bg-[#5F9468] text-white text-sm font-medium hover:bg-[#4F8357] transition-colors duration-200"
         >
           Mark Reviewed
         </button>

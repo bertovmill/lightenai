@@ -2,9 +2,9 @@
 
 import { useEffect, useRef } from "react";
 
-// Brand greens: #6B8F71 (main) and #5A7D60 (darker hover)
-const BASE = { r: 107, g: 143, b: 113 }; // #6B8F71
-const DARK = { r: 90, g: 125, b: 96 };   // #5A7D60
+// Brand greens: #5F9468 (main) and #4F8357 (darker hover)
+const BASE = { r: 107, g: 143, b: 113 }; // #5F9468
+const DARK = { r: 90, g: 125, b: 96 };   // #4F8357
 
 /**
  * density: 0–1, fraction of pixels that become the darker speckle.

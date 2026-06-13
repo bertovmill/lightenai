@@ -160,7 +160,7 @@ function SearchBox() {
           onBlur={() => setTimeout(() => setIsOpen(false), 150)}
           onKeyDown={handleKeyDown}
           placeholder="Search..."
-          className="w-full pl-9 pr-12 py-2 bg-white border border-[#E8E6E1] rounded-lg text-sm text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71]/50 transition-colors"
+          className="w-full pl-9 pr-12 py-2 bg-white border border-[#E8E6E1] rounded-lg text-sm text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468]/50 transition-colors"
         />
         <kbd className="absolute right-3 top-1/2 -translate-y-1/2 hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] text-[#999] bg-[#F5F5F3] border border-[#E8E6E1] rounded">
           <span className="text-xs">&#8984;</span>K
@@ -186,7 +186,7 @@ function SearchBox() {
             >
               <span className="truncate">{item.title}</span>
               <span className={`text-xs px-1.5 py-0.5 rounded ${
-                item.category === "Tool" ? "bg-[#6B8F71]/10 text-[#6B8F71]" :
+                item.category === "Tool" ? "bg-[#5F9468]/10 text-[#5F9468]" :
                 item.category === "Type" ? "bg-[#5B7BAD]/10 text-[#5B7BAD]" :
                 item.category === "Output" ? "bg-[#4A9D6E]/10 text-[#4A9D6E]" :
                 item.category === "Config" ? "bg-[#C4645A]/10 text-[#C4645A]" :
@@ -234,7 +234,7 @@ export function LearnLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#1C1C1C] relative overflow-x-hidden">
       {/* Background gradient orbs */}
-      <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#6B8F71] opacity-[0.06] blur-[150px] rounded-full" />
+      <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-[#5F9468] opacity-[0.06] blur-[150px] rounded-full" />
       <div className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-[#D4E5D7] opacity-[0.15] blur-[120px] rounded-full" />
 
       <Navigation />
@@ -262,7 +262,7 @@ export function LearnLayout({ children }: { children: React.ReactNode }) {
             />
             <div className="absolute right-0 top-0 h-full w-72 bg-[#FAFAF8] border-l border-[#E8E6E1] p-6 shadow-2xl">
               <div className="flex items-center justify-between mb-6">
-                <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em]">
+                <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em]">
                   Menu
                 </p>
                 <button
@@ -276,7 +276,7 @@ export function LearnLayout({ children }: { children: React.ReactNode }) {
                 </button>
               </div>
               <SearchBox />
-              <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">
+              <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">
                 Chapters
               </p>
               <nav>
@@ -288,14 +288,14 @@ export function LearnLayout({ children }: { children: React.ReactNode }) {
                         onClick={() => setMobileMenuOpen(false)}
                         className={`flex items-center gap-3 px-3 py-3 rounded-lg text-sm transition-colors group ${
                           pathname?.includes(chapter.id)
-                            ? "text-[#1C1C1C] bg-[#6B8F71]/10"
+                            ? "text-[#1C1C1C] bg-[#5F9468]/10"
                             : "text-[#666] hover:text-[#1C1C1C] hover:bg-[#F5F5F3]"
                         }`}
                       >
                         <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium transition-colors ${
                           pathname?.includes(chapter.id)
-                            ? "bg-[#6B8F71] text-white"
-                            : "bg-[#F5F5F3] group-hover:bg-[#6B8F71] group-hover:text-white"
+                            ? "bg-[#5F9468] text-white"
+                            : "bg-[#F5F5F3] group-hover:bg-[#5F9468] group-hover:text-white"
                         }`}>
                           {chapter.number}
                         </span>
@@ -315,7 +315,7 @@ export function LearnLayout({ children }: { children: React.ReactNode }) {
           <aside className="hidden lg:block w-56 shrink-0">
             <nav className="sticky top-[100px]">
               <SearchBox />
-              <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">
+              <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">
                 Chapters
               </p>
               <ul className="space-y-1">
@@ -325,14 +325,14 @@ export function LearnLayout({ children }: { children: React.ReactNode }) {
                       href={`/learn/${chapter.id}`}
                       className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors group ${
                         pathname?.includes(chapter.id)
-                          ? "text-[#1C1C1C] bg-[#6B8F71]/10"
+                          ? "text-[#1C1C1C] bg-[#5F9468]/10"
                           : "text-[#666] hover:text-[#1C1C1C] hover:bg-[#F5F5F3]"
                       }`}
                     >
                       <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium transition-colors ${
                         pathname?.includes(chapter.id)
-                          ? "bg-[#6B8F71] text-white"
-                          : "bg-[#F5F5F3] group-hover:bg-[#6B8F71] group-hover:text-white"
+                          ? "bg-[#5F9468] text-white"
+                          : "bg-[#F5F5F3] group-hover:bg-[#5F9468] group-hover:text-white"
                       }`}>
                         {chapter.number}
                       </span>

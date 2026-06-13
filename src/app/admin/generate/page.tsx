@@ -207,9 +207,9 @@ export default function GenerateAssetsPage() {
     return (
       <div className="flex items-center justify-center py-20">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-          <span className="w-2 h-2 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-          <span className="w-2 h-2 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+          <span className="w-2 h-2 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+          <span className="w-2 h-2 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+          <span className="w-2 h-2 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
         </div>
       </div>
     );
@@ -233,8 +233,8 @@ export default function GenerateAssetsPage() {
             }}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               mode === m
-                ? "bg-[#6B8F71] text-white"
-                : "bg-white border border-[#E8E6E1] text-[#666] hover:border-[#6B8F71] hover:text-[#6B8F71]"
+                ? "bg-[#5F9468] text-white"
+                : "bg-white border border-[#E8E6E1] text-[#666] hover:border-[#5F9468] hover:text-[#5F9468]"
             }`}
           >
             {m === "image" ? "Image" : m === "video" ? "Video" : "Animate Logo"}
@@ -255,9 +255,9 @@ export default function GenerateAssetsPage() {
             placeholder={
               mode === "logo"
                 ? "Subtle animation, logo gently breathing and pulsing, professional motion graphics, seamless loop"
-                : "Abstract flowing shapes in sage green #6B8F71, soft gradients, minimal, professional..."
+                : "Abstract flowing shapes in sage green #5F9468, soft gradients, minimal, professional..."
             }
-            className="w-full bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl px-4 py-3 text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] transition-colors resize-none"
+            className="w-full bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl px-4 py-3 text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] transition-colors resize-none"
             rows={3}
           />
         </div>
@@ -273,7 +273,7 @@ export default function GenerateAssetsPage() {
                 type="file"
                 accept="image/*"
                 onChange={handleFileUpload}
-                className="flex-1 bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl px-4 py-3 text-[#1C1C1C] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#6B8F71]/10 file:text-[#6B8F71] hover:file:bg-[#6B8F71]/20 cursor-pointer"
+                className="flex-1 bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl px-4 py-3 text-[#1C1C1C] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#5F9468]/10 file:text-[#5F9468] hover:file:bg-[#5F9468]/20 cursor-pointer"
               />
               <span className="text-[#999] self-center">or</span>
               <input
@@ -284,7 +284,7 @@ export default function GenerateAssetsPage() {
                   setUploadedFile(null);
                 }}
                 placeholder="Paste image URL..."
-                className="flex-1 bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl px-4 py-3 text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] transition-colors"
+                className="flex-1 bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl px-4 py-3 text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] transition-colors"
               />
             </div>
             {uploadedFile && (
@@ -303,7 +303,7 @@ export default function GenerateAssetsPage() {
               <select
                 value={imageSize}
                 onChange={(e) => setImageSize(e.target.value as ImageSize)}
-                className="w-full bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl px-4 py-3 text-[#1C1C1C] focus:outline-none focus:border-[#6B8F71] transition-colors"
+                className="w-full bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl px-4 py-3 text-[#1C1C1C] focus:outline-none focus:border-[#5F9468] transition-colors"
               >
                 <option value="square_hd">Square HD (1024x1024)</option>
                 <option value="square">Square (512x512)</option>
@@ -321,7 +321,7 @@ export default function GenerateAssetsPage() {
               value={seed}
               onChange={(e) => setSeed(e.target.value)}
               placeholder="Random"
-              className="w-full bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl px-4 py-3 text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] transition-colors"
+              className="w-full bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl px-4 py-3 text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] transition-colors"
             />
           </div>
         </div>
@@ -337,7 +337,7 @@ export default function GenerateAssetsPage() {
         <button
           onClick={handleGenerate}
           disabled={status === "generating"}
-          className="w-full bg-[#6B8F71] text-white font-medium py-3 px-6 rounded-xl hover:bg-[#5A7D60] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="w-full bg-[#5F9468] text-white font-medium py-3 px-6 rounded-xl hover:bg-[#4F8357] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
           {status === "generating" ? (
             <>
@@ -391,7 +391,7 @@ export default function GenerateAssetsPage() {
           <p className="text-sm text-[#666] mb-4">
             Completed in {result.duration?.toFixed(1)}s
             {result.saved && (
-              <span className="text-[#6B8F71] ml-2">
+              <span className="text-[#5F9468] ml-2">
                 Saved to {result.savedPath}
               </span>
             )}
@@ -400,13 +400,13 @@ export default function GenerateAssetsPage() {
             <button
               onClick={handleSaveAsset}
               disabled={result.saved}
-              className="px-4 py-2 bg-[#FAFAF8] border border-[#E8E6E1] text-[#1C1C1C] rounded-lg hover:border-[#6B8F71] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 bg-[#FAFAF8] border border-[#E8E6E1] text-[#1C1C1C] rounded-lg hover:border-[#5F9468] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {result.saved ? "Saved" : "Save to /public"}
             </button>
             <button
               onClick={() => navigator.clipboard.writeText(result.url)}
-              className="px-4 py-2 bg-[#FAFAF8] border border-[#E8E6E1] text-[#1C1C1C] rounded-lg hover:border-[#6B8F71] transition-colors"
+              className="px-4 py-2 bg-[#FAFAF8] border border-[#E8E6E1] text-[#1C1C1C] rounded-lg hover:border-[#5F9468] transition-colors"
             >
               Copy URL
             </button>
@@ -415,7 +415,7 @@ export default function GenerateAssetsPage() {
               download
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 bg-[#FAFAF8] border border-[#E8E6E1] text-[#1C1C1C] rounded-lg hover:border-[#6B8F71] transition-colors"
+              className="px-4 py-2 bg-[#FAFAF8] border border-[#E8E6E1] text-[#1C1C1C] rounded-lg hover:border-[#5F9468] transition-colors"
             >
               Download
             </a>

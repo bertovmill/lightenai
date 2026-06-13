@@ -32,8 +32,8 @@ export function ReviewForm() {
   if (status === "sent") {
     return (
       <div className="bg-white border border-[#E8E6E1] rounded-2xl p-8 md:p-10 max-w-lg w-full text-center">
-        <div className="w-12 h-12 rounded-full bg-[#6B8F71]/10 flex items-center justify-center mx-auto mb-4">
-          <svg className="w-6 h-6 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+        <div className="w-12 h-12 rounded-full bg-[#5F9468]/10 flex items-center justify-center mx-auto mb-4">
+          <svg className="w-6 h-6 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
@@ -62,7 +62,7 @@ export function ReviewForm() {
               className="cursor-pointer"
             >
               <svg
-                className={`w-7 h-7 transition-colors ${star <= rating ? "text-[#6B8F71] fill-[#6B8F71]" : "text-[#d5d3cd]"}`}
+                className={`w-7 h-7 transition-colors ${star <= rating ? "text-[#5F9468] fill-[#5F9468]" : "text-[#d5d3cd]"}`}
                 fill={star <= rating ? "currentColor" : "none"}
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -80,7 +80,7 @@ export function ReviewForm() {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="Your name (optional)"
-        className="w-full py-3 px-4 bg-[#F5F4F1] text-sm text-[#1C1C1C] placeholder-[#aaa] rounded-full border border-[#E8E6E1] focus:outline-none focus:border-[#6B8F71]"
+        className="w-full py-3 px-4 bg-[#F5F4F1] text-sm text-[#1C1C1C] placeholder-[#aaa] rounded-full border border-[#E8E6E1] focus:outline-none focus:border-[#5F9468]"
       />
 
       <input
@@ -88,7 +88,7 @@ export function ReviewForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email (optional)"
-        className="w-full py-3 px-4 bg-[#F5F4F1] text-sm text-[#1C1C1C] placeholder-[#aaa] rounded-full border border-[#E8E6E1] focus:outline-none focus:border-[#6B8F71]"
+        className="w-full py-3 px-4 bg-[#F5F4F1] text-sm text-[#1C1C1C] placeholder-[#aaa] rounded-full border border-[#E8E6E1] focus:outline-none focus:border-[#5F9468]"
       />
 
       <textarea
@@ -97,14 +97,14 @@ export function ReviewForm() {
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Tell us about your experience"
         rows={4}
-        className="w-full py-3 px-4 bg-[#F5F4F1] text-sm text-[#1C1C1C] placeholder-[#aaa] rounded-xl border border-[#E8E6E1] focus:outline-none focus:border-[#6B8F71] resize-none"
+        className="w-full py-3 px-4 bg-[#F5F4F1] text-sm text-[#1C1C1C] placeholder-[#aaa] rounded-xl border border-[#E8E6E1] focus:outline-none focus:border-[#5F9468] resize-none"
       />
 
       <div className="flex items-center gap-3 pt-1">
         <button
           type="submit"
           disabled={status === "sending" || !rating || !message.trim()}
-          className="px-8 py-3 bg-[#6B8F71] text-white text-xs font-semibold uppercase tracking-[0.1em] rounded-full hover:bg-[#5A7D60] disabled:opacity-40 transition-all duration-200 cursor-pointer"
+          className="px-8 py-3 bg-[#5F9468] text-white text-xs font-semibold uppercase tracking-[0.1em] rounded-full hover:bg-[#4F8357] disabled:opacity-40 transition-all duration-200 cursor-pointer"
         >
           {status === "sending" ? "Submitting..." : "Submit Review"}
         </button>

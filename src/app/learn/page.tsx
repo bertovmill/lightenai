@@ -7,7 +7,7 @@ export default function LearnIndex() {
   return (
     <LearnLayout>
       <div className="mb-12">
-        <p className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-2">Claude Agents SDK</p>
+        <p className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-2">Claude Agents SDK</p>
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
           Learn to Build AI Agents
         </h1>
@@ -22,21 +22,21 @@ export default function LearnIndex() {
           <Link
             key={chapter.id}
             href={`/learn/${chapter.id}`}
-            className="group bg-white border border-[#E8E6E1] rounded-xl p-6 hover:border-[#6B8F71]/40 transition-all"
+            className="group bg-white border border-[#E8E6E1] rounded-xl p-6 hover:border-[#5F9468]/40 transition-all"
           >
             <div className="flex items-start gap-4">
-              <span className="w-10 h-10 rounded-full bg-[#F5F5F3] group-hover:bg-[#6B8F71] group-hover:text-white flex items-center justify-center text-lg font-medium transition-colors shrink-0">
+              <span className="w-10 h-10 rounded-full bg-[#F5F5F3] group-hover:bg-[#5F9468] group-hover:text-white flex items-center justify-center text-lg font-medium transition-colors shrink-0">
                 {chapter.number}
               </span>
               <div className="flex-1">
-                <h2 className="text-xl font-semibold mb-2 group-hover:text-[#6B8F71] transition-colors">
+                <h2 className="text-xl font-semibold mb-2 group-hover:text-[#5F9468] transition-colors">
                   {chapter.title}
                 </h2>
                 <p className="text-sm text-[#888]">
                   {getChapterDescription(chapter.id)}
                 </p>
               </div>
-              <svg className="w-5 h-5 text-[#999] group-hover:text-[#6B8F71] group-hover:translate-x-1 transition-all shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-[#999] group-hover:text-[#5F9468] group-hover:translate-x-1 transition-all shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.25 4.5l7.5 7.5-7.5 7.5" />
               </svg>
             </div>
@@ -45,12 +45,12 @@ export default function LearnIndex() {
       </div>
 
       {/* Quick Start CTA */}
-      <div className="mt-12 bg-gradient-to-br from-[#6B8F71]/10 to-[#D4E5D7]/20 border border-[#6B8F71]/20 rounded-xl p-8 text-center">
+      <div className="mt-12 bg-gradient-to-br from-[#5F9468]/10 to-[#D4E5D7]/20 border border-[#5F9468]/20 rounded-xl p-8 text-center">
         <h3 className="text-xl font-semibold mb-2">Ready to start building?</h3>
         <p className="text-[#666] mb-6">Jump straight into the quickstart guide and build your first agent.</p>
         <Link
           href="/learn/quickstart"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-[#6B8F71] text-white font-medium rounded-lg hover:bg-[#5A7D60] transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-[#5F9468] text-white font-medium rounded-lg hover:bg-[#4F8357] transition-colors"
         >
           Start Building
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

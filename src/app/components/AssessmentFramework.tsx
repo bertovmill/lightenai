@@ -45,7 +45,7 @@ export function AssessmentFramework() {
     <div className="max-w-2xl mx-auto mb-8">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-center gap-2 text-sm font-semibold text-[#6B8F71] uppercase tracking-[0.1em] hover:text-[#5A7D60] transition-colors duration-200 cursor-pointer py-2"
+        className="w-full flex items-center justify-center gap-2 text-sm font-semibold text-[#5F9468] uppercase tracking-[0.1em] hover:text-[#4F8357] transition-colors duration-200 cursor-pointer py-2"
       >
         How the assessment works
         <svg
@@ -71,7 +71,7 @@ export function AssessmentFramework() {
                 key={step.step}
                 className="bg-white border border-[#E8E6E1] rounded-2xl p-6"
               >
-                <span className="text-[#6B8F71] text-xs font-semibold tracking-[0.1em]">
+                <span className="text-[#5F9468] text-xs font-semibold tracking-[0.1em]">
                   {step.step}
                 </span>
                 <h4 className="text-lg font-semibold mt-2 mb-1">{step.title}</h4>
@@ -79,7 +79,7 @@ export function AssessmentFramework() {
                 <ul className="space-y-2">
                   {step.bullets.map((bullet) => (
                     <li key={bullet} className="flex items-start gap-2 text-sm text-[#555] leading-relaxed">
-                      <svg className="w-4 h-4 text-[#6B8F71] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <svg className="w-4 h-4 text-[#5F9468] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                       </svg>
                       {bullet}

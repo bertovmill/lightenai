@@ -167,7 +167,7 @@ export default function OutreachCRMPage() {
           <p className="text-xs text-[#999] mt-1">This Month</p>
         </div>
         <div className="bg-white border border-[#E8E6E1] rounded-xl p-4">
-          <p className="text-2xl font-bold text-[#6B8F71]">{conversionRate}%</p>
+          <p className="text-2xl font-bold text-[#5F9468]">{conversionRate}%</p>
           <p className="text-xs text-[#999] mt-1">Conversion Rate</p>
         </div>
         <div className="bg-white border border-[#E8E6E1] rounded-xl p-4">
@@ -235,7 +235,7 @@ export default function OutreachCRMPage() {
             placeholder="Search name or notes..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full sm:w-56 bg-white border border-[#E8E6E1] rounded-lg px-3 py-1.5 text-sm outline-none placeholder-[#999] focus:border-[#6B8F71] transition-colors duration-200"
+            className="w-full sm:w-56 bg-white border border-[#E8E6E1] rounded-lg px-3 py-1.5 text-sm outline-none placeholder-[#999] focus:border-[#5F9468] transition-colors duration-200"
           />
         </div>
       </div>
@@ -244,9 +244,9 @@ export default function OutreachCRMPage() {
       {loading ? (
         <div className="flex items-center justify-center py-20">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-            <span className="w-2 h-2 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-            <span className="w-2 h-2 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+            <span className="w-2 h-2 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+            <span className="w-2 h-2 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+            <span className="w-2 h-2 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
           </div>
         </div>
       ) : filtered.length === 0 ? (
@@ -364,7 +364,7 @@ export default function OutreachCRMPage() {
                             updateContactNotes(contact.id, e.target.value);
                           }
                         }}
-                        className="w-full bg-[#FAFAF8] border border-[#E8E6E1] rounded-lg px-3 py-1.5 text-sm outline-none placeholder-[#999] focus:border-[#6B8F71] transition-colors duration-200"
+                        className="w-full bg-[#FAFAF8] border border-[#E8E6E1] rounded-lg px-3 py-1.5 text-sm outline-none placeholder-[#999] focus:border-[#5F9468] transition-colors duration-200"
                       />
                     </div>
 

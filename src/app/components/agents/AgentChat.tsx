@@ -173,7 +173,7 @@ export default function AgentChat({
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const isFull = variant === "full";
-  const accent = "#6B8F71";
+  const accent = "#5F9468";
 
   useEffect(() => {
     const saved = localStorage.getItem(storageKey);
@@ -341,7 +341,7 @@ export default function AgentChat({
           // Green rounded background
           ctx.beginPath();
           ctx.roundRect(0, 0, 32, 32, 8);
-          ctx.fillStyle = "#6B8F71";
+          ctx.fillStyle = "#5F9468";
           ctx.fill();
 
           // White checkmark
@@ -1219,13 +1219,13 @@ export default function AgentChat({
         >
           {/* Status indicator */}
           {tc.status === "running" ? (
-            <span className="w-1.5 h-1.5 rounded-full bg-[#6B8F71] animate-pulse shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#5F9468] animate-pulse shrink-0" />
           ) : tc.status === "error" ? (
             <svg className="w-3 h-3 text-red-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <svg className="w-3 h-3 text-[#6B8F71] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <svg className="w-3 h-3 text-[#5F9468] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           )}
@@ -1236,7 +1236,7 @@ export default function AgentChat({
           </span>
 
           {/* Summary */}
-          <span className={`text-xs truncate flex-1 ${tc.status === "running" ? "text-[#6B8F71]" : "text-[#999]"}`}>
+          <span className={`text-xs truncate flex-1 ${tc.status === "running" ? "text-[#5F9468]" : "text-[#999]"}`}>
             {tc.summary}
           </span>
 
@@ -1289,18 +1289,18 @@ export default function AgentChat({
             setSessionIdCopied(true);
             setTimeout(() => setSessionIdCopied(false), 2000);
           }}
-          className="group/sid relative text-xs font-mono bg-[#F5F4F0] px-2 py-1 rounded border border-[#E8E6E1] hover:border-[#6B8F71]/50 hover:bg-[#6B8F71]/5 transition-all cursor-pointer"
+          className="group/sid relative text-xs font-mono bg-[#F5F4F0] px-2 py-1 rounded border border-[#E8E6E1] hover:border-[#5F9468]/50 hover:bg-[#5F9468]/5 transition-all cursor-pointer"
           title="Click to copy session ID"
         >
           {sessionIdCopied ? (
-            <span className="text-[#6B8F71] flex items-center gap-1">
+            <span className="text-[#5F9468] flex items-center gap-1">
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
               Copied!
             </span>
           ) : (
-            <span className="text-[#888] group-hover/sid:text-[#6B8F71] transition-colors">
+            <span className="text-[#888] group-hover/sid:text-[#5F9468] transition-colors">
               <span className="group-hover/sid:hidden">{sessionId.slice(0, 8)}...</span>
               <span className="hidden group-hover/sid:inline">{sessionId}</span>
             </span>
@@ -1312,14 +1312,14 @@ export default function AgentChat({
       <div className="relative">
         <button
           onClick={() => setShowSessions(!showSessions)}
-          className="flex items-center gap-1.5 text-xs text-[#666] hover:text-[#6B8F71] transition-colors bg-white px-3 py-1.5 rounded-lg border border-[#E8E6E1] hover:border-[#6B8F71]/50"
+          className="flex items-center gap-1.5 text-xs text-[#666] hover:text-[#5F9468] transition-colors bg-white px-3 py-1.5 rounded-lg border border-[#E8E6E1] hover:border-[#5F9468]/50"
         >
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           History
           {sessions.length > 0 && (
-            <span className="bg-[#6B8F71]/10 text-[#6B8F71] px-1.5 py-0.5 rounded text-[10px] font-medium">
+            <span className="bg-[#5F9468]/10 text-[#5F9468] px-1.5 py-0.5 rounded text-[10px] font-medium">
               {sessions.length}
             </span>
           )}
@@ -1336,7 +1336,7 @@ export default function AgentChat({
                 <span className="text-xs font-medium text-[#888]">Recent Sessions</span>
                 <button
                   onClick={handleNewChat}
-                  className="text-xs text-[#6B8F71] hover:underline"
+                  className="text-xs text-[#5F9468] hover:underline"
                 >
                   + New Chat
                 </button>
@@ -1383,7 +1383,7 @@ export default function AgentChat({
 
       <button
         onClick={handleNewChat}
-        className="flex items-center gap-1.5 text-xs text-[#666] hover:text-[#6B8F71] transition-colors bg-white px-3 py-1.5 rounded-lg border border-[#E8E6E1] hover:border-[#6B8F71]/50"
+        className="flex items-center gap-1.5 text-xs text-[#666] hover:text-[#5F9468] transition-colors bg-white px-3 py-1.5 rounded-lg border border-[#E8E6E1] hover:border-[#5F9468]/50"
       >
         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.5v15m7.5-7.5h-15" />
@@ -1419,8 +1419,8 @@ export default function AgentChat({
       {/* Agent info bar (full variant only, hidden when portaled) */}
       {isFull && !headerPortalRef && (
         <div className="mb-6 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-[#6B8F71]/10 flex items-center justify-center">
-            <svg className="w-6 h-6 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-12 h-12 rounded-xl bg-[#5F9468]/10 flex items-center justify-center">
+            <svg className="w-6 h-6 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={agentIcon} />
             </svg>
           </div>
@@ -1445,13 +1445,13 @@ export default function AgentChat({
                     setSessionIdCopied(true);
                     setTimeout(() => setSessionIdCopied(false), 2000);
                   }}
-                  className="group/sid text-[10px] font-mono bg-white px-1.5 py-0.5 rounded border border-[#E8E6E1] hover:border-[#6B8F71]/50 hover:bg-[#6B8F71]/5 transition-all cursor-pointer"
+                  className="group/sid text-[10px] font-mono bg-white px-1.5 py-0.5 rounded border border-[#E8E6E1] hover:border-[#5F9468]/50 hover:bg-[#5F9468]/5 transition-all cursor-pointer"
                   title="Click to copy session ID"
                 >
                   {sessionIdCopied ? (
-                    <span className="text-[#6B8F71]">Copied!</span>
+                    <span className="text-[#5F9468]">Copied!</span>
                   ) : (
-                    <span className="text-[#888] group-hover/sid:text-[#6B8F71] transition-colors">
+                    <span className="text-[#888] group-hover/sid:text-[#5F9468] transition-colors">
                       <span className="group-hover/sid:hidden">{sessionId.slice(0, 8)}</span>
                       <span className="hidden group-hover/sid:inline">{sessionId}</span>
                     </span>
@@ -1459,8 +1459,8 @@ export default function AgentChat({
                 </button>
               )}
               {isLoading && (
-                <span className="flex items-center gap-1 text-[10px] text-[#6B8F71]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#6B8F71] animate-pulse" />
+                <span className="flex items-center gap-1 text-[10px] text-[#5F9468]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#5F9468] animate-pulse" />
                   {statusText || loadingText}
                 </span>
               )}
@@ -1471,7 +1471,7 @@ export default function AgentChat({
                 <div className="relative">
                   <button
                     onClick={() => setShowSessions(!showSessions)}
-                    className="flex items-center gap-1 text-[10px] text-[#999] hover:text-[#6B8F71] px-2 py-1 rounded-lg hover:bg-[#F5F4F0] transition-colors"
+                    className="flex items-center gap-1 text-[10px] text-[#999] hover:text-[#5F9468] px-2 py-1 rounded-lg hover:bg-[#F5F4F0] transition-colors"
                   >
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -1515,7 +1515,7 @@ export default function AgentChat({
               )}
               <button
                 onClick={handleNewChat}
-                className="flex items-center gap-1 text-[10px] text-[#999] hover:text-[#6B8F71] px-2 py-1 rounded-lg hover:bg-[#F5F4F0] transition-colors"
+                className="flex items-center gap-1 text-[10px] text-[#999] hover:text-[#5F9468] px-2 py-1 rounded-lg hover:bg-[#F5F4F0] transition-colors"
               >
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.5v15m7.5-7.5h-15" />
@@ -1530,8 +1530,8 @@ export default function AgentChat({
           {messages.length === 0 ? (
             <div className={`h-full flex flex-col items-center justify-center text-center ${isFull ? "py-12" : "py-6"}`}>
               {isFull && (
-                <div className="w-16 h-16 rounded-2xl bg-[#6B8F71]/10 flex items-center justify-center mb-4">
-                  <svg className="w-8 h-8 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-16 h-16 rounded-2xl bg-[#5F9468]/10 flex items-center justify-center mb-4">
+                  <svg className="w-8 h-8 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={agentIcon} />
                   </svg>
                 </div>
@@ -1548,7 +1548,7 @@ export default function AgentChat({
                     <button
                       key={i}
                       onClick={() => handleStarterPrompt(prompt)}
-                      className="text-xs px-3 py-2 rounded-lg border border-[#E8E6E1] text-[#666] hover:border-[#6B8F71]/50 hover:text-[#6B8F71] hover:bg-[#6B8F71]/5 transition-all text-left"
+                      className="text-xs px-3 py-2 rounded-lg border border-[#E8E6E1] text-[#666] hover:border-[#5F9468]/50 hover:text-[#5F9468] hover:bg-[#5F9468]/5 transition-all text-left"
                     >
                       {prompt}
                     </button>
@@ -1558,7 +1558,7 @@ export default function AgentChat({
               {isFull && sessions.length > 0 && (
                 <button
                   onClick={() => setShowSessions(true)}
-                  className="text-xs text-[#6B8F71] hover:underline mt-4"
+                  className="text-xs text-[#5F9468] hover:underline mt-4"
                 >
                   Or resume a previous session →
                 </button>
@@ -1584,7 +1584,7 @@ export default function AgentChat({
                               onClick={() => !isCurrentlyThinking && setExpandedThinking((prev) => ({ ...prev, [index]: !prev[index] }))}
                               className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs transition-all ${
                                 isCurrentlyThinking
-                                  ? "text-[#6B8F71] bg-[#6B8F71]/5 border border-[#6B8F71]/20"
+                                  ? "text-[#5F9468] bg-[#5F9468]/5 border border-[#5F9468]/20"
                                   : "text-[#999] hover:text-[#666] hover:bg-[#F5F4F0] border border-transparent hover:border-[#E8E6E1]"
                               }`}
                             >
@@ -1612,13 +1612,13 @@ export default function AgentChat({
                       <div
                         className={`px-4 py-3 rounded-2xl ${
                           message.role === "user"
-                            ? "bg-[#6B8F71] text-white"
+                            ? "bg-[#5F9468] text-white"
                             : "bg-[#F5F4F0] text-[#1C1C1C]"
                         }`}
                       >
                         {message.content ? (
                           message.role === "assistant" ? (
-                            <div data-assistant-content className="text-sm prose prose-sm max-w-none prose-headings:text-[#1C1C1C] prose-headings:font-semibold prose-headings:mt-4 prose-headings:mb-2 prose-p:text-[#444] prose-p:my-1.5 prose-p:leading-relaxed prose-a:text-[#6B8F71] prose-strong:text-[#1C1C1C] prose-li:text-[#444] prose-li:my-0.5 prose-ul:my-2 prose-ol:my-2 prose-hr:border-[#E8E6E1] prose-hr:my-4 prose-code:text-[#6B8F71] prose-code:bg-[#6B8F71]/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-xs prose-code:before:content-none prose-code:after:content-none prose-pre:bg-white prose-pre:border prose-pre:border-[#E8E6E1] prose-pre:rounded-lg prose-blockquote:border-[#6B8F71] prose-blockquote:text-[#555]">
+                            <div data-assistant-content className="text-sm prose prose-sm max-w-none prose-headings:text-[#1C1C1C] prose-headings:font-semibold prose-headings:mt-4 prose-headings:mb-2 prose-p:text-[#444] prose-p:my-1.5 prose-p:leading-relaxed prose-a:text-[#5F9468] prose-strong:text-[#1C1C1C] prose-li:text-[#444] prose-li:my-0.5 prose-ul:my-2 prose-ol:my-2 prose-hr:border-[#E8E6E1] prose-hr:my-4 prose-code:text-[#5F9468] prose-code:bg-[#5F9468]/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-xs prose-code:before:content-none prose-code:after:content-none prose-pre:bg-white prose-pre:border prose-pre:border-[#E8E6E1] prose-pre:rounded-lg prose-blockquote:border-[#5F9468] prose-blockquote:text-[#555]">
                               <ReactMarkdown
                                 remarkPlugins={[remarkGfm]}
                                 components={{
@@ -1664,7 +1664,7 @@ export default function AgentChat({
                                             download
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-1 text-xs text-[#6B8F71] hover:text-[#5A7D60] transition-colors ml-auto"
+                                            className="inline-flex items-center gap-1 text-xs text-[#5F9468] hover:text-[#4F8357] transition-colors ml-auto"
                                           >
                                             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -1702,7 +1702,7 @@ export default function AgentChat({
                                       <div className="mt-2 space-y-1">
                                         <div className="w-full h-1.5 bg-[#E8E6E1] rounded-full overflow-hidden">
                                           <div
-                                            className="h-full bg-[#6B8F71] rounded-full transition-all duration-1000 ease-linear"
+                                            className="h-full bg-[#5F9468] rounded-full transition-all duration-1000 ease-linear"
                                             style={{ width: `${progress * 100}%` }}
                                           />
                                         </div>
@@ -1723,13 +1723,13 @@ export default function AgentChat({
                                   {thinkingSteps.map((step, i) => (
                                     <div key={i} className="flex items-center gap-2">
                                       {i === thinkingSteps.length - 1 ? (
-                                        <span className="w-1.5 h-1.5 rounded-full bg-[#6B8F71] animate-pulse shrink-0" />
+                                        <span className="w-1.5 h-1.5 rounded-full bg-[#5F9468] animate-pulse shrink-0" />
                                       ) : (
-                                        <svg className="w-3 h-3 text-[#6B8F71] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                        <svg className="w-3 h-3 text-[#5F9468] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                         </svg>
                                       )}
-                                      <span className={`text-xs ${i === thinkingSteps.length - 1 ? "text-[#6B8F71]" : "text-[#999]"}`}>
+                                      <span className={`text-xs ${i === thinkingSteps.length - 1 ? "text-[#5F9468]" : "text-[#999]"}`}>
                                         {step}
                                       </span>
                                     </div>
@@ -1745,7 +1745,7 @@ export default function AgentChat({
                                       <div className="mt-2 space-y-1">
                                         <div className="w-full h-1.5 bg-[#E8E6E1] rounded-full overflow-hidden">
                                           <div
-                                            className="h-full bg-[#6B8F71] rounded-full transition-all duration-1000 ease-linear"
+                                            className="h-full bg-[#5F9468] rounded-full transition-all duration-1000 ease-linear"
                                             style={{ width: `${progress * 100}%` }}
                                           />
                                         </div>
@@ -1763,9 +1763,9 @@ export default function AgentChat({
                                 </>
                               ) : (
                                 <span className="inline-flex items-center gap-1">
-                                  <span className="w-1.5 h-1.5 rounded-full animate-bounce bg-[#6B8F71]" style={{ animationDelay: "0ms" }} />
-                                  <span className="w-1.5 h-1.5 rounded-full animate-bounce bg-[#6B8F71]" style={{ animationDelay: "150ms" }} />
-                                  <span className="w-1.5 h-1.5 rounded-full animate-bounce bg-[#6B8F71]" style={{ animationDelay: "300ms" }} />
+                                  <span className="w-1.5 h-1.5 rounded-full animate-bounce bg-[#5F9468]" style={{ animationDelay: "0ms" }} />
+                                  <span className="w-1.5 h-1.5 rounded-full animate-bounce bg-[#5F9468]" style={{ animationDelay: "150ms" }} />
+                                  <span className="w-1.5 h-1.5 rounded-full animate-bounce bg-[#5F9468]" style={{ animationDelay: "300ms" }} />
                                 </span>
                               )}
                             </div>
@@ -1782,13 +1782,13 @@ export default function AgentChat({
                             thinkingSteps.map((step, i) => (
                               <div key={i} className="flex items-center gap-2">
                                 {i === thinkingSteps.length - 1 ? (
-                                  <span className="w-1.5 h-1.5 rounded-full bg-[#6B8F71] animate-pulse shrink-0" />
+                                  <span className="w-1.5 h-1.5 rounded-full bg-[#5F9468] animate-pulse shrink-0" />
                                 ) : (
-                                  <svg className="w-3 h-3 text-[#6B8F71] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                  <svg className="w-3 h-3 text-[#5F9468] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                   </svg>
                                 )}
-                                <span className={`text-xs ${i === thinkingSteps.length - 1 ? "text-[#6B8F71]" : "text-[#999]"}`}>
+                                <span className={`text-xs ${i === thinkingSteps.length - 1 ? "text-[#5F9468]" : "text-[#999]"}`}>
                                   {step}
                                 </span>
                               </div>
@@ -1805,7 +1805,7 @@ export default function AgentChat({
                               <div className="mt-2 space-y-1">
                                 <div className="w-full h-1.5 bg-[#E8E6E1] rounded-full overflow-hidden">
                                   <div
-                                    className="h-full bg-[#6B8F71] rounded-full transition-all duration-1000 ease-linear"
+                                    className="h-full bg-[#5F9468] rounded-full transition-all duration-1000 ease-linear"
                                     style={{ width: `${progress * 100}%` }}
                                   />
                                 </div>
@@ -1871,15 +1871,15 @@ export default function AgentChat({
                               setCopiedIndex(index * 10);
                               setTimeout(() => setCopiedIndex(null), 2000);
                             }}
-                            className="flex items-center gap-1.5 text-xs font-medium text-[#666] hover:text-[#6B8F71] bg-[#FAFAF8] hover:bg-[#6B8F71]/10 border border-[#E8E6E1] hover:border-[#6B8F71]/30 px-3 py-1.5 rounded-lg transition-all"
+                            className="flex items-center gap-1.5 text-xs font-medium text-[#666] hover:text-[#5F9468] bg-[#FAFAF8] hover:bg-[#5F9468]/10 border border-[#E8E6E1] hover:border-[#5F9468]/30 px-3 py-1.5 rounded-lg transition-all"
                             title="Copy as plain text (for LinkedIn)"
                           >
                             {copiedIndex === index * 10 ? (
                               <>
-                                <svg className="w-3.5 h-3.5 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-3.5 h-3.5 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
-                                <span className="text-[#6B8F71]">Copied!</span>
+                                <span className="text-[#5F9468]">Copied!</span>
                               </>
                             ) : (
                               <>
@@ -1898,15 +1898,15 @@ export default function AgentChat({
                               setCopiedIndex(index * 10 + 1);
                               setTimeout(() => setCopiedIndex(null), 2000);
                             }}
-                            className="flex items-center gap-1.5 text-xs font-medium text-[#666] hover:text-[#6B8F71] bg-[#FAFAF8] hover:bg-[#6B8F71]/10 border border-[#E8E6E1] hover:border-[#6B8F71]/30 px-3 py-1.5 rounded-lg transition-all"
+                            className="flex items-center gap-1.5 text-xs font-medium text-[#666] hover:text-[#5F9468] bg-[#FAFAF8] hover:bg-[#5F9468]/10 border border-[#E8E6E1] hover:border-[#5F9468]/30 px-3 py-1.5 rounded-lg transition-all"
                             title="Copy as markdown (for Medium)"
                           >
                             {copiedIndex === index * 10 + 1 ? (
                               <>
-                                <svg className="w-3.5 h-3.5 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-3.5 h-3.5 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
-                                <span className="text-[#6B8F71]">Copied!</span>
+                                <span className="text-[#5F9468]">Copied!</span>
                               </>
                             ) : (
                               <>
@@ -1927,7 +1927,7 @@ export default function AgentChat({
                                 disabled={state === "posting" || state === "posted"}
                                 className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-all ${
                                   state === "posted"
-                                    ? "text-[#6B8F71] bg-[#6B8F71]/10 border-[#6B8F71]/30"
+                                    ? "text-[#5F9468] bg-[#5F9468]/10 border-[#5F9468]/30"
                                     : state === "error"
                                     ? "text-red-500 bg-red-50 border-red-200 hover:bg-red-100"
                                     : "text-[#666] hover:text-[#1C1C1C] bg-[#FAFAF8] hover:bg-[#F5F4F0] border-[#E8E6E1] hover:border-[#999]"
@@ -1955,7 +1955,7 @@ export default function AgentChat({
                                 disabled={state === "posting" || state === "posted"}
                                 className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-all ${
                                   state === "posted"
-                                    ? "text-[#6B8F71] bg-[#6B8F71]/10 border-[#6B8F71]/30"
+                                    ? "text-[#5F9468] bg-[#5F9468]/10 border-[#5F9468]/30"
                                     : state === "error"
                                     ? "text-red-500 bg-red-50 border-red-200 hover:bg-red-100"
                                     : "text-[#666] hover:text-[#0077B5] bg-[#FAFAF8] hover:bg-blue-50/50 border-[#E8E6E1] hover:border-[#0077B5]/30"
@@ -1983,7 +1983,7 @@ export default function AgentChat({
                                 disabled={state === "posting" || state === "posted"}
                                 className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-all ${
                                   state === "posted"
-                                    ? "text-[#6B8F71] bg-[#6B8F71]/10 border-[#6B8F71]/30"
+                                    ? "text-[#5F9468] bg-[#5F9468]/10 border-[#5F9468]/30"
                                     : state === "error"
                                     ? "text-red-500 bg-red-50 border-red-200 hover:bg-red-100"
                                     : "text-[#666] hover:text-[#0077B5] bg-[#FAFAF8] hover:bg-blue-50/50 border-[#E8E6E1] hover:border-[#0077B5]/30"
@@ -2014,7 +2014,7 @@ export default function AgentChat({
                             return (
                               <div key={qIdx} className="bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl p-4">
                                 <div className="flex items-center gap-2 mb-3">
-                                  <span className="text-xs font-medium px-2 py-0.5 rounded text-[#6B8F71] bg-[#6B8F71]/10">
+                                  <span className="text-xs font-medium px-2 py-0.5 rounded text-[#5F9468] bg-[#5F9468]/10">
                                     {question.header}
                                   </span>
                                   {question.multiSelect && (
@@ -2029,7 +2029,7 @@ export default function AgentChat({
                                       onClick={() => handleSelectOption(index, qIdx, option.label)}
                                       className={`w-full text-left px-3 py-2.5 rounded-lg border transition-all ${
                                         selected.includes(option.label)
-                                          ? "border-[#6B8F71] bg-[#6B8F71]/10 text-[#1C1C1C]"
+                                          ? "border-[#5F9468] bg-[#5F9468]/10 text-[#1C1C1C]"
                                           : "border-[#E8E6E1] hover:border-[#999] text-[#666] hover:text-[#1C1C1C]"
                                       }`}
                                     >
@@ -2067,7 +2067,7 @@ export default function AgentChat({
                               const key = index * 100 + qIdx;
                               return !selectedAnswers[key] || selectedAnswers[key].length === 0;
                             })}
-                            className="w-full px-4 py-2.5 font-medium rounded-lg hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-white bg-[#6B8F71]"
+                            className="w-full px-4 py-2.5 font-medium rounded-lg hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-white bg-[#5F9468]"
                           >
                             Continue
                           </button>
@@ -2079,8 +2079,8 @@ export default function AgentChat({
                         <div className="mt-3 bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl p-4">
                           <div className="flex items-center gap-3">
                             <div className="relative">
-                              <div className="w-8 h-8 rounded-lg bg-[#6B8F71]/10 flex items-center justify-center">
-                                <svg className="w-4 h-4 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <div className="w-8 h-8 rounded-lg bg-[#5F9468]/10 flex items-center justify-center">
+                                <svg className="w-4 h-4 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={agentIcon} />
                                 </svg>
                               </div>
@@ -2090,7 +2090,7 @@ export default function AgentChat({
                             </div>
                             <div className="flex-1">
                               <div className="flex items-center gap-2">
-                                <span className="text-xs font-medium px-2 py-0.5 rounded text-[#6B8F71] bg-[#6B8F71]/10">
+                                <span className="text-xs font-medium px-2 py-0.5 rounded text-[#5F9468] bg-[#5F9468]/10">
                                   {message.subagentStatus.agentType}
                                 </span>
                                 {!message.subagentStatus.isComplete && (
@@ -2106,7 +2106,7 @@ export default function AgentChat({
                       {/* Payload info button */}
                       <button
                         onClick={() => toggleRaw(index)}
-                        className={`flex items-center gap-1 text-xs transition-colors px-2 py-1 rounded-lg text-[#999] hover:text-[#6B8F71] hover:bg-[#F5F4F0] ${
+                        className={`flex items-center gap-1 text-xs transition-colors px-2 py-1 rounded-lg text-[#999] hover:text-[#5F9468] hover:bg-[#F5F4F0] ${
                           message.role === "user" ? "self-end" : "self-start"
                         }`}
                       >
@@ -2123,7 +2123,7 @@ export default function AgentChat({
                       <div className="max-w-[90%] bg-[#F5F4F0] border border-[#E8E6E1] rounded-xl p-4 space-y-3">
                         {message.role === "user" && message.rawInput ? (
                           <div>
-                            <p className="text-xs font-medium mb-2 text-[#6B8F71]">Request Payload</p>
+                            <p className="text-xs font-medium mb-2 text-[#5F9468]">Request Payload</p>
                             <pre className="text-xs text-[#555] overflow-x-auto whitespace-pre-wrap font-mono bg-white p-3 rounded-lg border border-[#E8E6E1]">
                               {JSON.stringify(message.rawInput, null, 2)}
                             </pre>
@@ -2131,7 +2131,7 @@ export default function AgentChat({
                         ) : null}
                         {message.role === "assistant" && message.rawOutput ? (
                           <div>
-                            <p className="text-xs font-medium mb-2 text-[#6B8F71]">Response Payload ({message.rawOutput.length} messages)</p>
+                            <p className="text-xs font-medium mb-2 text-[#5F9468]">Response Payload ({message.rawOutput.length} messages)</p>
                             <pre className="text-xs text-[#555] overflow-x-auto whitespace-pre-wrap font-mono bg-white p-3 rounded-lg border border-[#E8E6E1] max-h-[400px] overflow-y-auto">
                               {JSON.stringify(message.rawOutput, null, 2)}
                             </pre>
@@ -2158,12 +2158,12 @@ export default function AgentChat({
                   }}
                 >
                   <div className="p-3 space-y-2.5">
-                    <p className="text-xs text-[#888] line-clamp-2 border-l-2 border-[#6B8F71] pl-2 italic">
+                    <p className="text-xs text-[#888] line-clamp-2 border-l-2 border-[#5F9468] pl-2 italic">
                       &ldquo;{selectedText.length > 100 ? selectedText.slice(0, 100) + "..." : selectedText}&rdquo;
                     </p>
                     <button
                       onClick={() => handleAskAboutSelection()}
-                      className="w-full flex items-center gap-2 text-xs font-medium text-[#6B8F71] hover:bg-[#6B8F71]/5 px-2.5 py-2 rounded-lg transition-colors"
+                      className="w-full flex items-center gap-2 text-xs font-medium text-[#5F9468] hover:bg-[#5F9468]/5 px-2.5 py-2 rounded-lg transition-colors"
                     >
                       <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
@@ -2182,7 +2182,7 @@ export default function AgentChat({
                           }
                         }}
                         placeholder="Ask something about this..."
-                        className="flex-1 text-xs px-2.5 py-1.5 bg-[#FAFAF8] border border-[#E8E6E1] rounded-lg text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] transition-colors"
+                        className="flex-1 text-xs px-2.5 py-1.5 bg-[#FAFAF8] border border-[#E8E6E1] rounded-lg text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] transition-colors"
                       />
                       <button
                         onClick={() => {
@@ -2191,7 +2191,7 @@ export default function AgentChat({
                           }
                         }}
                         disabled={!selectionQuery.trim()}
-                        className="px-2.5 py-1.5 bg-[#6B8F71] text-white rounded-lg hover:bg-[#5A7D60] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                        className="px-2.5 py-1.5 bg-[#5F9468] text-white rounded-lg hover:bg-[#4F8357] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                       >
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
@@ -2213,7 +2213,7 @@ export default function AgentChat({
               {uploadedFiles.map((file, i) => (
                 <span
                   key={i}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#6B8F71]/10 text-[#6B8F71] text-xs font-medium"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#5F9468]/10 text-[#5F9468] text-xs font-medium"
                 >
                   {file.url ? (
                     /* eslint-disable-next-line @next/next/no-img-element */
@@ -2243,7 +2243,7 @@ export default function AgentChat({
 
           {isUploading && (
             <div className="flex items-center gap-2 mb-3 text-xs text-[#888]">
-              <div className="w-3.5 h-3.5 border-2 border-[#6B8F71] border-t-transparent rounded-full animate-spin" />
+              <div className="w-3.5 h-3.5 border-2 border-[#5F9468] border-t-transparent rounded-full animate-spin" />
               Uploading file...
             </div>
           )}
@@ -2262,7 +2262,7 @@ export default function AgentChat({
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                   disabled={isLoading || isUploading}
-                  className="self-end px-3 py-3 bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl text-[#999] hover:text-[#6B8F71] hover:border-[#6B8F71]/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="self-end px-3 py-3 bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl text-[#999] hover:text-[#5F9468] hover:border-[#5F9468]/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   title="Attach file"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2288,7 +2288,7 @@ export default function AgentChat({
               placeholder={placeholder}
               disabled={isLoading}
               rows={1}
-              className="flex-1 px-4 py-3 bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] transition-colors text-sm disabled:opacity-50 resize-none max-h-32 overflow-y-auto"
+              className="flex-1 px-4 py-3 bg-[#FAFAF8] border border-[#E8E6E1] rounded-xl text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] transition-colors text-sm disabled:opacity-50 resize-none max-h-32 overflow-y-auto"
             />
             {isLoading ? (
               <button

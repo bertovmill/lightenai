@@ -69,7 +69,7 @@ function ReviewCard({ review }: { review: Review }) {
       <p className="text-[#555] text-sm leading-relaxed mb-5">&ldquo;{review.quote}&rdquo;</p>
       <div className="flex items-center justify-between pt-4 border-t border-[#E8E6E1]">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-[#6B8F71]/15 flex items-center justify-center text-xs font-semibold text-[#6B8F71]">
+          <div className="w-9 h-9 rounded-full bg-[#5F9468]/15 flex items-center justify-center text-xs font-semibold text-[#5F9468]">
             {review.initials}
           </div>
           <div>

@@ -21,7 +21,7 @@ export function HeroGlow() {
       aria-hidden="true"
     >
       {/* Green orb */}
-      <div className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-[#6B8F71] opacity-[0.08] blur-[100px] animate-hero-float" />
+      <div className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full bg-[#5F9468] opacity-[0.08] blur-[100px] animate-hero-float" />
       {/* Coral orb */}
       <div
         className="absolute top-40 -right-24 w-[400px] h-[400px] rounded-full bg-[#E8856C] opacity-[0.06] blur-[100px] animate-hero-float"

@@ -41,7 +41,7 @@ export default function AgentChatPage() {
         <div className="text-center">
           <h1 className="text-2xl font-bold text-[#fafafa] mb-2">Agent not found</h1>
           <p className="text-[#888] mb-4">The agent &ldquo;{slug}&rdquo; doesn&apos;t exist.</p>
-          <Link href="/agents" className="text-[#6B8F71] hover:underline text-sm">Back to agents</Link>
+          <Link href="/agents" className="text-[#5F9468] hover:underline text-sm">Back to agents</Link>
         </div>
       </div>
     );

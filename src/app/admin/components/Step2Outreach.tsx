@@ -156,7 +156,7 @@ export default function Step2Outreach({
             <div
               key={i}
               className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                s.done ? "bg-[#6B8F71]" : "bg-[#E8E6E1]"
+                s.done ? "bg-[#5F9468]" : "bg-[#E8E6E1]"
               }`}
             />
           ))}
@@ -180,14 +180,14 @@ export default function Step2Outreach({
               <div
                 className={`rounded-xl border transition-colors duration-200 ${
                   slot.done
-                    ? "bg-[#6B8F71]/5 border-[#6B8F71]/20"
+                    ? "bg-[#5F9468]/5 border-[#5F9468]/20"
                     : "bg-[#FAFAF8] border-[#E8E6E1]"
                 }`}
               >
                 {/* Category header */}
                 <div className="flex items-center gap-2 px-3 pt-2.5 pb-1">
                   <svg
-                    className="w-3.5 h-3.5 text-[#6B8F71]"
+                    className="w-3.5 h-3.5 text-[#5F9468]"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -195,7 +195,7 @@ export default function Step2Outreach({
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d={catConfig.icon} />
                   </svg>
-                  <span className="text-[10px] font-semibold text-[#6B8F71] uppercase tracking-wider">
+                  <span className="text-[10px] font-semibold text-[#5F9468] uppercase tracking-wider">
                     {catConfig.label}
                   </span>
                   {catConfig.optional && (
@@ -233,7 +233,7 @@ export default function Step2Outreach({
                     <ul className="space-y-1">
                       {catConfig.searchFilters.map((filter, fi) => (
                         <li key={fi} className="flex items-start gap-1.5 text-xs text-[#666]">
-                          <span className="text-[#6B8F71] mt-0.5 shrink-0">&#8250;</span>
+                          <span className="text-[#5F9468] mt-0.5 shrink-0">&#8250;</span>
                           {filter}
                         </li>
                       ))}
@@ -247,8 +247,8 @@ export default function Step2Outreach({
                     onClick={() => handleToggleDone(i as 0 | 1 | 2 | 3 | 4)}
                     className={`w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-colors duration-200 ${
                       slot.done
-                        ? "bg-[#6B8F71] border-[#6B8F71]"
-                        : "border-[#D1CFC9] hover:border-[#6B8F71]"
+                        ? "bg-[#5F9468] border-[#5F9468]"
+                        : "border-[#D1CFC9] hover:border-[#5F9468]"
                     }`}
                   >
                     {slot.done && (
@@ -265,7 +265,7 @@ export default function Step2Outreach({
                       value={slot.name}
                       onChange={(e) => onUpdateSlot(i as 0 | 1 | 2 | 3 | 4, { name: e.target.value })}
                       className={`w-full bg-transparent text-sm outline-none placeholder-[#999] ${
-                        slot.done ? "text-[#6B8F71] line-through" : "text-[#1C1C1C]"
+                        slot.done ? "text-[#5F9468] line-through" : "text-[#1C1C1C]"
                       }`}
                     />
                   </div>
@@ -278,7 +278,7 @@ export default function Step2Outreach({
 
                   <button
                     onClick={() => setExpandedSlot(isExpanded ? null : i)}
-                    className="text-[#999] hover:text-[#6B8F71] transition-colors duration-200 shrink-0"
+                    className="text-[#999] hover:text-[#5F9468] transition-colors duration-200 shrink-0"
                     title="Details"
                   >
                     <svg
@@ -334,7 +334,7 @@ export default function Step2Outreach({
                           placeholder="linkedin.com/in/their-profile"
                           value={slot.linkedinUrl || ""}
                           onChange={(e) => onUpdateSlot(i as 0 | 1 | 2 | 3 | 4, { linkedinUrl: e.target.value })}
-                          className="flex-1 bg-white border border-[#E8E6E1] rounded-lg px-3 py-1.5 text-sm outline-none placeholder-[#999] focus:border-[#6B8F71] transition-colors duration-200"
+                          className="flex-1 bg-white border border-[#E8E6E1] rounded-lg px-3 py-1.5 text-sm outline-none placeholder-[#999] focus:border-[#5F9468] transition-colors duration-200"
                         />
                         {slot.linkedinUrl && (
                           <a
@@ -360,7 +360,7 @@ export default function Step2Outreach({
                         placeholder="e.g., Sent connection request, DM'd intro, They replied..."
                         value={slot.notes || ""}
                         onChange={(e) => onUpdateSlot(i as 0 | 1 | 2 | 3 | 4, { notes: e.target.value })}
-                        className="w-full bg-white border border-[#E8E6E1] rounded-lg px-3 py-1.5 text-sm outline-none placeholder-[#999] focus:border-[#6B8F71] transition-colors duration-200"
+                        className="w-full bg-white border border-[#E8E6E1] rounded-lg px-3 py-1.5 text-sm outline-none placeholder-[#999] focus:border-[#5F9468] transition-colors duration-200"
                       />
                     </div>
 
@@ -369,7 +369,7 @@ export default function Step2Outreach({
                       <div className="pt-2 border-t border-[#E8E6E1]/50">
                         <button
                           onClick={() => setAgentChatSlot(i)}
-                          className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#6B8F71]/30 bg-[#6B8F71]/5 text-[#6B8F71] text-sm font-medium hover:bg-[#6B8F71]/10 hover:border-[#6B8F71]/50 transition-colors duration-200"
+                          className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#5F9468]/30 bg-[#5F9468]/5 text-[#5F9468] text-sm font-medium hover:bg-[#5F9468]/10 hover:border-[#5F9468]/50 transition-colors duration-200"
                         >
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
@@ -391,7 +391,7 @@ export default function Step2Outreach({
                       <button
                         key={contact.email}
                         onClick={() => fillSuggestion(i as 0 | 1 | 2 | 3 | 4, contact)}
-                        className="px-2.5 py-1 rounded-lg border border-[#E8E6E1] text-[11px] text-[#666] hover:border-[#6B8F71] hover:text-[#6B8F71] transition-colors duration-200"
+                        className="px-2.5 py-1 rounded-lg border border-[#E8E6E1] text-[11px] text-[#666] hover:border-[#5F9468] hover:text-[#5F9468] transition-colors duration-200"
                       >
                         {contact.name || contact.email}
                       </button>
@@ -406,15 +406,15 @@ export default function Step2Outreach({
 
       {/* Completion messages */}
       {doneCount >= 3 && doneCount < 5 && (
-        <div className="mt-4 py-3 text-center rounded-lg bg-[#6B8F71]/5">
-          <p className="text-sm text-[#6B8F71] font-medium">
+        <div className="mt-4 py-3 text-center rounded-lg bg-[#5F9468]/5">
+          <p className="text-sm text-[#5F9468] font-medium">
             {doneCount}/5 outreach done — step complete! Keep going for a perfect score.
           </p>
         </div>
       )}
       {doneCount === 5 && (
-        <div className="mt-4 py-3 text-center rounded-lg bg-[#6B8F71]/5">
-          <p className="text-sm text-[#6B8F71] font-medium">
+        <div className="mt-4 py-3 text-center rounded-lg bg-[#5F9468]/5">
+          <p className="text-sm text-[#5F9468] font-medium">
             All 5 outreach done! Perfect score.
           </p>
         </div>
@@ -424,7 +424,7 @@ export default function Step2Outreach({
       <div className="mt-6 pt-5 border-t border-[#E8E6E1]">
         <div className="flex items-center gap-2 mb-3">
           <svg
-            className="w-4 h-4 text-[#6B8F71]"
+            className="w-4 h-4 text-[#5F9468]"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -436,7 +436,7 @@ export default function Step2Outreach({
               d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
             />
           </svg>
-          <h3 className="text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em]">
+          <h3 className="text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em]">
             Engage
           </h3>
           <span className="text-[10px] text-[#999]">
@@ -451,8 +451,8 @@ export default function Step2Outreach({
                 onClick={() => onUpdateEngagement(i as 0 | 1 | 2, { done: !eSlot.done })}
                 className={`w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 transition-colors duration-200 ${
                   eSlot.done
-                    ? "bg-[#6B8F71] border-[#6B8F71]"
-                    : "border-[#D1CFC9] hover:border-[#6B8F71]"
+                    ? "bg-[#5F9468] border-[#5F9468]"
+                    : "border-[#D1CFC9] hover:border-[#5F9468]"
                 }`}
               >
                 {eSlot.done && (
@@ -467,8 +467,8 @@ export default function Step2Outreach({
                 placeholder="whose post?"
                 value={eSlot.targetName}
                 onChange={(e) => onUpdateEngagement(i as 0 | 1 | 2, { targetName: e.target.value })}
-                className={`flex-1 bg-transparent text-sm outline-none placeholder-[#999] border-b border-[#E8E6E1] focus:border-[#6B8F71] pb-0.5 transition-colors duration-200 ${
-                  eSlot.done ? "text-[#6B8F71] line-through" : "text-[#1C1C1C]"
+                className={`flex-1 bg-transparent text-sm outline-none placeholder-[#999] border-b border-[#E8E6E1] focus:border-[#5F9468] pb-0.5 transition-colors duration-200 ${
+                  eSlot.done ? "text-[#5F9468] line-through" : "text-[#1C1C1C]"
                 }`}
               />
             </div>
@@ -495,7 +495,7 @@ export default function Step2Outreach({
               </button>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <svg className="w-3.5 h-3.5 text-[#6B8F71] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <svg className="w-3.5 h-3.5 text-[#5F9468] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d={catConfig.icon} />
                   </svg>
                   <span className="text-sm font-medium text-[#1C1C1C] truncate">

@@ -121,26 +121,26 @@ export default function SocialPlatformTab({ platform, onCountChange }: SocialPla
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="w-full px-3 py-2 text-sm rounded-lg border border-[#E8E6E1] bg-white text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] transition-colors"
+          className="w-full px-3 py-2 text-sm rounded-lg border border-[#E8E6E1] bg-white text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] transition-colors"
         />
         <input
           type="url"
           placeholder="Profile URL"
           value={profileUrl}
           onChange={(e) => setProfileUrl(e.target.value)}
-          className="w-full px-3 py-2 text-sm rounded-lg border border-[#E8E6E1] bg-white text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] transition-colors"
+          className="w-full px-3 py-2 text-sm rounded-lg border border-[#E8E6E1] bg-white text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] transition-colors"
         />
         <textarea
           placeholder="Message / note"
           value={messageSummary}
           onChange={(e) => setMessageSummary(e.target.value)}
           rows={2}
-          className="w-full px-3 py-2 text-sm rounded-lg border border-[#E8E6E1] bg-white text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#6B8F71] transition-colors resize-none"
+          className="w-full px-3 py-2 text-sm rounded-lg border border-[#E8E6E1] bg-white text-[#1C1C1C] placeholder-[#999] focus:outline-none focus:border-[#5F9468] transition-colors resize-none"
         />
         <button
           type="submit"
           disabled={submitting || !name.trim()}
-          className="px-4 py-2 rounded-lg bg-[#6B8F71] text-white text-sm font-medium hover:bg-[#5A7D60] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-4 py-2 rounded-lg bg-[#5F9468] text-white text-sm font-medium hover:bg-[#4F8357] transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {submitting ? "Logging..." : "Log Lead"}
         </button>
@@ -150,9 +150,9 @@ export default function SocialPlatformTab({ platform, onCountChange }: SocialPla
       {loading ? (
         <div className="py-6 flex justify-center">
           <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-            <span className="w-1.5 h-1.5 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-            <span className="w-1.5 h-1.5 bg-[#6B8F71] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+            <span className="w-1.5 h-1.5 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+            <span className="w-1.5 h-1.5 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+            <span className="w-1.5 h-1.5 bg-[#5F9468] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
           </div>
         </div>
       ) : recentLeads.length === 0 ? (
@@ -171,7 +171,7 @@ export default function SocialPlatformTab({ platform, onCountChange }: SocialPla
                         href={lead.profile_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-[#6B8F71] hover:underline font-medium truncate"
+                        className="text-sm text-[#5F9468] hover:underline font-medium truncate"
                       >
                         {lead.contact_name}
                       </a>

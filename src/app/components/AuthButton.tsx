@@ -46,7 +46,7 @@ export function AuthButton() {
       <div className="relative" ref={dropdownRef}>
         <button
           onClick={() => setDropdownOpen(!dropdownOpen)}
-          className="w-8 h-8 rounded-full bg-[#6B8F71] text-white text-xs font-semibold flex items-center justify-center hover:bg-[#5A7D60] transition-colors duration-200"
+          className="w-8 h-8 rounded-full bg-[#5F9468] text-white text-xs font-semibold flex items-center justify-center hover:bg-[#4F8357] transition-colors duration-200"
         >
           {initial}
         </button>
@@ -60,7 +60,7 @@ export function AuthButton() {
                 <Link
                   href="/admin"
                   onClick={() => setDropdownOpen(false)}
-                  className="block px-4 py-2 text-sm text-[#666] hover:text-[#6B8F71] hover:bg-[#F5F4F1] transition-colors"
+                  className="block px-4 py-2 text-sm text-[#666] hover:text-[#5F9468] hover:bg-[#F5F4F1] transition-colors"
                 >
                   Dashboard
                 </Link>
@@ -69,8 +69,8 @@ export function AuthButton() {
                   onClick={() => setDropdownOpen(false)}
                   className={`block px-4 py-2 text-sm transition-colors ${
                     !isAdminView
-                      ? "text-[#6B8F71] font-medium bg-[#6B8F71]/5"
-                      : "text-[#666] hover:text-[#6B8F71] hover:bg-[#F5F4F1]"
+                      ? "text-[#5F9468] font-medium bg-[#5F9468]/5"
+                      : "text-[#666] hover:text-[#5F9468] hover:bg-[#F5F4F1]"
                   }`}
                 >
                   Client View
@@ -80,8 +80,8 @@ export function AuthButton() {
                   onClick={() => setDropdownOpen(false)}
                   className={`block px-4 py-2 text-sm transition-colors ${
                     isAdminView
-                      ? "text-[#6B8F71] font-medium bg-[#6B8F71]/5"
-                      : "text-[#666] hover:text-[#6B8F71] hover:bg-[#F5F4F1]"
+                      ? "text-[#5F9468] font-medium bg-[#5F9468]/5"
+                      : "text-[#666] hover:text-[#5F9468] hover:bg-[#F5F4F1]"
                   }`}
                 >
                   Admin View
@@ -108,7 +108,7 @@ export function AuthButton() {
   return (
     <Link
       href="/login"
-      className="text-sm text-[#666] hover:text-[#6B8F71] transition-colors duration-200"
+      className="text-sm text-[#666] hover:text-[#5F9468] transition-colors duration-200"
     >
       Sign In
     </Link>

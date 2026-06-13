@@ -43,10 +43,10 @@ export function HeroBackground() {
       {/* CSS fallback (shows while video loads, or if no video) */}
       {!videoLoaded && !reducedMotion && (
         <>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#6B8F71] opacity-[0.07] blur-[120px] animate-light-pulse" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#5F9468] opacity-[0.07] blur-[120px] animate-light-pulse" />
           <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-[#D4C5A9] opacity-[0.05] blur-[100px] animate-light-drift" />
           <div
-            className="absolute top-2/3 right-1/4 w-[350px] h-[350px] rounded-full bg-[#6B8F71] opacity-[0.04] blur-[100px] animate-light-drift"
+            className="absolute top-2/3 right-1/4 w-[350px] h-[350px] rounded-full bg-[#5F9468] opacity-[0.04] blur-[100px] animate-light-drift"
             style={{ animationDelay: "-6s" }}
           />
           <div className="absolute inset-0 animate-light-sweep">

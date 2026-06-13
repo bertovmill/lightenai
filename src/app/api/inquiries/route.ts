@@ -131,7 +131,7 @@ export async function POST(request: NextRequest) {
             },
             html: `
               <div style="font-family:sans-serif;max-width:600px;">
-                <div style="background:#6B8F71;color:white;padding:16px 20px;border-radius:8px 8px 0 0;">
+                <div style="background:#5F9468;color:white;padding:16px 20px;border-radius:8px 8px 0 0;">
                   <h2 style="margin:0;font-size:18px;">🚨 New Rapid Prototype Request</h2>
                 </div>
                 <div style="border:1px solid #e5e5e5;border-top:none;padding:20px;border-radius:0 0 8px 8px;">
@@ -145,7 +145,7 @@ export async function POST(request: NextRequest) {
 
                   ${website ? `
                   <p style="margin:0 0 4px;font-size:13px;color:#888;text-transform:uppercase;letter-spacing:0.05em;">LinkedIn</p>
-                  <p style="margin:0 0 16px;font-size:15px;"><a href="${encodeURI(website)}" style="color:#6B8F71;">${escapeHtml(website)}</a></p>
+                  <p style="margin:0 0 16px;font-size:15px;"><a href="${encodeURI(website)}" style="color:#5F9468;">${escapeHtml(website)}</a></p>
                   ` : ""}
 
                   <p style="margin:0 0 4px;font-size:13px;color:#888;text-transform:uppercase;letter-spacing:0.05em;">Service</p>

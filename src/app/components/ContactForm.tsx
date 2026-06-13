@@ -126,9 +126,9 @@ export function ContactForm() {
   if (submitted) {
     return (
       <div className="text-center py-6">
-        <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-[#6B8F71]/10 flex items-center justify-center">
+        <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-[#5F9468]/10 flex items-center justify-center">
           <svg
-            className="w-8 h-8 text-[#6B8F71]"
+            className="w-8 h-8 text-[#5F9468]"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -152,10 +152,10 @@ export function ContactForm() {
   }
 
   const inputClasses =
-    "w-full px-4 py-2.5 bg-[#FAFAF8] border border-[#E8E6E1] rounded-2xl text-sm text-[#1C1C1C] placeholder-[#aaa] focus:outline-none focus:border-[#6B8F71] focus:ring-2 focus:ring-[#6B8F71]/20 transition-all duration-200";
+    "w-full px-4 py-2.5 bg-[#FAFAF8] border border-[#E8E6E1] rounded-2xl text-sm text-[#1C1C1C] placeholder-[#aaa] focus:outline-none focus:border-[#5F9468] focus:ring-2 focus:ring-[#5F9468]/20 transition-all duration-200";
 
   const selectClasses =
-    "w-full px-4 py-2.5 bg-[#FAFAF8] border border-[#E8E6E1] rounded-2xl text-sm text-[#1C1C1C] focus:outline-none focus:border-[#6B8F71] focus:ring-2 focus:ring-[#6B8F71]/20 transition-all duration-200 appearance-none cursor-pointer";
+    "w-full px-4 py-2.5 bg-[#FAFAF8] border border-[#E8E6E1] rounded-2xl text-sm text-[#1C1C1C] focus:outline-none focus:border-[#5F9468] focus:ring-2 focus:ring-[#5F9468]/20 transition-all duration-200 appearance-none cursor-pointer";
 
   const animationClass = direction === "forward"
     ? "animate-slideInRight"
@@ -165,8 +165,8 @@ export function ContactForm() {
     <>
       {/* Header */}
       <div className="flex items-center gap-3 mb-1">
-        <div className="w-9 h-9 rounded-full bg-[#6B8F71]/10 flex items-center justify-center">
-          <svg className="w-4.5 h-4.5 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-9 h-9 rounded-full bg-[#5F9468]/10 flex items-center justify-center">
+          <svg className="w-4.5 h-4.5 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
           </svg>
         </div>
@@ -183,9 +183,9 @@ export function ContactForm() {
               <div
                 className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold shrink-0 transition-all duration-300 ${
                   i < step
-                    ? "bg-[#6B8F71] text-white"
+                    ? "bg-[#5F9468] text-white"
                     : i === step
-                    ? "bg-[#6B8F71] text-white"
+                    ? "bg-[#5F9468] text-white"
                     : "bg-[#E8E6E1] text-[#999]"
                 }`}
               >
@@ -209,7 +209,7 @@ export function ContactForm() {
               <div className="flex-1 h-px relative">
                 <div className="absolute inset-0 bg-[#E8E6E1]" />
                 <div
-                  className="absolute inset-y-0 left-0 bg-[#6B8F71] transition-all duration-500"
+                  className="absolute inset-y-0 left-0 bg-[#5F9468] transition-all duration-500"
                   style={{ width: i < step ? "100%" : "0%" }}
                 />
               </div>
@@ -387,7 +387,7 @@ export function ContactForm() {
               type="button"
               onClick={next}
               disabled={!canAdvance()}
-              className="flex-1 py-3 bg-[#6B8F71] text-white text-sm font-semibold rounded-full hover:bg-[#5A7D60] transition-all duration-200 hover:shadow-lg hover:shadow-[#6B8F71]/25 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.98]"
+              className="flex-1 py-3 bg-[#5F9468] text-white text-sm font-semibold rounded-full hover:bg-[#4F8357] transition-all duration-200 hover:shadow-lg hover:shadow-[#5F9468]/25 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.98]"
             >
               Continue
             </button>

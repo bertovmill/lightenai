@@ -287,19 +287,19 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
       <div className="flex items-center justify-between px-4 py-2 border-b border-[#E8E6E1] shrink-0">
         <div className="flex items-center gap-2">
           {isAgentWriting && (
-            <span className="flex items-center gap-1.5 text-xs text-[#6B8F71] font-medium">
-              <span className="w-2 h-2 rounded-full bg-[#6B8F71] animate-pulse" />
+            <span className="flex items-center gap-1.5 text-xs text-[#5F9468] font-medium">
+              <span className="w-2 h-2 rounded-full bg-[#5F9468] animate-pulse" />
               Writing...
             </span>
           )}
           {isUploading && (
-            <span className="flex items-center gap-1.5 text-xs text-[#6B8F71] font-medium">
-              <span className="w-3 h-3 border-2 border-[#6B8F71] border-t-transparent rounded-full animate-spin" />
+            <span className="flex items-center gap-1.5 text-xs text-[#5F9468] font-medium">
+              <span className="w-3 h-3 border-2 border-[#5F9468] border-t-transparent rounded-full animate-spin" />
               Uploading image...
             </span>
           )}
           {uploadStatus === "success" && !isUploading && (
-            <span className="flex items-center gap-1.5 text-xs text-[#6B8F71] font-medium animate-in fade-in">
+            <span className="flex items-center gap-1.5 text-xs text-[#5F9468] font-medium animate-in fade-in">
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
@@ -326,7 +326,7 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={isUploading}
-            className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-[#999] hover:text-[#6B8F71] border border-transparent hover:border-[#E8E6E1] rounded-lg transition-all disabled:opacity-50"
+            className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-[#999] hover:text-[#5F9468] border border-transparent hover:border-[#E8E6E1] rounded-lg transition-all disabled:opacity-50"
             title="Add image"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -339,7 +339,7 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
             onClick={() => setShowSource(!showSource)}
             className={`flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg transition-all ${
               showSource
-                ? "text-[#6B8F71] bg-[#6B8F71]/10 border border-[#6B8F71]/30"
+                ? "text-[#5F9468] bg-[#5F9468]/10 border border-[#5F9468]/30"
                 : "text-[#999] hover:text-[#666] border border-transparent hover:border-[#E8E6E1]"
             }`}
             title="Toggle markdown source"
@@ -352,11 +352,11 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
           {/* Copy Text */}
           <button
             onClick={copyAsText}
-            className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-[#999] hover:text-[#6B8F71] border border-transparent hover:border-[#E8E6E1] rounded-lg transition-all"
+            className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-[#999] hover:text-[#5F9468] border border-transparent hover:border-[#E8E6E1] rounded-lg transition-all"
             title="Copy as plain text"
           >
             {copied === "text" ? (
-              <svg className="w-3 h-3 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             ) : (
@@ -370,11 +370,11 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
           {/* Copy Markdown */}
           <button
             onClick={copyAsMarkdown}
-            className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-[#999] hover:text-[#6B8F71] border border-transparent hover:border-[#E8E6E1] rounded-lg transition-all"
+            className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-[#999] hover:text-[#5F9468] border border-transparent hover:border-[#E8E6E1] rounded-lg transition-all"
             title="Copy as markdown"
           >
             {copied === "md" ? (
-              <svg className="w-3 h-3 text-[#6B8F71]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 text-[#5F9468]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             ) : (
@@ -397,7 +397,7 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
         />
       ) : (
         <div ref={contentRef} className="flex-1 min-h-0 overflow-y-auto p-4">
-          <div className="prose prose-sm max-w-none prose-headings:text-[#1C1C1C] prose-headings:font-semibold prose-headings:mt-4 prose-headings:mb-2 prose-p:text-[#444] prose-p:my-1.5 prose-p:leading-relaxed prose-a:text-[#6B8F71] prose-strong:text-[#1C1C1C] prose-li:text-[#444] prose-li:my-0.5 prose-ul:my-2 prose-ol:my-2 prose-hr:border-[#E8E6E1] prose-hr:my-4 prose-code:text-[#6B8F71] prose-code:bg-[#6B8F71]/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-xs prose-code:before:content-none prose-code:after:content-none prose-pre:bg-white prose-pre:border prose-pre:border-[#E8E6E1] prose-pre:rounded-lg prose-blockquote:border-[#6B8F71] prose-blockquote:text-[#555]">
+          <div className="prose prose-sm max-w-none prose-headings:text-[#1C1C1C] prose-headings:font-semibold prose-headings:mt-4 prose-headings:mb-2 prose-p:text-[#444] prose-p:my-1.5 prose-p:leading-relaxed prose-a:text-[#5F9468] prose-strong:text-[#1C1C1C] prose-li:text-[#444] prose-li:my-0.5 prose-ul:my-2 prose-ol:my-2 prose-hr:border-[#E8E6E1] prose-hr:my-4 prose-code:text-[#5F9468] prose-code:bg-[#5F9468]/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-xs prose-code:before:content-none prose-code:after:content-none prose-pre:bg-white prose-pre:border prose-pre:border-[#E8E6E1] prose-pre:rounded-lg prose-blockquote:border-[#5F9468] prose-blockquote:text-[#555]">
             <ReactMarkdown
               components={{
                 p: ({ node, children, ...props }) => {
@@ -423,7 +423,7 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
                           download
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1.5 rounded-lg bg-white/90 border border-[#E8E6E1] text-[#666] hover:text-[#6B8F71] transition-colors"
+                          className="p-1.5 rounded-lg bg-white/90 border border-[#E8E6E1] text-[#666] hover:text-[#5F9468] transition-colors"
                           title="Download"
                         >
                           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -488,7 +488,7 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
               value={scheduledAt}
               onChange={(e) => setScheduledAt(e.target.value)}
               min={new Date(Date.now() + 60000).toISOString().slice(0, 16)}
-              className="px-2.5 py-1.5 text-xs border border-[#E8E6E1] rounded-lg bg-white text-[#1C1C1C] focus:outline-none focus:border-[#6B8F71]"
+              className="px-2.5 py-1.5 text-xs border border-[#E8E6E1] rounded-lg bg-white text-[#1C1C1C] focus:outline-none focus:border-[#5F9468]"
             />
           )}
 
@@ -499,7 +499,7 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
               disabled={postingState["x"] === "posting" || (scheduleMode && !scheduledAt)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                 postingState["x"] === "posted"
-                  ? "bg-[#6B8F71]/10 text-[#6B8F71] border border-[#6B8F71]/30"
+                  ? "bg-[#5F9468]/10 text-[#5F9468] border border-[#5F9468]/30"
                   : postingState["x"] === "error"
                   ? "bg-red-50 text-red-600 border border-red-200"
                   : "bg-white border border-[#E8E6E1] text-[#1C1C1C] hover:border-[#1C1C1C]/30 hover:bg-[#F5F4F0]"
@@ -533,7 +533,7 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
               disabled={postingState["linkedin"] === "posting" || (scheduleMode && !scheduledAt)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                 postingState["linkedin"] === "posted"
-                  ? "bg-[#6B8F71]/10 text-[#6B8F71] border border-[#6B8F71]/30"
+                  ? "bg-[#5F9468]/10 text-[#5F9468] border border-[#5F9468]/30"
                   : postingState["linkedin"] === "error"
                   ? "bg-red-50 text-red-600 border border-red-200"
                   : "bg-white border border-[#E8E6E1] text-[#0077B5] hover:border-[#0077B5]/30 hover:bg-[#0077B5]/5"
@@ -561,7 +561,7 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
               disabled={postingState["linkedin-org"] === "posting" || (scheduleMode && !scheduledAt)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                 postingState["linkedin-org"] === "posted"
-                  ? "bg-[#6B8F71]/10 text-[#6B8F71] border border-[#6B8F71]/30"
+                  ? "bg-[#5F9468]/10 text-[#5F9468] border border-[#5F9468]/30"
                   : postingState["linkedin-org"] === "error"
                   ? "bg-red-50 text-red-600 border border-red-200"
                   : "bg-white border border-[#E8E6E1] text-[#0077B5] hover:border-[#0077B5]/30 hover:bg-[#0077B5]/5"
@@ -589,7 +589,7 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
               disabled={postingState["instagram"] === "posting" || !imageUrls.length || (scheduleMode && !scheduledAt)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                 postingState["instagram"] === "posted"
-                  ? "bg-[#6B8F71]/10 text-[#6B8F71] border border-[#6B8F71]/30"
+                  ? "bg-[#5F9468]/10 text-[#5F9468] border border-[#5F9468]/30"
                   : postingState["instagram"] === "error"
                   ? "bg-red-50 text-red-600 border border-red-200"
                   : "bg-white border border-[#E8E6E1] text-[#E1306C] hover:border-[#E1306C]/30 hover:bg-[#E1306C]/5"
@@ -623,7 +623,7 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
               disabled={postingState["medium"] === "posting" || (scheduleMode && !scheduledAt)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                 postingState["medium"] === "posted"
-                  ? "bg-[#6B8F71]/10 text-[#6B8F71] border border-[#6B8F71]/30"
+                  ? "bg-[#5F9468]/10 text-[#5F9468] border border-[#5F9468]/30"
                   : postingState["medium"] === "error"
                   ? "bg-red-50 text-red-600 border border-red-200"
                   : "bg-white border border-[#E8E6E1] text-[#00AB6C] hover:border-[#00AB6C]/30 hover:bg-[#00AB6C]/5"
@@ -651,7 +651,7 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
               disabled={postingState["facebook"] === "posting" || (scheduleMode && !scheduledAt)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                 postingState["facebook"] === "posted"
-                  ? "bg-[#6B8F71]/10 text-[#6B8F71] border border-[#6B8F71]/30"
+                  ? "bg-[#5F9468]/10 text-[#5F9468] border border-[#5F9468]/30"
                   : postingState["facebook"] === "error"
                   ? "bg-red-50 text-red-600 border border-red-200"
                   : "bg-white border border-[#E8E6E1] text-[#1877F2] hover:border-[#1877F2]/30 hover:bg-[#1877F2]/5"
@@ -686,7 +686,7 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
                   setShowScheduledList(!showScheduledList);
                   if (!showScheduledList && onRefreshScheduled) onRefreshScheduled();
                 }}
-                className="flex items-center gap-1.5 text-xs text-[#6B8F71] hover:text-[#5A7D60] font-medium transition-colors"
+                className="flex items-center gap-1.5 text-xs text-[#5F9468] hover:text-[#4F8357] font-medium transition-colors"
               >
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -709,7 +709,7 @@ export default function DocumentEditor({ content, onChange, isAgentWriting, conn
                 <div key={post.id} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#FAFAF8] border border-[#E8E6E1] text-xs">
                   <span className="font-medium text-[#1C1C1C]">{platformLabel(post.platform)}</span>
                   <span className="text-[#999] truncate flex-1 max-w-[200px]">{post.text.slice(0, 60)}{post.text.length > 60 ? "..." : ""}</span>
-                  <span className="text-[#6B8F71] whitespace-nowrap">{formatScheduledTime(post.scheduled_at)}</span>
+                  <span className="text-[#5F9468] whitespace-nowrap">{formatScheduledTime(post.scheduled_at)}</span>
                   {onCancelScheduled && (
                     <button
                       onClick={() => onCancelScheduled(post.id)}

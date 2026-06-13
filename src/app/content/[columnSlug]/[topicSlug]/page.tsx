@@ -47,7 +47,7 @@ export default async function TopicDetailPage({ params }: PageProps) {
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#1C1C1C] relative overflow-x-hidden">
       {/* Soft background gradients */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#6B8F71] opacity-[0.06] blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#5F9468] opacity-[0.06] blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#D4E5D7] opacity-[0.15] blur-[120px] rounded-full pointer-events-none" />
 
       <Navigation />
@@ -55,11 +55,11 @@ export default async function TopicDetailPage({ params }: PageProps) {
       <div className="relative z-10 max-w-4xl mx-auto px-6 py-8 min-h-screen flex flex-col">
         {/* Breadcrumb */}
         <nav className="py-6 text-sm text-[#999] flex items-center gap-2 flex-wrap">
-          <Link href="/content" className="hover:text-[#6B8F71] transition-colors">
+          <Link href="/content" className="hover:text-[#5F9468] transition-colors">
             Content
           </Link>
           <span>/</span>
-          <Link href="/content" className="hover:text-[#6B8F71] transition-colors">
+          <Link href="/content" className="hover:text-[#5F9468] transition-colors">
             {column.title}
           </Link>
           <span>/</span>
@@ -106,7 +106,7 @@ export default async function TopicDetailPage({ params }: PageProps) {
                     href={published.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#6B8F71]/10 text-[#6B8F71] text-sm font-medium hover:bg-[#6B8F71]/20 transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#5F9468]/10 text-[#5F9468] text-sm font-medium hover:bg-[#5F9468]/20 transition-colors"
                   >
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d={meta.iconPath} />
@@ -124,7 +124,7 @@ export default async function TopicDetailPage({ params }: PageProps) {
 
         {/* Article body */}
         {articleBody ? (
-          <article className="py-12 prose prose-lg max-w-none prose-headings:text-[#1C1C1C] prose-headings:font-bold prose-p:text-[#444] prose-p:leading-relaxed prose-a:text-[#6B8F71] prose-a:no-underline hover:prose-a:underline prose-strong:text-[#1C1C1C] prose-li:text-[#444] prose-th:text-[#1C1C1C] prose-td:text-[#444] prose-hr:border-[#E8E6E1]">
+          <article className="py-12 prose prose-lg max-w-none prose-headings:text-[#1C1C1C] prose-headings:font-bold prose-p:text-[#444] prose-p:leading-relaxed prose-a:text-[#5F9468] prose-a:no-underline hover:prose-a:underline prose-strong:text-[#1C1C1C] prose-li:text-[#444] prose-th:text-[#1C1C1C] prose-td:text-[#444] prose-hr:border-[#E8E6E1]">
             <ReactMarkdown>{articleBody}</ReactMarkdown>
           </article>
         ) : (
@@ -139,7 +139,7 @@ export default async function TopicDetailPage({ params }: PageProps) {
         <div className="py-8 border-t border-[#E8E6E1]">
           <Link
             href="/content"
-            className="inline-flex items-center gap-2 text-[#6B8F71] font-medium hover:underline"
+            className="inline-flex items-center gap-2 text-[#5F9468] font-medium hover:underline"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 12H5m0 0l7 7m-7-7l7-7" />

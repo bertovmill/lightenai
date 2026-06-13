@@ -15,8 +15,8 @@ export function CalendlyWidget() {
         hideEventTypeDetails: true,
         layout: "month_view",
         cssVarsPerTheme: {
-          light: { "cal-brand": "#6B8F71" },
-          dark: { "cal-brand": "#6B8F71" },
+          light: { "cal-brand": "#5F9468" },
+          dark: { "cal-brand": "#5F9468" },
         },
       });
     })();

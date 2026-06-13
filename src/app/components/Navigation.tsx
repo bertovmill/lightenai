@@ -85,7 +85,7 @@ export function Navigation() {
                 href={link.href}
                 className={`text-xs tracking-[0.15em] transition-colors duration-200 cursor-pointer ${
                   link.label === "LEAVE A REVIEW"
-                    ? "font-semibold text-[#6B8F71] hover:text-[#5A7D60]"
+                    ? "font-semibold text-[#5F9468] hover:text-[#4F8357]"
                     : `font-medium ${
                         pathname === link.href
                           ? "text-[#1C1C1C]"
@@ -169,7 +169,7 @@ export function Navigation() {
               onClick={closeMobile}
               className={`text-xs tracking-[0.15em] py-3 px-4 rounded-lg transition-colors duration-200 ${
                 link.label === "LEAVE A REVIEW"
-                  ? "font-semibold text-[#6B8F71] hover:text-[#5A7D60] hover:bg-[#F5F4F1]"
+                  ? "font-semibold text-[#5F9468] hover:text-[#4F8357] hover:bg-[#F5F4F1]"
                   : `font-medium ${
                       pathname === link.href
                         ? "text-[#1C1C1C] bg-[#F5F4F1]"

@@ -23,7 +23,7 @@ export default async function ContentPage() {
   return (
     <div className="min-h-screen bg-[#FAFAF8] text-[#1C1C1C] relative overflow-x-hidden">
       {/* Soft background gradients */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#6B8F71] opacity-[0.06] blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#5F9468] opacity-[0.06] blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#D4E5D7] opacity-[0.15] blur-[120px] rounded-full pointer-events-none" />
 
       <Navigation />
@@ -32,12 +32,12 @@ export default async function ContentPage() {
         {/* Hero Section */}
         <section className="py-16 lg:py-24">
           <div className="max-w-3xl">
-            <span className="inline-block text-xs font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-4">
+            <span className="inline-block text-xs font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-4">
               Content
             </span>
             <h1 className="text-4xl md:text-5xl xl:text-[3.5rem] font-bold tracking-tight leading-[1.1] mb-6 text-[#1C1C1C]">
               Insights to help you work{" "}
-              <span className="text-[#6B8F71]">smarter.</span>
+              <span className="text-[#5F9468]">smarter.</span>
             </h1>
             <p className="text-lg md:text-xl text-[#555] leading-relaxed">
               Guides, ideas, and resources on how AI can lighten the load for
@@ -61,7 +61,7 @@ export default async function ContentPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   title={`${p.name} — ${p.handle}`}
-                  className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white border border-[#E8E6E1] text-[#555] hover:border-[#6B8F71]/40 hover:text-[#6B8F71] transition-all duration-200"
+                  className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white border border-[#E8E6E1] text-[#555] hover:border-[#5F9468]/40 hover:text-[#5F9468] transition-all duration-200"
                 >
                   <svg
                     className="w-5 h-5"
@@ -88,7 +88,7 @@ export default async function ContentPage() {
 
         {/* CTA */}
         <section className="py-16 border-t border-[#E8E6E1]">
-          <div className="bg-[#6B8F71] rounded-[2rem] p-10 lg:p-14 text-center text-white">
+          <div className="bg-[#5F9468] rounded-[2rem] p-10 lg:p-14 text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Want to stay in the loop?
             </h2>
@@ -97,7 +97,7 @@ export default async function ContentPage() {
             </p>
             <Link
               href="/"
-              className="inline-block px-8 py-4 bg-white text-[#6B8F71] font-semibold rounded-2xl hover:bg-white/90 transition-all duration-200 cursor-pointer active:scale-[0.98]"
+              className="inline-block px-8 py-4 bg-white text-[#5F9468] font-semibold rounded-2xl hover:bg-white/90 transition-all duration-200 cursor-pointer active:scale-[0.98]"
             >
               Get in touch
             </Link>

@@ -54,8 +54,8 @@ function CalInlineEmbed() {
         hideEventTypeDetails: true,
         layout: "month_view",
         cssVarsPerTheme: {
-          light: { "cal-brand": "#6B8F71" },
-          dark: { "cal-brand": "#6B8F71" },
+          light: { "cal-brand": "#5F9468" },
+          dark: { "cal-brand": "#5F9468" },
         },
       });
     })();
@@ -145,7 +145,7 @@ export function ServicePills() {
     return (
       <div className="flex flex-col items-center gap-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-5 h-5 rounded-full bg-[#6B8F71] flex items-center justify-center">
+          <div className="w-5 h-5 rounded-full bg-[#5F9468] flex items-center justify-center">
             <svg
               className="w-3 h-3 text-white"
               fill="none"
@@ -218,14 +218,14 @@ export function ServicePills() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email"
-                  className="w-full py-2.5 px-4 bg-[#F5F4F1] text-sm text-[#1C1C1C] placeholder-[#aaa] rounded-full border border-[#E8E6E1] focus:outline-none focus:border-[#6B8F71]"
+                  className="w-full py-2.5 px-4 bg-[#F5F4F1] text-sm text-[#1C1C1C] placeholder-[#aaa] rounded-full border border-[#E8E6E1] focus:outline-none focus:border-[#5F9468]"
                 />
                 <input
                   type="url"
                   value={linkedin}
                   onChange={(e) => setLinkedin(e.target.value)}
                   placeholder="LinkedIn URL (optional)"
-                  className="w-full py-2.5 px-4 bg-[#F5F4F1] text-sm text-[#1C1C1C] placeholder-[#aaa] rounded-full border border-[#E8E6E1] focus:outline-none focus:border-[#6B8F71]"
+                  className="w-full py-2.5 px-4 bg-[#F5F4F1] text-sm text-[#1C1C1C] placeholder-[#aaa] rounded-full border border-[#E8E6E1] focus:outline-none focus:border-[#5F9468]"
                 />
                 <textarea
                   required
@@ -234,7 +234,7 @@ export function ServicePills() {
                   onChange={(e) => setProjectDesc(e.target.value)}
                   placeholder="Describe what you want to build (min 50 characters)"
                   rows={3}
-                  className="w-full py-2.5 px-4 bg-[#F5F4F1] text-sm text-[#1C1C1C] placeholder-[#aaa] rounded-xl border border-[#E8E6E1] focus:outline-none focus:border-[#6B8F71] resize-none"
+                  className="w-full py-2.5 px-4 bg-[#F5F4F1] text-sm text-[#1C1C1C] placeholder-[#aaa] rounded-xl border border-[#E8E6E1] focus:outline-none focus:border-[#5F9468] resize-none"
                 />
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-[#aaa]">

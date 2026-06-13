@@ -64,7 +64,7 @@ export default function StepCard({
       >
         {/* Completion accent — left edge glow */}
         {isComplete && (
-          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-[#6B8F71] via-[#6B8F71] to-[#5A7D60]" />
+          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-[#5F9468] via-[#5F9468] to-[#4F8357]" />
         )}
 
         {/* Header button */}
@@ -83,7 +83,7 @@ export default function StepCard({
                 w-9 h-9 rounded-xl flex items-center justify-center text-sm font-semibold
                 transition-all duration-500
                 ${isComplete
-                  ? "bg-[#6B8F71] text-white shadow-[0_2px_8px_rgba(107,143,113,0.3)]"
+                  ? "bg-[#5F9468] text-white shadow-[0_2px_8px_rgba(107,143,113,0.3)]"
                   : isExpanded
                     ? "bg-[#1C1C1C] text-white shadow-[0_2px_6px_rgba(28,28,28,0.15)]"
                     : "bg-[#F5F4F1] text-[#888] group-hover:bg-[#EDECE8] group-hover:text-[#666]"
@@ -105,7 +105,7 @@ export default function StepCard({
             <p className={`
               text-[10px] font-semibold uppercase tracking-[0.15em] mb-0.5
               transition-colors duration-300
-              ${isComplete ? "text-[#6B8F71]" : "text-[#999]"}
+              ${isComplete ? "text-[#5F9468]" : "text-[#999]"}
             `}>
               {label}
             </p>
@@ -126,7 +126,7 @@ export default function StepCard({
             text-[11px] font-medium shrink-0 px-2.5 py-1 rounded-full
             transition-all duration-300
             ${isComplete
-              ? "bg-[#6B8F71]/10 text-[#6B8F71]"
+              ? "bg-[#5F9468]/10 text-[#5F9468]"
               : "bg-[#F5F4F1] text-[#999] group-hover:bg-[#EDECE8]"
             }
           `}>

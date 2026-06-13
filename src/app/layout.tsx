@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Cormorant_Garamond, Montserrat } from "next/font/google";
+import { Plus_Jakarta_Sans, Cormorant_Garamond, Montserrat, Geist } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -34,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" className={cn("font-sans", geist.variable)}>
         <body
           className={`${plusJakarta.variable} ${cormorantGaramond.variable} ${montserrat.variable} font-sans antialiased`}
         >

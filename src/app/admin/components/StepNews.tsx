@@ -157,7 +157,7 @@ export default function StepNews({ onComplete, isComplete, onCreateContent }: St
           setShowChat(true);
           window.history.pushState(null, "", "#sdk-news");
         }}
-        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#6B8F71]/30 bg-[#6B8F71]/5 text-[#6B8F71] text-sm font-medium hover:bg-[#6B8F71]/10 hover:border-[#6B8F71]/50 transition-colors duration-200"
+        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#5F9468]/30 bg-[#5F9468]/5 text-[#5F9468] text-sm font-medium hover:bg-[#5F9468]/10 hover:border-[#5F9468]/50 transition-colors duration-200"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d={NEWS_ICON} />
@@ -183,7 +183,7 @@ export default function StepNews({ onComplete, isComplete, onCreateContent }: St
               Back
             </button>
             <div className="flex items-center gap-2">
-              <svg className="w-3.5 h-3.5 text-[#6B8F71] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <svg className="w-3.5 h-3.5 text-[#5F9468] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d={NEWS_ICON} />
               </svg>
               <span className="text-sm font-medium text-[#1C1C1C] truncate">
@@ -204,7 +204,7 @@ export default function StepNews({ onComplete, isComplete, onCreateContent }: St
                   setShowChat(false);
                   window.history.pushState(null, "", window.location.pathname);
                 }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-[#6B8F71] text-white hover:bg-[#5A7D60] transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-[#5F9468] text-white hover:bg-[#4F8357] transition-colors"
               >
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
@@ -217,7 +217,7 @@ export default function StepNews({ onComplete, isComplete, onCreateContent }: St
               onClick={() => setShowAbout(!showAbout)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                 showAbout
-                  ? "bg-[#6B8F71] text-white"
+                  ? "bg-[#5F9468] text-white"
                   : "bg-[#F5F4F0] text-[#666] hover:bg-[#ECEAE5] hover:text-[#1C1C1C]"
               }`}
             >
@@ -272,13 +272,13 @@ export default function StepNews({ onComplete, isComplete, onCreateContent }: St
                   className="absolute left-0 top-0 bottom-0 w-1 cursor-col-resize z-10 group"
                 >
                   <div className="absolute inset-y-0 -left-1 w-3" />
-                  <div className="h-full w-px bg-[#E8E6E1] group-hover:bg-[#6B8F71] group-active:bg-[#6B8F71] transition-colors" />
+                  <div className="h-full w-px bg-[#E8E6E1] group-hover:bg-[#5F9468] group-active:bg-[#5F9468] transition-colors" />
                 </div>
               <div className="flex-1 overflow-y-auto p-5 pl-3">
                 {/* Shelf header */}
                 <div className="flex items-center gap-3 mb-5 pb-4 border-b border-[#E8E6E1]">
-                  <div className="w-10 h-10 rounded-xl bg-[#6B8F71]/10 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-[#6B8F71]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <div className="w-10 h-10 rounded-xl bg-[#5F9468]/10 flex items-center justify-center">
+                    <svg className="w-5 h-5 text-[#5F9468]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d={NEWS_ICON} />
                     </svg>
                   </div>
@@ -292,7 +292,7 @@ export default function StepNews({ onComplete, isComplete, onCreateContent }: St
                 <div className="space-y-5">
                   {ABOUT_SECTIONS.map((section) => (
                     <div key={section.title}>
-                      <h4 className="text-[10px] font-semibold text-[#6B8F71] uppercase tracking-[0.15em] mb-2">
+                      <h4 className="text-[10px] font-semibold text-[#5F9468] uppercase tracking-[0.15em] mb-2">
                         {section.title}
                       </h4>
 
@@ -308,7 +308,7 @@ export default function StepNews({ onComplete, isComplete, onCreateContent }: St
                         <ul className="space-y-1.5">
                           {section.items.map((item, i) => (
                             <li key={i} className="flex gap-2 text-[13px] text-[#555] leading-relaxed">
-                              <span className="text-[#6B8F71] shrink-0 mt-1.5">
+                              <span className="text-[#5F9468] shrink-0 mt-1.5">
                                 <svg className="w-2 h-2" fill="currentColor" viewBox="0 0 8 8">
                                   <circle cx="4" cy="4" r="3" />
                                 </svg>
@@ -344,7 +344,7 @@ export default function StepNews({ onComplete, isComplete, onCreateContent }: St
       {!isComplete && (
         <button
           onClick={onComplete}
-          className="mt-3 w-full px-4 py-2.5 rounded-lg bg-[#6B8F71] text-white text-sm font-medium hover:bg-[#5A7D60] transition-colors duration-200"
+          className="mt-3 w-full px-4 py-2.5 rounded-lg bg-[#5F9468] text-white text-sm font-medium hover:bg-[#4F8357] transition-colors duration-200"
         >
           Mark News Complete
         </button>
@@ -353,9 +353,9 @@ export default function StepNews({ onComplete, isComplete, onCreateContent }: St
       {isComplete && (
         <button
           onClick={onComplete}
-          className="mt-3 w-full py-2.5 text-center rounded-lg bg-[#6B8F71]/5 hover:bg-[#6B8F71]/10 transition-colors"
+          className="mt-3 w-full py-2.5 text-center rounded-lg bg-[#5F9468]/5 hover:bg-[#5F9468]/10 transition-colors"
         >
-          <p className="text-sm text-[#6B8F71] font-medium">News complete! (click to undo)</p>
+          <p className="text-sm text-[#5F9468] font-medium">News complete! (click to undo)</p>
         </button>
       )}
     </div>
