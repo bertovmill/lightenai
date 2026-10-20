@@ -90,3 +90,13 @@ next-env.d.ts
 
 # clerk configuration (can include secrets)
 /.clerk/
+.next
+.next-main
+.next-preview
+venv
+.venv
+__pycache__
+out
+dist
+.turbo
+!.env.example
